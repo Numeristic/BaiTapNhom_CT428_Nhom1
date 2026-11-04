@@ -5,29 +5,54 @@ main {
 .headerwall {
     display:grid;
     width: 100%;
-    height: 15%;
-    max-height: 250px;
+    height: 20%;
+    max-height: 300px;
     max-width: 100%;
     background-color: rgb(11, 147, 205);
     grid-template-areas: 
         'image title accountinfo'
-        'image options accountinfo';
-    grid-template-columns: 1fr 10fr 3fr;
-    grid-template-rows: 60% 40%;
+        'image options accountactions';
+    grid-template-columns: 1.2fr 10fr 3fr;
+    grid-template-rows: 65% 35%;
+    justify-self:center;
+    padding: 15px 15px;
+    margin: 0px;
+}
 
-    padding: 10px;
+.footerwall {
+    display:grid;
+    width: 100%;
+    height: 20%;
+    max-height: 300px;
+    max-width: 100%;
+    background-color: rgba(78, 78, 78, 0.614);
+    grid-template-areas: 
+        'image title accountinfo'
+        'image options accountactions';
+    grid-template-columns: 1.2fr 10fr 3fr;
+    grid-template-rows: 65% 35%;
+    justify-self:center;
+    padding: 15px 15px;
     margin: 0px;
 }
 
 #title { 
     display: flex;
     grid-area: title;
-    justify-content: left;
-    align-items:flex-end;
+
+    text-align:center;
+    align-items:center;
+    justify-content:left;
+
+    padding:0px;
 }
 #title>h1 {
-    height: auto;
+    display:inline;
     color:white;
+    height:0px;
+
+    vertical-align:middle;
+    margin:0px;
 }
 
 #navbar {
@@ -36,32 +61,60 @@ main {
     align-items: center;
     align-content:left;
 }
-#navbar>a {
-    margin: 10px;
-    color:white;
-}
-
-#account_info {
-    display: flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    
-    grid-area:accountinfo;
-}
 
 #account_info_icon {
     display: flex;
     align-items:center;
     justify-content:center;
     flex-direction:column;
+    grid-area:accountinfo;
 }
+#account_info_icon>p {
+    margin: 2px;
+}
+#account_info_icon>img {
+    margin: 0px 0px 2px 0px;
+}
+
+#account_actions { 
+    display: flex;
+    grid-area:accountactions;
+    align-items:center;
+    justify-content:center;
+    margin:0px;
+}
+.action_button {
+    display:flex;
+    background-color: rgba(251, 251, 251, 0.1);
+    height:75%;
+    margin:5px;
+    min-width:150px;
+
+    text-align:center;
+    
+    align-items:center;
+    justify-content:center;
+}
+.action_button>a { 
+    display:inline;
+
+    color:white;
+    
+    vertical-align:middle;
+}
+
+
 #user_profile_picture {
-    min-width: 50px;
-    min-height: 50px;
+    min-width: 60px;
+    min-height: 60px;
+    width: 100%;
+    height: auto;
 }
 #user_name {
     margin: 5px 0px 0px 0px;
+}
+#user_specialization {
+    color:rgb(150, 1, 1);
 }
 
 #icon {
@@ -69,8 +122,15 @@ main {
     display:flex;
     align-items:center;
     justify-content:center;
-    min-width: 30px;
-    min-height: 30px;
+    min-width: 45px;
+    min-height: 45px;
+}
+#icon>img {
+    width:100%;
+    height:auto;
+
+    max-width: 90px;
+    max-height: 90px;
 }
 
 #user_profile_picture {
@@ -81,13 +141,6 @@ main {
     max-height: 50px;
 }
 
-#icon>img {
-    width:100%;
-    height:auto;
-
-    max-width: 75px;
-    max-height: 75px;
-}
 
 #flex_div1 {
     display: grid;
