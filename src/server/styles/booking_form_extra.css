@@ -1,0 +1,17 @@
+#timeslots_container {
+    display:grid;
+
+    grid-template-areas: "sang chieu";
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+
+    width:100%;
+    margin-bottom: 10px;
+}
+
+#morning_container {
+    grid-area: sang;
+}
+#night_container {
+    grid-area:chieu;
+}

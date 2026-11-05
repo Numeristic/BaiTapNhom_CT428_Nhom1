@@ -3,6 +3,7 @@
         <?php
             include '../server/stylesheets.php'
         ?>
+        <link rel="stylesheet" href="../server/styles/booking_form_extra.css">
     </head>
     <body>
         <?php
@@ -78,6 +79,45 @@
                             <label>
                                 Khung giờ <p class="red_required">*</p>
                             </label>
+                            <br>
+                            <div id="timeslots_container">
+                                <div id="morning_container">
+                                    <p>Sáng</p>
+
+                                    <input type="radio" value="time_id1" name="select_time" id="timeslot_id1">
+                                    <label for="timeslot_id1">7h-8h</label>
+
+                                    <br>
+                                    <input type="radio" value="time_id2" name="select_time" id="timeslot_id2">
+                                    <label for="timeslot_id2">8h-9h</label>
+
+                                    <br>
+                                    <input type="radio" value="time_id3" name="select_time" id="timeslot_id3">
+                                    <label for="timeslot_id2">9h-10h</label>
+
+                                    <br>
+                                    <input type="radio" value="time_id4" name="select_time" id="timeslot_id4">
+                                    <label for="timeslot_id2">9h-10h</label>
+                                </div>
+                                <div id="night_container">
+                                    <p>Chiều</p>
+
+                                    <input type="radio" value="time_id1" name="select_time" id="timeslot_id1">
+                                    <label for="timeslot_id1">1h-2h</label>
+
+                                    <br>
+                                    <input type="radio" value="time_id2" name="select_time" id="timeslot_id2">
+                                    <label for="timeslot_id2">2h-3h</label>
+
+                                    <br>
+                                    <input type="radio" value="time_id3" name="select_time" id="timeslot_id3">
+                                    <label for="timeslot_id2">3h-4h</label>
+
+                                    <br>
+                                    <input type="radio" value="time_id4" name="select_time" id="timeslot_id4">
+                                    <label for="timeslot_id2">4h-5h</label>
+                                </div>
+                            </div>
 
                             <div id="login_sr_container">
                                 <input id="login_button" for="main_form" type="submit" value="Đăng ký khám bệnh">

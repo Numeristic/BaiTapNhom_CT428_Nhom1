@@ -22,20 +22,19 @@
                             <label for="ten_tk">
                                 Email tài khoản <p class="red_required">*</p>
                             </label>
-                            
                             <br>
                             <input class="input_text" type="email" name="ten_tk" id="input_ten_tk">
-
                             <br>
+
 
                             <label for="mk">
                                 Mật khẩu <p class="red_required">*</p>
                             </label>
-                           
                             <br>
                             <input class="input_text" type="password" name="mk" id="input_ten_tk">
-
                             <br>
+
+
                             <div id="login_sr_container">
                                 <input id="login_button" for="main_form" type="submit" value="Đăng nhập">
                                 <div id="sr_container">
@@ -43,6 +42,8 @@
                                     <a id="forgot_password" href="signup.php">Đăng ký</a>
                                 </div>  
                             </div>
+
+                            
                         </form>
                     </div>
                 </div>
