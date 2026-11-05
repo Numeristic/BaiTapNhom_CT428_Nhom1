@@ -1,0 +1,98 @@
+let current_stage = 0;
+const number_of_stages = 3;
+
+proceed_button = document.getElementById("pbutton");
+return_button = document.getElementById("rbutton");
+
+stages = [
+    document.getElementById("form_step1"),
+    document.getElementById("form_step2"),
+    document.getElementById("form_step3"),
+];
+stages_preload_event = [
+    
+];
+sub_stages = [
+    [],
+    [
+        [document.getElementById("form_step2_1"),document.getElementById("form_step2_2")],
+        function(){return 0;} //Function that returns 0 (for form_step_2_1 to be displayed) or 1 (for form_step_2_2)
+    ],
+    []
+];
+display_type_storage = [];
+
+for (let i = 0; i<stages.length; i++) {
+    
+    display_type_storage[stages[i].id] = stages[i].style.display;
+    stages[i].style.display = 'none';
+
+}
+
+for (let i = 0; i<sub_stages.length; i++) {
+    if (Array.isArray(sub_stages[i][0])) {
+        //sub_stage[i][0]: The documents that gets decided.
+        //sub_stage[i][1]: The function.
+        for (let j = 0; j < sub_stages[i][0].length; j++){
+
+            var this_element = sub_stages[i][0][j];
+
+            display_type_storage[this_element.id] = this_element.style.display;
+            this_element.display = 'none';
+
+        }
+    }
+}
+
+function update_current_stage() {
+    for (let i = 0; i<stages.length; i++) {
+        if (i!=current_stage) {
+            stages[i].style.display = 'none';
+            continue;
+        } else {
+            stages[i].style.display = display_type_storage[stages[i].id];
+
+            //If the sub_stage for stage i is defined, and there's something in the first list.
+            if (Array.isArray(sub_stages[i]) && Array.isArray(sub_stages[i][0]) && sub_stages[i][0].length>0) {
+
+                //Then make the decision and display what wins.
+                //I didn't properly structure the form lol. So right now it just runs the placeholder function.
+
+                const result = sub_stages[i][1]();
+                console.log("Result",result);
+
+                for (let j = 0; j < sub_stages[i][0].length; j++){
+
+                    var this_element = sub_stages[i][0][j];
+                    if (j==result || (Array.isArray(result) && result.includes(j))) {
+                        this_element.style.display = display_type_storage[this_element.id];
+                    } else {
+                        this_element.style.display = 'none';
+                    }
+                }
+            }
+        }
+    }
+}
+update_current_stage();
+
+function increment_stage(increment) {
+    
+    if (current_stage+increment<number_of_stages && current_stage+increment>=0) {
+        current_stage += increment;
+        console.log(current_stage);
+        update_current_stage();
+    } else {
+        
+    }
+}
+
+proceed_button.addEventListener("click",function(){
+    increment_stage(1);
+    console.log("Ticked up by 1!");
+});
+
+return_button.addEventListener("click",function(){
+    increment_stage(-1);
+    console.log("Ticked down by 1.");
+});

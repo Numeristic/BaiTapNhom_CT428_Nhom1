@@ -42,7 +42,7 @@
     display:block;
 }
 #form_step2_1 {
-    display:none;
+    display:block;
 }
 #form_step2_2 {
     display:block;
@@ -88,10 +88,18 @@
     align-items:center;
     justify-content:center;
 }
-#proceed_button>a, #return_button>a {
+#proceed_button>button, #return_button>button {
+    color: white;
     text-align:center;
+
     height:100%;
     width:100%;
+
+    padding: 0px;
+
+    background-color: rgba(0,0,0,0);
+    border-style:none;
+    
 }
 
 #return_button {

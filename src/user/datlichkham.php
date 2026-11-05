@@ -4,6 +4,7 @@
             include '../server/stylesheets.php'
         ?>
         <link rel="stylesheet" href="../server/styles/multistep_form_extra.css">
+        <script src="../client/scripts/booking.js" defer></script>
     </head>
     <body>
         <?php
@@ -145,8 +146,8 @@
                                 </div>
                             </div>
                             <div id="form_step_proceed">
-                                <div id="return_button"><a>Quay lại</a></div>
-                                <div id="proceed_button"><a>Tiếp tục</a></div>
+                                <div id="return_button"><button id="rbutton" type="button">Quay lại</button></div>
+                                <div id="proceed_button"><button id="pbutton" type="button">Tiếp tục</button></div>
                             </div>
                             <div id="form_step_finish">
                                 <div class="login_sr_container">
