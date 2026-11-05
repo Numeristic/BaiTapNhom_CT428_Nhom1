@@ -2,10 +2,10 @@
     <div id="icon"><img src="../../img/stethoscope.png"></div>
     <div id="title"><h1>Hệ thống đặt lịch phòng khám</h1></div>
     <nav id="navbar">
-        <div class="action_button"><a>Trang chủ</a></div>
-        <div class="action_button"><a>Xem lịch khám</a></div>
-        <div class="action_button"><a>Đặt lịch khám</a></div>
-        <div class="action_button"><a>Cài đặt</a></div>
+        <div class="action_button"><a href="../../index.php">Trang chủ</a></div>
+        <div class="action_button"><a href="">Xem lịch khám</a></div>
+        <div class="action_button"><a href="">Đặt lịch khám</a></div>
+        <div class="action_button"><a href="">Cài đặt</a></div>
     </nav>
     <div id="account_info_icon">
         <img src="../../img/profile_picture_default.png" id="user_profile_picture">

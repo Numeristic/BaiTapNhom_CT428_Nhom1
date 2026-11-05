@@ -4,40 +4,31 @@ main {
 
 .headerwall {
     display:grid;
-    width: 100%;
-    height: 20%;
-    max-height: 300px;
-    max-width: 100%;
-    background-color: rgb(11, 147, 205);
-    grid-template-areas: 
-        'image title accountinfo'
-        'image options accountactions';
-    grid-template-columns: 1.2fr 10fr 3fr;
-    grid-template-rows: 65% 35%;
-    justify-self:center;
-    padding: 15px 15px;
-    margin: 0px;
-}
 
-.footerwall {
-    display:grid;
     width: 100%;
     height: 20%;
     max-height: 300px;
     max-width: 100%;
-    background-color: rgba(78, 78, 78, 0.614);
+
+    min-height:200px;
+
+    background-color: rgb(11, 147, 205);
+
     grid-template-areas: 
         'image title accountinfo'
         'image options accountactions';
     grid-template-columns: 1.2fr 10fr 3fr;
     grid-template-rows: 65% 35%;
+
     justify-self:center;
+
     padding: 15px 15px;
     margin: 0px;
 }
 
 #title { 
     display: flex;
+
     grid-area: title;
 
     text-align:center;
@@ -48,25 +39,33 @@ main {
 }
 #title>h1 {
     display:inline;
+
     color:white;
+
     height:0px;
 
     vertical-align:middle;
+
     margin:0px;
 }
 
 #navbar {
     grid-area:options;
+
     display: flex;
+
     align-items: center;
     align-content:left;
 }
 
 #account_info_icon {
     display: flex;
+
+    flex-direction:column;
+
     align-items:center;
     justify-content:center;
-    flex-direction:column;
+
     grid-area:accountinfo;
 }
 #account_info_icon>p {
@@ -78,14 +77,19 @@ main {
 
 #account_actions { 
     display: flex;
+
     grid-area:accountactions;
+
     align-items:center;
     justify-content:center;
+
     margin:0px;
 }
 .action_button {
     display:flex;
+
     background-color: rgba(251, 251, 251, 0.1);
+
     height:75%;
     margin:5px;
     min-width:150px;
@@ -99,6 +103,8 @@ main {
     display:inline;
 
     color:white;
+    font-style:normal;
+    text-decoration:none;
     
     vertical-align:middle;
 }
@@ -107,6 +113,7 @@ main {
 #user_profile_picture {
     min-width: 60px;
     min-height: 60px;
+
     width: 100%;
     height: auto;
 }
@@ -119,9 +126,12 @@ main {
 
 #icon {
     grid-area: image;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     min-width: 45px;
     min-height: 45px;
 }
@@ -141,14 +151,113 @@ main {
     max-height: 50px;
 }
 
+/*===========================================*/
+/*Below this, is for main. Above this, is for header.*/
 
 #flex_div1 {
     display: grid;
+
     grid-template-areas: "empty1 login empty2";
+    grid-template-columns: 4fr 3fr 4fr;
+
     width: 100%;
     height: 100%;
 }
 #login_panel {
     /*background-color: red;*/
     grid-area: "login";
+    background-color: rgba(115, 215, 255, 0.418);
+    max-width: 1500px;
+    width: auto;
+
+    padding: 10px;
+
+    min-height:1fr;
+}
+
+#main_form {
+    display:inline;
+}
+#main_form>p {
+    display:inline;
+    font-size: 15px;
+}
+
+.red_required {
+    display:inline;
+    color:red;
+    font-weight:bolder;
+    font-size:15px;
+}
+
+.input_text {
+    width:100%;
+    /*max-width: 500px;*/
+    min-height:35px;
+
+    margin-bottom: 30px;
+}
+
+
+#login_sr_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+#login_button {
+
+    background-color: rgb(0, 119, 199);
+    color: white;
+
+    /*min-width: 150px;*/
+    min-height: 35px;
+
+    width: 35%;
+
+    border-radius: 5px;
+    border-style:none;
+}
+
+#sr_container {
+    display:inline;
+
+    max-width:50%;
+    width: 50%;
+
+    align-items:right;
+}
+#signup_redirect_label {
+    margin-left: 0px;
+    width:100%;
+    text-align:right;
+}
+#forgot_password {
+    margin-left: 2px;
+}
+
+/*===========================================*/
+/*Below this, is for footer. Above this, is for main.*/
+
+.footerwall {
+    display:grid;
+
+    width: 100%;
+    height: 20%;
+    max-height: 300px;
+    max-width: 100%;
+
+    background-color: rgba(78, 78, 78, 0.614);
+
+    grid-template-areas: 
+        'image title accountinfo'
+        'image options accountactions';
+    grid-template-columns: 1.2fr 10fr 3fr;
+    grid-template-rows: 65% 35%;
+
+    justify-self:center;
+
+    padding: 15px 15px;
+    margin: 0px;
 }
