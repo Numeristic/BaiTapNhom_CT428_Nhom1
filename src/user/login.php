@@ -6,7 +6,7 @@
     </head>
     <body>
         <?php
-            include '../server/header.php'
+            include '../server/templates/header.php'
         ?>
         <?php
             //PHP code embed here.
@@ -39,7 +39,8 @@
                             <div id="login_sr_container">
                                 <input id="login_button" for="main_form" type="submit" value="Đăng nhập">
                                 <div id="sr_container">
-                                    <p id="signup_redirect_label">Chưa có tài khoản? <a id="forgot_password" href="signup.php">Đăng ký</a></p>
+                                    <p id="signup_redirect_label">Chưa có tài khoản?</p>
+                                    <a id="forgot_password" href="signup.php">Đăng ký</a>
                                 </div>  
                             </div>
                         </form>
@@ -49,7 +50,7 @@
             </div>
         </main>
         <?php
-            include '../server/footer.php'
+            include '../server/templates/footer.php'
         ?>
     </body>
 </html>

@@ -29,13 +29,20 @@
                             </label>
                            
                             <br>
-                            <input class="input_text" type="password" name="mk" id="input_ten_tk">
-
+                            <input class="input_text" type="password" name="mk" id="input_mk">
                             <br>
+
+                            <label for="mk">
+                                Nhập lại mật khẩu <p class="red_required">*</p>
+                            </label>
+                            <input class="input_text" type="password" name="rpt_mk" id="input_rptmk">
+
+
                             <div id="login_sr_container">
-                                <input id="login_button" for="main_form" type="submit" value="Đăng nhập">
+                                <input id="login_button" for="main_form" type="submit" value="Đăng ký">
                                 <div id="sr_container">
-                                    <p id="signup_redirect_label">Đã có tài khoản? <a id="forgot_password" href="login.php">Đăng nhập</a></p>
+                                    <p id="signup_redirect_label">Đã có tài khoản?</p>
+                                    <a id="forgot_password" href="login.php">Đăng nhập</a>
                                 </div>  
                             </div>
                         </form>

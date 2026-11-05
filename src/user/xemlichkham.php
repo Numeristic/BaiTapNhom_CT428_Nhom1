@@ -6,7 +6,7 @@
     </head>
     <body>
         <?php
-            include '../server/header.php'
+            include '../server/templates/header.php'
         ?>
         <?php
             //PHP code embed here.
@@ -16,7 +16,7 @@
             
         </main>
         <?php
-            include '../server/footer.php'
+            include '../server/templates/footer.php'
         ?>
     </body>
 </html>
