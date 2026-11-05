@@ -1,6 +1,8 @@
 <html>
     <head>
-        <link rel="stylesheet" href="page.css">
+        <?php
+            include '../server/stylesheets.php'
+        ?>
     </head>
     <body>
         <?php
