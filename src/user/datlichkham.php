@@ -3,7 +3,7 @@
         <?php
             include '../server/stylesheets.php'
         ?>
-        <link rel="stylesheet" href="../server/styles/booking_form_extra.css">
+        <link rel="stylesheet" href="../server/styles/multistep_form_extra.css">
     </head>
     <body>
         <?php
@@ -18,111 +18,143 @@
                 <div id="empty"></div>
                 <div id="login_panel">
                     <h2><b>Đặt lịch khám</b></h2>
+
                     <div>
-                        <form action="login.php" id="main_form" name="main_form" method="post">
-                            <label for="ten_tk">
+                        <form action="login.php" class="main_form" name="main_form" method="post">
+                            <div id="form_step1" class="form_steps">
+                                <label for="ten_tk">
                                 Họ và tên người khám <p class="red_required">*</p>
-                            </label>
-                            <br>
-                            <input class="input_text" type="text" name="ten_tk">
-                            <br>
+                                </label>
+                                <br>
+                                <input class="input_text" type="text" name="ten_tk">
+                                <br>
 
 
+                                <label for="mk">
+                                    Số CCCD <p class="red_required">*</p>
+                                </label>
+                                <br>
+                                <input class="input_text" type="number" name="mk">
+                                <br>
 
-                            <label for="mk">
-                                Số CCCD <p class="red_required">*</p>
-                            </label>
-                            <br>
-                            <input class="input_text" type="number" name="mk">
-                            <br>
+                                <label>
+                                    Loại hình khám <p class="red_required">*</p>
+                                </label>
+                                <br>
+                                <select name="ck" class="input_text">
+                                    <option value="ck_tmh">Theo chuyên khoa</option>
+                                    <option value="ck_noi">Theo chuyên gia</option>
+                                </select>
+                                
+                                <!--<br>-->
+                            </div>
+                            
+                            <div id="form_step2" class="form_steps">
 
-
-
-                            <label>
-                                Hình thức khám <p class="red_required">*</p>
-                            </label>
-                            <br>
-                            <select name="hinhthuckham" class="input_text">
-                                <option value="trong_gio_hc">Trong giờ hành chính</option>
-                                <option value="ngoai_gio_hc">Ngoài giờ hành chính (Khám theo yêu cầu)</option>
-                            </select>
-                            <br>
-
-
-
-                            <label>
-                                Chuyên khoa <p class="red_required">*</p>
-                            </label>
-                            <br>
-                            <select name="ck" class="input_text">
-                                <option value="ck_tmh">Tai-Mũi-Họng</option>
-                                <option value="ck_noi">Chuyên khoa Nội</option>
-                                <option value="ck_ngoai">Chuyên khoa Ngoại</option>
-                                <option value="ck_ungbuou">Ung bướu</option>
-                                <option value="ck_sanphu">Sản phụ</option>
-                            </select>
-                            <br>
-
-                            <label>
-                                Chuyên gia <p class="red_required">*</p>
-                            </label>
-                            <br>
-                            <select name="cf" class="input_text">
-                                <option value="cg_tmh">Bs.CKII.TS. Nguyễn Thị L</option>
-                                <option value="cg_noi">Bs.CKII.TS. Nguyễn Thị M</option>
-                                <option value="cg_ngoai">Bs.CKII.TS. Nguyễn Thị N</option>
-                                <option value="cg_ungbuou">Bs.CKII.TS. Nguyễn Thị O</option>
-                                <option value="cg_sanphu">Bs.CKII.TS. Nguyễn Thị P</option>
-                            </select>
-                            <br>
-
-                            <label>
-                                Khung giờ <p class="red_required">*</p>
-                            </label>
-                            <br>
-                            <div id="timeslots_container">
-                                <div id="morning_container">
-                                    <p>Sáng</p>
-
-                                    <input type="radio" value="time_id1" name="select_time" id="timeslot_id1">
-                                    <label for="timeslot_id1">7h-8h</label>
-
+                                <div id="form_step2_1">
+                                    <label>
+                                        Chuyên khoa <p class="red_required">*</p>
+                                    </label>
                                     <br>
-                                    <input type="radio" value="time_id2" name="select_time" id="timeslot_id2">
-                                    <label for="timeslot_id2">8h-9h</label>
-
-                                    <br>
-                                    <input type="radio" value="time_id3" name="select_time" id="timeslot_id3">
-                                    <label for="timeslot_id2">9h-10h</label>
-
-                                    <br>
-                                    <input type="radio" value="time_id4" name="select_time" id="timeslot_id4">
-                                    <label for="timeslot_id2">9h-10h</label>
+                                    <select name="ck" class="input_text">
+                                        <option value="ck_tmh">Tai-Mũi-Họng</option>
+                                        <option value="ck_noi">Chuyên khoa Nội</option>
+                                        <option value="ck_ngoai">Chuyên khoa Ngoại</option>
+                                        <option value="ck_ungbuou">Ung bướu</option>
+                                        <option value="ck_sanphu">Sản phụ</option>
+                                    </select>
                                 </div>
-                                <div id="night_container">
-                                    <p>Chiều</p>
-
-                                    <input type="radio" value="time_id1" name="select_time" id="timeslot_id1">
-                                    <label for="timeslot_id1">1h-2h</label>
-
+                                <div id="form_step2_2">
+                                    <label>
+                                        Chuyên gia <p class="red_required">*</p>
+                                    </label>
                                     <br>
-                                    <input type="radio" value="time_id2" name="select_time" id="timeslot_id2">
-                                    <label for="timeslot_id2">2h-3h</label>
-
-                                    <br>
-                                    <input type="radio" value="time_id3" name="select_time" id="timeslot_id3">
-                                    <label for="timeslot_id2">3h-4h</label>
-
-                                    <br>
-                                    <input type="radio" value="time_id4" name="select_time" id="timeslot_id4">
-                                    <label for="timeslot_id2">4h-5h</label>
+                                    <select name="cf" class="input_text">
+                                        <option value="cg_tmh">Bs.CKII.TS. Nguyễn Thị L</option>
+                                        <option value="cg_noi">Bs.CKII.TS. Nguyễn Thị M</option>
+                                        <option value="cg_ngoai">Bs.CKII.TS. Nguyễn Thị N</option>
+                                        <option value="cg_ungbuou">Bs.CKII.TS. Nguyễn Thị O</option>
+                                        <option value="cg_sanphu">Bs.CKII.TS. Nguyễn Thị P</option>
+                                    </select>
                                 </div>
+
+                                <label for="mk">
+                                    Lý do khám <p class="red_required">*</p>
+                                </label>
+                                <br>
+                                <textarea class="input_text" type="text" name="mk" id="ly_do_kham" placeholder="Hãy ghi thêm thông tin về triệu chứng để bác sĩ có thể chẩn đoán hiệu quả hơn"></textarea>
+                                <!--<br>-->
                             </div>
 
-                            <div id="login_sr_container">
-                                <input id="login_button" for="main_form" type="submit" value="Đăng ký khám bệnh">
+                            <div id="form_step3" class="form_steps">
+                                <label>
+                                    Ngày khám <p class="red_required">*</p><br><p class="tagalong" id="hinhthuck">Hình thức khám: (Placeholder)</p>
+                                </label>
+                                <!--<select name="hinhthuckham" class="input_text">
+                                    <option value="trong_gio_hc">Trong giờ hành chính</option>
+                                    <option value="ngoai_gio_hc">Ngoài giờ hành chính (Khám theo yêu cầu)</option>
+                                </select>-->
+                                <input class="input_text" type="date" name="mk">
+                                <br>
+
+                                <label>
+                                    Khung giờ <p class="red_required">*</p>
+                                </label>
+                                <br>
+                                <div id="timeslots_container">
+                                    <div id="morning_container">
+                                        <p><i>Sáng</i></p>
+
+                                        <input type="radio" value="time_id1" name="select_time" id="timeslot_id1">
+                                        <label for="timeslot_id1">07:00-08:00</label>
+
+                                        <br>
+                                        <input type="radio" value="time_id2" name="select_time" id="timeslot_id2">
+                                        <label for="timeslot_id2">08:00-09:00</label>
+
+                                        <br>
+                                        <input type="radio" value="time_id3" name="select_time" id="timeslot_id3">
+                                        <label for="timeslot_id2">09:00-10:00</label>
+
+                                        <br>
+                                        <input type="radio" value="time_id4" name="select_time" id="timeslot_id4">
+                                        <label for="timeslot_id2">10:00-11:00</label>
+
+                                        <br>
+                                        <input type="radio" value="time_id5" name="select_time" id="timeslot_id5">
+                                        <label for="timeslot_id2">11:00-12:00</label>
+                                    </div>
+                                    <div id="night_container">
+                                        <p><i>Chiều</i></p>
+
+                                        <input type="radio" value="time_id1" name="select_time" id="timeslot_id1">
+                                        <label for="timeslot_id1">13:30-14:00</label>
+
+                                        <br>
+                                        <input type="radio" value="time_id2" name="select_time" id="timeslot_id2">
+                                        <label for="timeslot_id2">14:00-15:00</label>
+
+                                        <br>
+                                        <input type="radio" value="time_id3" name="select_time" id="timeslot_id3">
+                                        <label for="timeslot_id2">15:00-16:00</label>
+
+                                        <br>
+                                        <input type="radio" value="time_id4" name="select_time" id="timeslot_id4">
+                                        <label for="timeslot_id2">16:00-17:00</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="form_step_proceed">
+                                <div id="return_button"><a>Quay lại</a></div>
+                                <div id="proceed_button"><a>Tiếp tục</a></div>
+                            </div>
+                            <div id="form_step_finish">
+                                <div class="login_sr_container">
+                                    <input id="login_button" for="main_form" type="submit" value="Đăng ký khám bệnh">
+                                </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
                 <div class="empty"></div>

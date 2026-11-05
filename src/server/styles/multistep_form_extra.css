@@ -1,0 +1,116 @@
+#login_panel {
+    /*background-color: red;*/
+    grid-area: "login";
+    background-color: rgba(115, 215, 255, 0.418);
+    max-width: 1500px;
+    min-width: 700px;
+    width: auto;
+
+    padding: 10px;
+
+    min-height:1fr;
+}
+
+#timeslots_container {
+    display:grid;
+
+    grid-template-areas: "sang chieu";
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+
+    width:100%;
+    margin-bottom: 25px;
+}
+
+#morning_container {
+    grid-area: sang;
+}
+#night_container {
+    grid-area:chieu;
+}
+
+.tagalong {
+    margin-bottom:5px;
+    margin-top:5px;
+    font-style:italic;
+}
+
+#form_step1 {
+    display: block;
+}
+#form_step2 {
+    display:block;
+}
+#form_step2_1 {
+    display:none;
+}
+#form_step2_2 {
+    display:block;
+}
+#form_step3 {
+    display:block;
+}
+
+#ly_do_kham {
+    min-height: 250px;
+    padding:5px;
+    margin-top: 5px;
+}
+
+#form_step_proceed {
+    display:flex;
+    
+    align-items: center;
+    justify-content: space-between;
+}
+
+#form_step_finish {
+    display:none;
+}
+
+#proceed_button {
+    display: flex;
+    grid-area: forward;
+
+    background-color: rgb(0, 119, 199);
+    color: white;
+
+    /*min-width: 150px;*/
+    min-height: 35px;
+
+    width: 35%;
+
+    border-radius: 5px;
+    border-style:none;
+
+    text-align:center;
+
+    align-items:center;
+    justify-content:center;
+}
+#proceed_button>a, #return_button>a {
+    text-align:center;
+    height:100%;
+    width:100%;
+}
+
+#return_button {
+    display: flex;
+    grid-area:back;
+
+    background-color: rgb(0, 119, 199);
+    color: white;
+
+    /*min-width: 150px;*/
+    min-height: 35px;
+
+    width: 35%;
+
+    border-radius: 5px;
+    border-style:none;
+
+    text-align:center;
+
+    align-items:center;
+    justify-content:center;
+}

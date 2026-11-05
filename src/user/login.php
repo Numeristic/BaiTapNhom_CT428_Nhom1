@@ -18,7 +18,7 @@
                 <div id="login_panel">
                     <h2><b>Đăng nhập</b></h2>
                     <div>
-                        <form action="login.php" id="main_form" name="main_form" method="post">
+                        <form action="login.php" class="main_form" name="main_form" method="post">
                             <label for="ten_tk">
                                 Email tài khoản <p class="red_required">*</p>
                             </label>
