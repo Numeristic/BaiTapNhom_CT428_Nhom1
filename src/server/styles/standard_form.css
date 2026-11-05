@@ -22,7 +22,7 @@ main {
     grid-area: "login";
     background-color: rgba(115, 215, 255, 0.418);
     max-width: 1500px;
-    min-width: 350px;
+    min-width: 400px;
     width: auto;
 
     padding: 10px;
