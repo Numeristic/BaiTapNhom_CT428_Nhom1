@@ -65,7 +65,7 @@
 }
 
 #form_step_finish {
-    display:none;
+    display:inline;
 }
 
 #proceed_button {
@@ -88,7 +88,7 @@
     align-items:center;
     justify-content:center;
 }
-#proceed_button>button, #return_button>button {
+.form_button {
     color: white;
     text-align:center;
 

@@ -1,3 +1,8 @@
+//Plan: Set multi-stage form so you can fill in with AJAX along the way.
+
+//Goal: Able to adjust form according to selected doctor's, faculty's work time and integrate it 
+//into the form itself.
+
 let current_stage = 0;
 const number_of_stages = 3;
 
@@ -10,7 +15,7 @@ stages = [
     document.getElementById("form_step3"),
 ];
 stages_preload_event = [
-    
+
 ];
 sub_stages = [
     [],
@@ -28,7 +33,6 @@ for (let i = 0; i<stages.length; i++) {
     stages[i].style.display = 'none';
 
 }
-
 for (let i = 0; i<sub_stages.length; i++) {
     if (Array.isArray(sub_stages[i][0])) {
         //sub_stage[i][0]: The documents that gets decided.
@@ -43,8 +47,18 @@ for (let i = 0; i<sub_stages.length; i++) {
         }
     }
 }
+display_type_storage["form_step_proceed"] = document.getElementById("form_step_proceed").style.display;
+display_type_storage["form_step_finish"] = document.getElementById("form_step_finish").style.display;
 
 function update_current_stage() {
+    if (current_stage==number_of_stages-1) {
+        document.getElementById("form_step_proceed").style.display = "none";
+        document.getElementById("form_step_finish").style.display = display_type_storage["form_step_finish"];
+    } else {
+        document.getElementById("form_step_proceed").style.display = display_type_storage["form_step_proceed"];
+        document.getElementById("form_step_finish").style.display = "none";
+    }
+
     for (let i = 0; i<stages.length; i++) {
         if (i!=current_stage) {
             stages[i].style.display = 'none';
@@ -78,13 +92,13 @@ update_current_stage();
 
 function increment_stage(increment) {
     
-    if (current_stage+increment<number_of_stages && current_stage+increment>=0) {
-        current_stage += increment;
-        console.log(current_stage);
-        update_current_stage();
-    } else {
-        
+    if (current_stage+increment>=number_of_stages || current_stage+increment<0) {
+        return;
     }
+    current_stage += increment;
+    console.log(current_stage);
+    update_current_stage();
+    
 }
 
 proceed_button.addEventListener("click",function(){

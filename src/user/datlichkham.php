@@ -145,11 +145,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="form_step_proceed">
-                                <div id="return_button"><button id="rbutton" type="button">Quay lại</button></div>
-                                <div id="proceed_button"><button id="pbutton" type="button">Tiếp tục</button></div>
+                            <div id="form_step_proceed" class="form_footer">
+                                <div id="return_button"><button id="rbutton" type="button" class="form_button">Quay lại</button></div>
+                                <div id="proceed_button"><button id="pbutton" type="button" class="form_button">Tiếp tục</button></div>
                             </div>
-                            <div id="form_step_finish">
+                            <div id="form_step_finish" class="form_footer">
                                 <div class="login_sr_container">
                                     <input id="login_button" for="main_form" type="submit" value="Đăng ký khám bệnh">
                                 </div>
