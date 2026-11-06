@@ -6,6 +6,11 @@
 let current_stage = 0;
 const number_of_stages = 3;
 
+const xhttp = new XMLHttpRequest();
+xhttp.onload = function() {
+
+}
+
 proceed_button = document.getElementById("pbutton");
 return_button = document.getElementById("rbutton");
 return_button2 = document.getElementById("rbutton2");
@@ -18,17 +23,28 @@ stages = [
 stages_preload_event = [
 
 ];
+
+past_response = 0;
 sub_stages = [
     [],
     [
         [document.getElementById("form_step2_1"),document.getElementById("form_step2_2")],
         function(){
             kham_ck = document.getElementById("kham_ck");
+            let returned_value = 0;
             if (kham_ck.value=="ck"){
-                return 0;
+                returned_value = 0;
             } else {
-                return [0,1];
+                returned_value = [0,1];
             }
+            if (returned_value!=past_response) {
+                //Update the cg list here.
+                if (returned_value==1 || (Array.isArray(returned_value) && returned_value.includes(1))) {
+                    
+                }
+                past_response = returned_value;
+            }
+            return returned_value;
         } //Function that returns 0 (for form_step_2_1 to be displayed) or 1 (for form_step_2_2)
     ],
     []

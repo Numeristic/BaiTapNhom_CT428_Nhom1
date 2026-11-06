@@ -23,26 +23,26 @@
                     <div>
                         <form action="login.php" class="main_form" name="main_form" method="post">
                             <div id="form_step1" class="form_steps">
-                                <label for="ten_tk">
+                                <label for="ho_ten">
                                 Họ và tên người khám <p class="red_required">*</p>
                                 </label>
                                 <br>
-                                <input class="input_text" type="text" name="ten_tk">
+                                <input name="ho_ten" class="input_text" type="text">
                                 <br>
 
 
-                                <label for="mk">
+                                <label for="so_cccd">
                                     Số CCCD <p class="red_required">*</p>
                                 </label>
                                 <br>
-                                <input class="input_text" type="number" name="mk">
+                                <input name="so_cccd" class="input_text" type="number">
                                 <br>
 
-                                <label>
+                                <label for="loai_hinh">
                                     Loại hình khám <p class="red_required">*</p>
                                 </label>
                                 <br>
-                                <select name="ck" class="input_text" id="kham_ck">
+                                <select name="loai_hinh" class="input_text" id="kham_ck">
                                     <option value="ck">Theo chuyên khoa</option>
                                     <option value="cg">Theo chuyên gia</option>
                                 </select>
@@ -53,7 +53,7 @@
                             <div id="form_step2" class="form_steps">
 
                                 <div id="form_step2_1">
-                                    <label>
+                                    <label for="ck">
                                         Chuyên khoa <p class="red_required">*</p>
                                     </label>
                                     <br>
@@ -66,11 +66,11 @@
                                     </select>
                                 </div>
                                 <div id="form_step2_2">
-                                    <label>
+                                    <label for="cg">
                                         Chuyên gia <p class="red_required">*</p>
                                     </label>
                                     <br>
-                                    <select name="cf" class="input_text">
+                                    <select name="cg" class="input_text">
                                         <option value="cg_tmh">Bs.CKII.TS. Nguyễn Thị L</option>
                                         <option value="cg_noi">Bs.CKII.TS. Nguyễn Thị M</option>
                                         <option value="cg_ngoai">Bs.CKII.TS. Nguyễn Thị N</option>
@@ -79,26 +79,26 @@
                                     </select>
                                 </div>
 
-                                <label for="mk">
+                                <label for="ly_do_kham">
                                     Lý do khám <p class="red_required">*</p>
                                 </label>
                                 <br>
-                                <textarea class="input_text" type="text" name="mk" id="ly_do_kham" placeholder="Hãy ghi thêm thông tin về triệu chứng để bác sĩ có thể chẩn đoán hiệu quả hơn"></textarea>
+                                <textarea name="ly_do_kham" class="input_text" type="text" id="ly_do_kham" placeholder="Hãy ghi thêm thông tin về triệu chứng để bác sĩ có thể chẩn đoán hiệu quả hơn"></textarea>
                                 <!--<br>-->
                             </div>
 
                             <div id="form_step3" class="form_steps">
-                                <label>
+                                <label for="ngay_kham">
                                     Ngày khám <p class="red_required">*</p><br><p class="tagalong" id="hinhthuck">Hình thức khám: (Placeholder)</p>
                                 </label>
                                 <!--<select name="hinhthuckham" class="input_text">
                                     <option value="trong_gio_hc">Trong giờ hành chính</option>
                                     <option value="ngoai_gio_hc">Ngoài giờ hành chính (Khám theo yêu cầu)</option>
                                 </select>-->
-                                <input class="input_text" type="date" name="mk">
+                                <input name="ngay_kham" class="input_text" type="date">
                                 <br>
 
-                                <label>
+                                <label for="khung_gio">
                                     Khung giờ <p class="red_required">*</p>
                                 </label>
                                 <br>
@@ -106,41 +106,41 @@
                                     <div id="morning_container">
                                         <p><i>Sáng</i></p>
 
-                                        <input type="radio" value="time_id1" name="select_time" id="timeslot_id1">
+                                        <input type="radio" value="time_id1" name="khung_gio" id="timeslot_id1">
                                         <label for="timeslot_id1">07:00-08:00</label>
 
                                         <br>
-                                        <input type="radio" value="time_id2" name="select_time" id="timeslot_id2">
+                                        <input type="radio" value="time_id2" name="khung_gio" id="timeslot_id2">
                                         <label for="timeslot_id2">08:00-09:00</label>
 
                                         <br>
-                                        <input type="radio" value="time_id3" name="select_time" id="timeslot_id3">
+                                        <input type="radio" value="time_id3" name="khung_gio" id="timeslot_id3">
                                         <label for="timeslot_id2">09:00-10:00</label>
 
                                         <br>
-                                        <input type="radio" value="time_id4" name="select_time" id="timeslot_id4">
+                                        <input type="radio" value="time_id4" name="khung_gio" id="timeslot_id4">
                                         <label for="timeslot_id2">10:00-11:00</label>
 
                                         <br>
-                                        <input type="radio" value="time_id5" name="select_time" id="timeslot_id5">
+                                        <input type="radio" value="time_id5" name="khung_gio" id="timeslot_id5">
                                         <label for="timeslot_id2">11:00-12:00</label>
                                     </div>
                                     <div id="night_container">
                                         <p><i>Chiều</i></p>
 
-                                        <input type="radio" value="time_id1" name="select_time" id="timeslot_id1">
+                                        <input type="radio" value="time_id1" name="khung_gio" id="timeslot_id6">
                                         <label for="timeslot_id1">13:30-14:00</label>
 
                                         <br>
-                                        <input type="radio" value="time_id2" name="select_time" id="timeslot_id2">
+                                        <input type="radio" value="time_id2" name="khung_gio" id="timeslot_id7">
                                         <label for="timeslot_id2">14:00-15:00</label>
 
                                         <br>
-                                        <input type="radio" value="time_id3" name="select_time" id="timeslot_id3">
+                                        <input type="radio" value="time_id3" name="khung_gio" id="timeslot_id8">
                                         <label for="timeslot_id2">15:00-16:00</label>
 
                                         <br>
-                                        <input type="radio" value="time_id4" name="select_time" id="timeslot_id4">
+                                        <input type="radio" value="time_id4" name="khung_gio" id="timeslot_id9">
                                         <label for="timeslot_id2">16:00-17:00</label>
                                     </div>
                                 </div>
