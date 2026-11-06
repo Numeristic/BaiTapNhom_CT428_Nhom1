@@ -8,6 +8,7 @@ const number_of_stages = 3;
 
 proceed_button = document.getElementById("pbutton");
 return_button = document.getElementById("rbutton");
+return_button2 = document.getElementById("rbutton2");
 
 stages = [
     document.getElementById("form_step1"),
@@ -21,7 +22,14 @@ sub_stages = [
     [],
     [
         [document.getElementById("form_step2_1"),document.getElementById("form_step2_2")],
-        function(){return 0;} //Function that returns 0 (for form_step_2_1 to be displayed) or 1 (for form_step_2_2)
+        function(){
+            kham_ck = document.getElementById("kham_ck");
+            if (kham_ck.value=="ck"){
+                return 0;
+            } else {
+                return [0,1];
+            }
+        } //Function that returns 0 (for form_step_2_1 to be displayed) or 1 (for form_step_2_2)
     ],
     []
 ];
@@ -57,6 +65,11 @@ function update_current_stage() {
     } else {
         document.getElementById("form_step_proceed").style.display = display_type_storage["form_step_proceed"];
         document.getElementById("form_step_finish").style.display = "none";
+    }
+    if (current_stage==0) {
+
+    } else {
+        
     }
 
     for (let i = 0; i<stages.length; i++) {
@@ -103,10 +116,12 @@ function increment_stage(increment) {
 
 proceed_button.addEventListener("click",function(){
     increment_stage(1);
-    console.log("Ticked up by 1!");
 });
 
 return_button.addEventListener("click",function(){
     increment_stage(-1);
-    console.log("Ticked down by 1.");
+});
+
+return_button2.addEventListener("click",function(){
+    increment_stage(-1);
 });

@@ -42,9 +42,9 @@
                                     Loại hình khám <p class="red_required">*</p>
                                 </label>
                                 <br>
-                                <select name="ck" class="input_text">
-                                    <option value="ck_tmh">Theo chuyên khoa</option>
-                                    <option value="ck_noi">Theo chuyên gia</option>
+                                <select name="ck" class="input_text" id="kham_ck">
+                                    <option value="ck">Theo chuyên khoa</option>
+                                    <option value="cg">Theo chuyên gia</option>
                                 </select>
                                 
                                 <!--<br>-->
@@ -146,13 +146,12 @@
                                 </div>
                             </div>
                             <div id="form_step_proceed" class="form_footer">
-                                <div id="return_button"><button id="rbutton" type="button" class="form_button">Quay lại</button></div>
-                                <div id="proceed_button"><button id="pbutton" type="button" class="form_button">Tiếp tục</button></div>
+                                <div id="return_button" class="form_button_container"><button id="rbutton" type="button" class="form_button">Quay lại</button></div>
+                                <div id="proceed_button" class="form_button_container"><button id="pbutton" type="button" class="form_button">Tiếp tục</button></div>
                             </div>
                             <div id="form_step_finish" class="form_footer">
-                                <div class="login_sr_container">
-                                    <input id="login_button" for="main_form" type="submit" value="Đăng ký khám bệnh">
-                                </div>
+                                <div id="return_button2" class="form_button_container"><button id="rbutton2" type="button" class="form_button">Quay lại</button></div>
+                                <input id="login_button" for="main_form" type="submit" value="Đăng ký khám bệnh" class="form_button_container">
                             </div>
                         </form>
 
