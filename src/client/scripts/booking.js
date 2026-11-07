@@ -7,9 +7,6 @@ let current_stage = 0;
 const number_of_stages = 3;
 
 const xhttp = new XMLHttpRequest();
-xhttp.onload = function() {
-
-}
 
 proceed_button = document.getElementById("pbutton");
 return_button = document.getElementById("rbutton");
@@ -40,7 +37,8 @@ sub_stages = [
             if (returned_value!=past_response) {
                 //Update the cg list here.
                 if (returned_value==1 || (Array.isArray(returned_value) && returned_value.includes(1))) {
-                    
+                    xhttp.open("GET",`../../server/scripts/updateBookingInfo.php?ck=\"${document.getElementById("ck_selection").value}\"`,false);
+                    xhttp.send(); 
                 }
                 past_response = returned_value;
             }
@@ -52,7 +50,7 @@ sub_stages = [
 display_type_storage = [];
 
 for (let i = 0; i<stages.length; i++) {
-    
+    console.log(i,stages[i]);
     display_type_storage[stages[i].id] = stages[i].style.display;
     stages[i].style.display = 'none';
 

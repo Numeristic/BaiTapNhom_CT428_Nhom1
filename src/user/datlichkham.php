@@ -57,12 +57,27 @@
                                         Chuyên khoa <p class="red_required">*</p>
                                     </label>
                                     <br>
-                                    <select name="ck" class="input_text">
-                                        <option value="ck_tmh">Tai-Mũi-Họng</option>
+                                    <select id="ck_selection" name="ck" class="input_text" required>
+                                        <!--<option value="ck_tmh">Tai-Mũi-Họng</option>
                                         <option value="ck_noi">Chuyên khoa Nội</option>
                                         <option value="ck_ngoai">Chuyên khoa Ngoại</option>
                                         <option value="ck_ungbuou">Ung bướu</option>
-                                        <option value="ck_sanphu">Sản phụ</option>
+                                        <option value="ck_sanphu">Sản phụ</option>-->
+                                        <?php 
+                                            require("sqlCredentials.php");
+
+                                            $mysqli = new mysqli($hostname,$username,$password);
+                                            $mysqli->select_db("htdlkbtt");
+
+                                            $stm = $mysqli->prepare("SELECT * FROM chuyenkhoa");
+                                            if ($stm->execute()) {
+                                                while ($rows=$stm->fetch_assoc()) {
+                                                    echo "<option value=\"".$rows->ID."\">".($rows->TenChuyenKhoa)."</option>\n";
+                                                }
+                                            } else {
+                                                echo "Error: ".$stm->error;
+                                            }
+                                        ?>
                                     </select>
                                 </div>
                                 <div id="form_step2_2">
