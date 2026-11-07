@@ -46,13 +46,8 @@
                                     <option value="ck">Theo chuyên khoa</option>
                                     <option value="cg">Theo chuyên gia</option>
                                 </select>
-                                
-                                <!--<br>-->
-                            </div>
-                            
-                            <div id="form_step2" class="form_steps">
-
-                                <div id="form_step2_1">
+                                <br>
+                                <div>
                                     <label for="ck">
                                         Chuyên khoa <p class="red_required">*</p>
                                     </label>
@@ -64,33 +59,34 @@
                                         <option value="ck_ungbuou">Ung bướu</option>
                                         <option value="ck_sanphu">Sản phụ</option>-->
                                         <?php 
-                                            require("sqlCredentials.php");
+                                            require("../server/scripts/sqlCredentials.php");
 
                                             $mysqli = new mysqli($hostname,$username,$password);
                                             $mysqli->select_db("htdlkbtt");
 
-                                            $stm = $mysqli->prepare("SELECT * FROM chuyenkhoa");
-                                            if ($stm->execute()) {
-                                                while ($rows=$stm->fetch_assoc()) {
-                                                    echo "<option value=\"".$rows->ID."\">".($rows->TenChuyenKhoa)."</option>\n";
-                                                }
-                                            } else {
-                                                echo "Error: ".$stm->error;
+                                            $result = $mysqli->query("SELECT * FROM chuyenkhoa");
+                                            while ($rows=$result->fetch_assoc()) {
+                                                echo "<option value=\"".$rows["ID"]."\">".($rows["TenChuyenKhoa"])."</option>\n";
                                             }
                                         ?>
                                     </select>
                                 </div>
-                                <div id="form_step2_2">
+                                
+                                <!--<br>-->
+                            </div>
+                            
+                            <div id="form_step2" class="form_steps">
+                                <div id="form_step2_1">
                                     <label for="cg">
                                         Chuyên gia <p class="red_required">*</p>
                                     </label>
                                     <br>
-                                    <select name="cg" class="input_text">
-                                        <option value="cg_tmh">Bs.CKII.TS. Nguyễn Thị L</option>
+                                    <select name="cg" class="input_text" id="prof_selection">
+                                        <!--<option value="cg_tmh">Bs.CKII.TS. Nguyễn Thị L</option>
                                         <option value="cg_noi">Bs.CKII.TS. Nguyễn Thị M</option>
                                         <option value="cg_ngoai">Bs.CKII.TS. Nguyễn Thị N</option>
                                         <option value="cg_ungbuou">Bs.CKII.TS. Nguyễn Thị O</option>
-                                        <option value="cg_sanphu">Bs.CKII.TS. Nguyễn Thị P</option>
+                                        <option value="cg_sanphu">Bs.CKII.TS. Nguyễn Thị P</option>-->
                                     </select>
                                 </div>
 

@@ -25,22 +25,31 @@ past_response = 0;
 sub_stages = [
     [],
     [
-        [document.getElementById("form_step2_1"),document.getElementById("form_step2_2")],
+        [document.getElementById("form_step2_1")],
         function(){
             kham_ck = document.getElementById("kham_ck");
             let returned_value = 0;
             if (kham_ck.value=="ck"){
-                returned_value = 0;
+                returned_value = 1;
             } else {
-                returned_value = [0,1];
+                returned_value = 0;
             }
-            if (returned_value!=past_response) {
+
+            let ck_value = document.getElementById("ck_selection").value;
+
+            if (ck_value!=past_response && (returned_value==0 || (Array.isArray(returned_value) && returned_value.includes(0)))) {
                 //Update the cg list here.
-                if (returned_value==1 || (Array.isArray(returned_value) && returned_value.includes(1))) {
-                    xhttp.open("GET",`../../server/scripts/updateBookingInfo.php?ck=\"${document.getElementById("ck_selection").value}\"`,false);
-                    xhttp.send(); 
+                if (returned_value==0 || (Array.isArray(returned_value) && returned_value.includes(1))) {
+                    xhttp.open("GET",`../server/scripts/updateExpertsInfo.php?ck=${document.getElementById("ck_selection").value}`,false);
+                    xhttp.send();
+                    if (xhttp.readyState==4 && xhttp.status==200) {
+                        document.getElementById("prof_selection").innerHTML = xhttp.responseText;
+                        console.log("Updated.");
+                        console.log(xhttp.responseText);
+                    }
+                    console.log("Yes we update the list.");
                 }
-                past_response = returned_value;
+                past_response = ck_value;
             }
             return returned_value;
         } //Function that returns 0 (for form_step_2_1 to be displayed) or 1 (for form_step_2_2)
