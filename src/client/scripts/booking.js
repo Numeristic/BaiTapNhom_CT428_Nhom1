@@ -6,7 +6,7 @@
 let current_stage = 0;
 const number_of_stages = 3;
 
-const xhttp = new XMLHttpRequest(); //Tìm kiếm chuyên gia dựa trên Chuyên khoa
+const xhttp = new XMLHttpRequest(); //Tìm kiếm chuyên gia dựa trên Chuyên khoa.
 const xhttp2 = new XMLHttpRequest(); //Tìm kiếm khung giờ làm việc phù hợp với Chuyên khoa/Chuyên gia.
 
 proceed_button = document.getElementById("pbutton");
@@ -118,7 +118,7 @@ function update_current_stage() {
             if (Array.isArray(sub_stages[i]) && Array.isArray(sub_stages[i][0]) && sub_stages[i][0].length>0) {
 
                 //Then make the decision and display what wins.
-                //I didn't properly structure the form lol. So right now it just runs the placeholder function.
+                //I didn't properly structure the form. So right now it just runs the placeholder function.
 
                 const result = sub_stages[i][1]();
                 //console.log("Result",result);

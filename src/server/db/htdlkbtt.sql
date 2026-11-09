@@ -1,9 +1,10 @@
 
+drop database htdlkbtt;
 create database HTDLKBTT;
 use HTDLKBTT;
 
 create table ThongTinTaiKhoan (
-    Email char(256) primary key,
+    Email char(255) primary key,
     ID char(10) unique,
       
     PHash char(64) not null
@@ -132,7 +133,7 @@ create table LichNghiPhep (
 );
 
 create table LichNghi (
-    ID_BacSi char(10) primary key,
+    ID_BacSi char(10),
     ID_Thu int not null,
     
     constraint fk_BacSiNghi

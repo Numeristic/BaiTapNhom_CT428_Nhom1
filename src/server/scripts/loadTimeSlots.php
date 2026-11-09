@@ -14,6 +14,7 @@
         $result = $stm->get_result();
         $compiled = [];
         while ($rows = $result->fetch_assoc()) {
+            if ($compiled[$result[""]])
             echo "<input type="radio" value="time_id1" name="khung_gio" id="timeslot_id1"><label for="timeslot_id1">07:00-08:00</label>";
         }
     }
