@@ -1,4 +1,3 @@
-
 drop database htdlkbtt;
 create database HTDLKBTT;
 use HTDLKBTT;
@@ -55,18 +54,19 @@ create table TrangThai (
 );
 
 create table Buoi(
-     TenBuoi char(20) primary key   
+    ID int AUTO_INCREMENT primary key,
+    TenBuoi char(20) not null unique
 );
 
 create table KhungGio(
-     ID int primary key AUTO_INCREMENT,
-    Gio_BD date not null,
-    Gio_KT date not null,
-    Buoi char(20) not null,
+    ID int primary key AUTO_INCREMENT,
+    Gio_BD time not null,
+    Gio_KT time not null,
+    ID_Buoi int not null,
     
     constraint fk_Buoi
-    foreign key (Buoi)
-    references Buoi(TenBuoi)
+    foreign key (ID_Buoi)
+    references Buoi(ID)
 );
 
 create table LichKham (
@@ -75,6 +75,7 @@ create table LichKham (
     ID_ChuyenKhoa char(10) not null,
     ID_BacSi char(10),
     KhungGio int not null,
+    NgayKham date not null,
     LyDoKham varchar(1000),
     ID_TrangThai char(10) not null,
     
@@ -102,18 +103,18 @@ create table Thu(
 
 create table LichLamViec (
   ID_BacSi char(10),
-  ID_KhungGioLamViec int not null,
+  ID_KhungGio int not null,
     
   constraint fk_LichCuaBacSi
   foreign key (ID_BacSi)
   references BacSi(ID),
   
   constraint fk_BuoiLamViec
-  foreign key (ID_KhungGioLamViec)
+  foreign key (ID_KhungGio)
   references KhungGio(ID),
     
   constraint pk_LichLamViec
-  primary key (ID_BacSi,ID_KhungGioLamViec)
+  primary key (ID_BacSi,ID_KhungGio)
 );
 
 create table LichNghiPhep (

@@ -1,5 +1,19 @@
 use htdlkbtt;
 
+insert into Thu(ID,TenThu) values(2,"Thứ Hai");
+insert into Thu(ID,TenThu) values(3,"Thứ Ba");
+insert into Thu(ID,TenThu) values(4,"Thứ Tư");
+insert into Thu(ID,TenThu) values(5,"Thứ Năm");
+insert into Thu(ID,TenThu) values(6,"Thứ Sáu");
+insert into Thu(ID,TenThu) values(7,"Thứ Bảy");
+insert into Thu(ID,TenThu) values(1,"Chủ Nhật");
+
+insert into Buoi(ID,TenBuoi) values(1,"Sáng");
+insert into Buoi(ID,TenBuoi) values(2,"Chiều");
+insert into Buoi(ID,TenBuoi) values(3,"Tối");
+
+insert into KhungGio(ID,Gio_BD,Gio_KT,ID_Buoi) values(1,)
+
 insert into ChuyenKhoa(ID,TenChuyenKhoa,MoTa) values("noitq", "Nội Tổng Quát","");
 insert into ChuyenKhoa(ID,TenChuyenKhoa,MoTa) values("tm", "Tim Mạch","");
 insert into ChuyenKhoa(ID,TenChuyenKhoa,MoTa) values("nt", "Nội Tiết","");
@@ -14,12 +28,14 @@ insert into ChuyenKhoa(ID,TenChuyenKhoa,MoTa) values("rhm", "Răng-Hàm-Mặt","
 insert into ChuyenKhoa(ID,TenChuyenKhoa,MoTa) values("tmh", "Tai-Mũi-Họng","");
 insert into ChuyenKhoa(ID,TenChuyenKhoa,MoTa) values("cdha", "Chẩn Đoán Hình Ảnh","");
 
-
 insert into ThongTinTaiKhoan(Email,ID,PHash) values("abcd12345@gmail.com","BS12345","random");
 insert into ThongTinTaiKhoan(Email,ID,PHash) values("abcd12346@gmail.com","BS12346","random");
 insert into ThongTinTaiKhoan(Email,ID,PHash) values("abcd12347@gmail.com","BS12347","random");
 insert into ThongTinTaiKhoan(Email,ID,PHash) values("abcd12348@gmail.com","BS12348","random");
+insert into ThongTinTaiKhoan(Email,ID,PHash) values("abcd12349@gmail.com","BS12349","random");
 insert into bacsi(ID,HoTen,ID_ChuyenKhoa) values("BS12345","Nguyễn Văn A","tmh");
 insert into bacsi(ID,HoTen,ID_ChuyenKhoa) values("BS12346","Nguyễn Văn B","rhm");
 insert into bacsi(ID,HoTen,ID_ChuyenKhoa) values("BS12347","Lê Thị C","nk");
 insert into bacsi(ID,HoTen,ID_ChuyenKhoa) values("BS12348","Nguyễn Thị D","dl");
+insert into bacsi(ID,HoTen,ID_ChuyenKhoa) values("BS12349","Lê Thu Hân","dl");
+

@@ -13,7 +13,11 @@ proceed_button = document.getElementById("pbutton");
 return_button = document.getElementById("rbutton");
 return_button2 = document.getElementById("rbutton2");
 
-past_response = 0;
+past_ck = 0;
+
+past_ck2 = 0;
+past_cg = 0;
+past_ht = 0;
 
 stages = [
     document.getElementById("form_step1"),
@@ -38,7 +42,7 @@ sub_stages = [
 
             let ck_value = document.getElementById("ck_selection").value;
 
-            if (ck_value!=past_response && (returned_value==0 || (Array.isArray(returned_value) && returned_value.includes(0)))) {
+            if (ck_value!=past_ck && (returned_value==0 || (Array.isArray(returned_value) && returned_value.includes(0)))) {
                 //Update the cg list here.
                 if (returned_value==0 || (Array.isArray(returned_value) && returned_value.includes(1))) {
                     xhttp.open("GET",`../server/scripts/updateExpertsInfo.php?ck=${document.getElementById("ck_selection").value}`,false);
@@ -50,16 +54,50 @@ sub_stages = [
                     }
                     console.log("Yes we update the list.");
                 }
-                past_response = ck_value;
+                past_ck = ck_value;
             }
             return returned_value;
-        } //Function that returns 0 (for form_step_2_1 to be displayed) or 1 (for form_step_2_2)
+        } 
     ],
     [
         [document.getElementById("form_step3")],
         function() {
             //Load available time slots.
+            let ck_value = document.getElementById("ck_selection").value;
+            let cg_value = document.getElementById("prof_selection").value;
+            let ht_kham = document.getElementById("kham_ck").value;
             
+            let parameters = `ck=${ck_value}`;
+            let does_update = 0;
+
+            if (past_ht!=ht_kham) {
+                if (ht_kham==0) {
+                    parameters = `${parameters}&cg=${cg_value}`;
+                }
+                does_update = 1;
+            } else {
+                if (ht_kham==1 && past_ck2!=ck_value) {
+                    does_update = 1;
+                } else if (ht_kham==0 && past_cg!=cg_value) {
+                    parameters = `${parameters}&cg=${cg_value}`;
+                    does_update = 1;
+                }
+            }
+            past_ht = ht_kham;
+            past_cg = cg_value;
+            past_ck2 = ck_value;
+
+            if (does_update==1){
+                xhttp2.open("GET",`../server/scripts/loadTimeSlots.php?${parameters}`,false);
+                xhttp2.send();
+                if (xhttp2.readyState==4 && xhttp2.status==200) {
+                    document.getElementById("timeslots_container").innerHTML = xhttp2.responseText;
+                    console.log("Updated.");
+                    console.log(xhttp2.responseText);
+                }
+                console.log("Yes we update the list.");
+            }
+
             return 0;
         },
     ]
@@ -92,6 +130,8 @@ for (let i = 0; i<sub_stages.length; i++) {
 }
 display_type_storage["form_step_proceed"] = document.getElementById("form_step_proceed").style.display;
 display_type_storage["form_step_finish"] = document.getElementById("form_step_finish").style.display;
+
+
 
 function update_current_stage() {
     if (current_stage==number_of_stages-1) {
@@ -126,6 +166,7 @@ function update_current_stage() {
                 for (let j = 0; j < sub_stages[i][0].length; j++){
 
                     var this_element = sub_stages[i][0][j];
+
                     if (j==result || (Array.isArray(result) && result.includes(j))) {
                         this_element.style.display = display_type_storage[this_element.id];
                     } else {
