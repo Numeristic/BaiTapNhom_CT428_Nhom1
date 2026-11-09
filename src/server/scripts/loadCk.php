@@ -1,4 +1,4 @@
-<?p
+<?php
     require("../server/scripts/sqlCredentials.php");
 
     $mysqli = new mysqli($hostname,$username,$password);

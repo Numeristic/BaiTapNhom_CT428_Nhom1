@@ -6,11 +6,14 @@
 let current_stage = 0;
 const number_of_stages = 3;
 
-const xhttp = new XMLHttpRequest();
+const xhttp = new XMLHttpRequest(); //Tìm kiếm chuyên gia dựa trên Chuyên khoa
+const xhttp2 = new XMLHttpRequest(); //Tìm kiếm khung giờ làm việc phù hợp với Chuyên khoa/Chuyên gia.
 
 proceed_button = document.getElementById("pbutton");
 return_button = document.getElementById("rbutton");
 return_button2 = document.getElementById("rbutton2");
+
+past_response = 0;
 
 stages = [
     document.getElementById("form_step1"),
@@ -20,8 +23,6 @@ stages = [
 stages_preload_event = [
 
 ];
-
-past_response = 0;
 sub_stages = [
     [],
     [
@@ -54,12 +55,21 @@ sub_stages = [
             return returned_value;
         } //Function that returns 0 (for form_step_2_1 to be displayed) or 1 (for form_step_2_2)
     ],
-    []
+    [
+        [document.getElementById("form_step3")],
+        function() {
+            //Load available time slots.
+            
+            return 0;
+        },
+    ]
 ];
 display_type_storage = [];
 
 for (let i = 0; i<stages.length; i++) {
-    console.log(i,stages[i]);
+    if (display_type_storage[stages[i].id]!=null) {
+        continue;
+    }
     display_type_storage[stages[i].id] = stages[i].style.display;
     stages[i].style.display = 'none';
 
@@ -71,10 +81,12 @@ for (let i = 0; i<sub_stages.length; i++) {
         for (let j = 0; j < sub_stages[i][0].length; j++){
 
             var this_element = sub_stages[i][0][j];
-
+            //console.log(i,j,this_element);
+            if (display_type_storage[this_element.id]!=null){
+                continue;
+            }
             display_type_storage[this_element.id] = this_element.style.display;
             this_element.display = 'none';
-
         }
     }
 }
@@ -109,7 +121,7 @@ function update_current_stage() {
                 //I didn't properly structure the form lol. So right now it just runs the placeholder function.
 
                 const result = sub_stages[i][1]();
-                console.log("Result",result);
+                //console.log("Result",result);
 
                 for (let j = 0; j < sub_stages[i][0].length; j++){
 
