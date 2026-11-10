@@ -33,6 +33,7 @@
 
     $khung_gio = [];
     $khung_gio_min = [];
+
     while ($kg = $info_result->fetch_assoc()) {
         if (!isset($khung_gio_min[$kg["ID_Buoi"]]) || ($khung_gio_min[$kg["ID_Buoi"]] > (int)$kg["ID"])) {
             $khung_gio_min[$kg["ID_Buoi"]] = (int)$kg["ID"];
@@ -45,7 +46,6 @@
         $compiled = [];
         $compiled_index = [];
 
-        //Result must have: BuoiID, BuoiName :)
         while ($rows = $result->fetch_assoc()) {
             if (!isset($compiled[$rows["Buoi"]])) {
                 $compiled[$rows["Buoi"]] = [];

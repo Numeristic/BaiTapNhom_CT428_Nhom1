@@ -82,7 +82,7 @@
                                     Ngày khám <p class="red_required">*</p><br><p class="tagalong" id="hinhthuck">Hình thức khám: (Placeholder)</p>
                                 </label>
 
-                                <input id="input_date" name="ngay_kham" class="input_text" type="date" required>
+                                <input id="input_date" name="ngay_kham" class="input_text" type="date" min="<?php echo date("Y-m-d", strtotime('tomorrow')); ?>" required>
                                 <br>
 
                                 <label for="khung_gio">
