@@ -9,6 +9,9 @@ const number_of_stages = 3;
 const xhttp = new XMLHttpRequest(); //Tìm kiếm chuyên gia dựa trên Chuyên khoa.
 const xhttp2 = new XMLHttpRequest(); //Tìm kiếm khung giờ làm việc phù hợp với Chuyên khoa/Chuyên gia.
 
+form = document.getElementById("main_form");
+const red_requireds = document.getElementsByClassName("red_required");
+
 proceed_button = document.getElementById("pbutton");
 return_button = document.getElementById("rbutton");
 return_button2 = document.getElementById("rbutton2");
@@ -25,9 +28,6 @@ stages = [
     document.getElementById("form_step1"),
     document.getElementById("form_step2"),
     document.getElementById("form_step3"),
-];
-stages_preload_event = [
-
 ];
 sub_stages = [
     [],
@@ -104,6 +104,9 @@ sub_stages = [
 ];
 display_type_storage = [];
 
+for (let i = 0; i<red_requireds.length; i++){
+    red_requireds[i].style.display = 'none';
+}
 for (let i = 0; i<stages.length; i++) {
     if (display_type_storage[stages[i].id]!=null) {
         continue;
@@ -200,4 +203,29 @@ return_button.addEventListener("click",function(){
 
 return_button2.addEventListener("click",function(){
     increment_stage(-1);
+});
+
+const form_inputs = [
+    [document.getElementById("input_hoten"),document.getElementById("label_hoten"),0],
+    [document.getElementById("input_socccd"),document.getElementById("label_socccd"),0],
+    [document.getElementById("input_date"),document.getElementById("label_date"),2],
+];
+
+form.addEventListener("submit",function(event){
+    let result = true;
+    for (let i=0;i<form_inputs.length;i++){
+        if (!form_inputs[i][0].checkValidity() || form_inputs[i][0].value==null) {
+
+            if (result==true){
+                event.preventDefault();
+                current_stage = form_inputs[i][2];
+                update_current_stage();
+            }
+
+            let tag = form_inputs[i][1].querySelector(".red_required");
+            tag.style.display = 'inline';
+            result = false;
+        }
+    }
+    return result;
 });

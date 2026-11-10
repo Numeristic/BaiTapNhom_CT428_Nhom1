@@ -75,9 +75,7 @@
                         $element_behind = $khung_gio[$this_element["ID"]-$id];
                         echo "<input type=\"radio\" disabled>";
                         echo "<label class=\"disabled_label\">{$element_behind["Gio_BD"]}-{$element_behind["Gio_KT"]}</label>";
-                        if ($z!=$offset_behind-1) {
-                            
-                        }
+
                         echo "<br>";
                     }
                 }

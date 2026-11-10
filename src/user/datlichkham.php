@@ -17,28 +17,28 @@
                     <h2><b>Đặt lịch khám</b></h2>
 
                     <div>
-                        <form action="login.php" class="main_form" name="main_form" method="post">
+                        <form action="../server/scripts/processBooking.php" class="main_form" name="main_form" id="main_form" method="post" novalidate>
                             <div id="form_step1" class="form_steps">
-                                <label for="ho_ten">
-                                Họ và tên người khám <p class="red_required">*</p>
+                                <label for="ho_ten" id="label_hoten">
+                                    Họ và tên người khám <p class="red_required">*</p>
                                 </label>
                                 <br>
-                                <input name="ho_ten" class="input_text" type="text">
+                                <input name="ho_ten" class="input_text" type="text" id="input_hoten" required>
                                 <br>
 
 
-                                <label for="so_cccd">
+                                <label for="so_cccd" id="label_socccd">
                                     Số CCCD <p class="red_required">*</p>
                                 </label>
                                 <br>
-                                <input name="so_cccd" class="input_text" type="number">
+                                <input name="so_cccd" class="input_text" type="number" id="input_socccd" required>
                                 <br>
 
                                 <label for="loai_hinh">
                                     Loại hình khám <p class="red_required">*</p>
                                 </label>
                                 <br>
-                                <select name="loai_hinh" class="input_text" id="kham_ck">
+                                <select name="loai_hinh" class="input_text" id="kham_ck" required>
                                     <option value="ck">Theo chuyên khoa</option>
                                     <option value="cg">Theo chuyên gia</option>
                                 </select>
@@ -78,11 +78,11 @@
                             </div>
 
                             <div id="form_step3" class="form_steps">
-                                <label for="ngay_kham">
+                                <label for="ngay_kham" id="label_date">
                                     Ngày khám <p class="red_required">*</p><br><p class="tagalong" id="hinhthuck">Hình thức khám: (Placeholder)</p>
                                 </label>
 
-                                <input name="ngay_kham" class="input_text" type="date">
+                                <input id="input_date" name="ngay_kham" class="input_text" type="date" required>
                                 <br>
 
                                 <label for="khung_gio">
