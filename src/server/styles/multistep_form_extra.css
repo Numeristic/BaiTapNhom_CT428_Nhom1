@@ -108,5 +108,8 @@
 
     background-color: rgba(0,0,0,0);
     border-style:none;
-    
+}
+
+.disabled_label {
+    color: rgba(0, 0, 0, 0.4);
 }
