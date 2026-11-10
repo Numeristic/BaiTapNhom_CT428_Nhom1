@@ -13,8 +13,10 @@ proceed_button = document.getElementById("pbutton");
 return_button = document.getElementById("rbutton");
 return_button2 = document.getElementById("rbutton2");
 
+//Stage 2 loading
 past_ck = 0;
 
+//Stage 3 loading
 past_ck2 = 0;
 past_cg = 0;
 past_ht = 0;
@@ -49,8 +51,6 @@ sub_stages = [
                     xhttp.send();
                     if (xhttp.readyState==4 && xhttp.status==200) {
                         document.getElementById("prof_selection").innerHTML = xhttp.responseText;
-                        console.log("Updated.");
-                        console.log(xhttp.responseText);
                     }
                     console.log("Yes we update the list.");
                 }
@@ -65,7 +65,7 @@ sub_stages = [
             //Load available time slots.
             let ck_value = document.getElementById("ck_selection").value;
             let cg_value = document.getElementById("prof_selection").value;
-            let ht_kham = document.getElementById("kham_ck").value;
+            let ht_kham = document.getElementById("kham_ck").value=="ck";
             
             let parameters = `ck=${ck_value}`;
             let does_update = 0;
@@ -88,6 +88,7 @@ sub_stages = [
             past_ck2 = ck_value;
 
             if (does_update==1){
+                console.log("Does update.");
                 xhttp2.open("GET",`../server/scripts/loadTimeSlots.php?${parameters}`,false);
                 xhttp2.send();
                 if (xhttp2.readyState==4 && xhttp2.status==200) {
@@ -95,7 +96,6 @@ sub_stages = [
                     console.log("Updated.");
                     console.log(xhttp2.responseText);
                 }
-                console.log("Yes we update the list.");
             }
 
             return 0;

@@ -1,12 +1,12 @@
 <html>
     <head>
         <?php
-            include '../server/stylesheets.php'
+            include_once '../server/stylesheets.php'
         ?>
     </head>
     <body>
         <?php
-            include '../server/templates/header.php'
+            include_once '../server/templates/header.php'
         ?>
         <main>
             <div id="flex_div1">
