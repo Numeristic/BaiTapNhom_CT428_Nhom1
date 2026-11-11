@@ -5,16 +5,17 @@ use HTDLKBTT;
 create table ThongTinTaiKhoan (
     Email char(255) primary key,
     ID char(10) unique,
+    
+    HoTen varchar(50) not null,
+    SoCCCD char(12) not null,
+    NgaySinh date not null,
+    SoDT varchar(20),
       
-    PHash char(64) not null
+    PHash char(64) not null,
 );
 
 create table BenhNhan (
     ID char(10) primary key,
-    HoTen varchar(50) not null,
-    NgaySinh date not null,
-    SoDT varchar(20),
-    
     constraint fk_ThongTinTKBN
     foreign key (ID)
     references ThongTinTaiKhoan(ID)
@@ -28,8 +29,8 @@ create table ChuyenKhoa (
 
 create table BacSi (
     ID char(10) primary key,
-    HoTen varchar(50) not null,
     ID_ChuyenKhoa char(10) not null,
+
     constraint fk_ChuyenKhoaBS
     foreign key (ID_ChuyenKhoa)
     references ChuyenKhoa(ID),
@@ -71,7 +72,9 @@ create table KhungGio(
 
 create table LichKham (
     ID char(20) primary key,
+
     ID_BenhNhan char(10) not null,
+
     ID_ChuyenKhoa char(10) not null,
     ID_BacSi char(10),
     KhungGio int not null,

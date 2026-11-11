@@ -40,19 +40,19 @@ insert into ChuyenKhoa(ID,TenChuyenKhoa,MoTa) values("rhm", "Răng-Hàm-Mặt","
 insert into ChuyenKhoa(ID,TenChuyenKhoa,MoTa) values("tmh", "Tai-Mũi-Họng","");
 insert into ChuyenKhoa(ID,TenChuyenKhoa,MoTa) values("cdha", "Chẩn Đoán Hình Ảnh","");
 
-insert into ThongTinTaiKhoan(Email,ID,PHash) values("abcd12345@gmail.com","BS12345","random");
-insert into ThongTinTaiKhoan(Email,ID,PHash) values("abcd12346@gmail.com","BS12346","random");
-insert into ThongTinTaiKhoan(Email,ID,PHash) values("abcd12347@gmail.com","BS12347","random");
-insert into ThongTinTaiKhoan(Email,ID,PHash) values("abcd12348@gmail.com","BS12348","random");
-insert into ThongTinTaiKhoan(Email,ID,PHash) values("abcd12349@gmail.com","BS12349","random");
-insert into bacsi(ID,HoTen,ID_ChuyenKhoa) values("BS12345","Nguyễn Văn A","tmh");
-insert into bacsi(ID,HoTen,ID_ChuyenKhoa) values("BS12346","Nguyễn Văn B","rhm");
-insert into bacsi(ID,HoTen,ID_ChuyenKhoa) values("BS12347","Lê Thị C","nk");
-insert into bacsi(ID,HoTen,ID_ChuyenKhoa) values("BS12348","Nguyễn Thị D","dl");
-insert into bacsi(ID,HoTen,ID_ChuyenKhoa) values("BS12349","Lê Thu Hân","dl");
+insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12345@gmail.com","TK12345","Nguyễn Văn A","","","random");
+insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12346@gmail.com","TK12346","Nguyễn Văn B","random");
+insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12347@gmail.com","TK12347","Lê Thị C","random");
+insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12348@gmail.com","TK12348","Nguyễn Thị D","random");
+insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12349@gmail.com","TK12349","Lê Thu Hân","random");
+insert into bacsi(ID,ID_ChuyenKhoa) values("TK12345","tmh");
+insert into bacsi(ID,ID_ChuyenKhoa) values("TK12346","rhm");
+insert into bacsi(ID,ID_ChuyenKhoa) values("TK12347","nk");
+insert into bacsi(ID,ID_ChuyenKhoa) values("TK12348","dl");
+insert into bacsi(ID,ID_ChuyenKhoa) values("TK12349","dl");
 
-insert into LichLamViec(ID_BacSi,ID_KhungGio) values ("BS12348",1),("BS12348",2),("BS12348",3),("BS12348",4);
-insert into LichLamViec(ID_BacSi,ID_KhungGio) values ("BS12349",1),("BS12349",2),("BS12349",5),("BS12349",6),("BS12349",7),("BS12349",8);
-insert into LichLamViec(ID_BacSi,ID_KhungGio) values ("BS12347",1),("BS12347",3),("BS12347",5),("BS12347",7),("BS12347",8);
+insert into LichLamViec(ID_BacSi,ID_KhungGio) values ("TK12348",1),("TK12348",2),("TK12348",3),("TK12348",4);
+insert into LichLamViec(ID_BacSi,ID_KhungGio) values ("TK12349",1),("TK12349",2),("TK12349",5),("TK12349",6),("TK12349",7),("TK12349",8);
+insert into LichLamViec(ID_BacSi,ID_KhungGio) values ("TK12347",1),("TK12347",3),("TK12347",5),("TK12347",7),("TK12347",8);
 
 
