@@ -16,6 +16,20 @@
                     <div>
                         <form action="/login" class="main_form" name="main_form" method="post">
                             
+                            <label for="hoten">
+                                Họ tên <p class="red_required">*</p>
+                            </label>
+                            <br>
+                            <input class="input_text" type="text" name="hoten" id="input_hoten" required>
+                            <br>
+
+                            <label for="socccd">
+                                Họ tên <p class="red_required">*</p>
+                            </label>
+                            <br>
+                            <input class="input_text" type="text" name="socccd" id="input_hoten" required>
+                            <br>
+
                             <label for="ten_tk">
                                 Email tài khoản <p class="red_required">*</p>
                             </label>

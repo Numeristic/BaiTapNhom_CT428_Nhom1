@@ -206,8 +206,8 @@ return_button2.addEventListener("click",function(){
 });
 
 const form_inputs = [
-    [document.getElementById("input_hoten"),document.getElementById("label_hoten"),0],
-    [document.getElementById("input_socccd"),document.getElementById("label_socccd"),0],
+    //[document.getElementById("input_hoten"),document.getElementById("label_hoten"),0],
+    //[document.getElementById("input_socccd"),document.getElementById("label_socccd"),0],
     [document.getElementById("input_date"),document.getElementById("label_date"),2],
 ];
 

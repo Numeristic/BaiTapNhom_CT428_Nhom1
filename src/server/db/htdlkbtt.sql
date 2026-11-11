@@ -4,7 +4,7 @@ use HTDLKBTT;
 
 create table ThongTinTaiKhoan (
     Email char(255) primary key,
-    ID char(10) unique,
+    ID int unique,
     
     HoTen varchar(50) not null,
     SoCCCD char(12) not null,
@@ -15,7 +15,7 @@ create table ThongTinTaiKhoan (
 );
 
 create table BenhNhan (
-    ID char(10) primary key,
+    ID int AUTO_INCREMENT primary key,
     constraint fk_ThongTinTKBN
     foreign key (ID)
     references ThongTinTaiKhoan(ID)
@@ -28,7 +28,7 @@ create table ChuyenKhoa (
 );
 
 create table BacSi (
-    ID char(10) primary key,
+    ID int AUTO_INCREMENT primary key,
     ID_ChuyenKhoa char(10) not null,
 
     constraint fk_ChuyenKhoaBS
@@ -41,7 +41,7 @@ create table BacSi (
 );
 
 create table QuanLy (
-    ID char(10) primary key,
+    ID int AUTO_INCREMENT primary key,
     HoTen varchar(50) not null,
     
     constraint fk_ThongTinTKQL
@@ -50,7 +50,7 @@ create table QuanLy (
 );
 
 create table TrangThai (
-    ID char(10) primary key,
+    ID int primary key,
     TenTrangThai char(50) unique
 );
 
@@ -71,16 +71,16 @@ create table KhungGio(
 );
 
 create table LichKham (
-    ID char(20) primary key,
+    ID int AUTO_INCREMENT primary key,
 
-    ID_BenhNhan char(10) not null,
+    ID_BenhNhan int not null,
 
     ID_ChuyenKhoa char(10) not null,
-    ID_BacSi char(10),
+    ID_BacSi int null,
     KhungGio int not null,
     NgayKham date not null,
     LyDoKham varchar(1000),
-    ID_TrangThai char(10) not null,
+    ID_TrangThai int not null,
     
     constraint fk_BenhNhan
     foreign key (ID_BenhNhan)
@@ -105,7 +105,7 @@ create table Thu(
 );
 
 create table LichLamViec (
-  ID_BacSi char(10),
+  ID_BacSi int,
   ID_KhungGio int not null,
     
   constraint fk_LichCuaBacSi
@@ -121,11 +121,11 @@ create table LichLamViec (
 );
 
 create table LichNghiPhep (
-    ID_BacSi char(10) primary key,
+    ID_BacSi int primary key,
     Ngay_BD date not null,
     Ngay_KT date not null,
     LyDo varchar(1500),
-    TrangThai char(10) not null,
+    TrangThai int not null,
     
     constraint fk_BacSiNghiPhep
     foreign key (ID_BacSi)
@@ -137,7 +137,7 @@ create table LichNghiPhep (
 );
 
 create table LichNghi (
-    ID_BacSi char(10),
+    ID_BacSi int,
     ID_Thu int not null,
     
     constraint fk_BacSiNghi

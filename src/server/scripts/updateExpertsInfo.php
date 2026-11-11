@@ -6,7 +6,7 @@ if (isset($_GET["ck"])) {
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
 
-    $stm = $mysqli->prepare("SELECT * FROM bacsi WHERE ID_ChuyenKhoa = ?");
+    $stm = $mysqli->prepare("SELECT BacSi.ID as ID, ThongTinTaiKhoan.HoTen as HoTen FROM bacsi,ThongTinTaiKhoan WHERE ID_ChuyenKhoa = ? AND BacSi.ID = ThongTinTaiKhoan.ID");
     $stm->bind_param("s",$_GET["ck"]);
     
     if ($stm->execute()) {

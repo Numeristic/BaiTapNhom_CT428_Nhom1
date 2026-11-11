@@ -1,0 +1,30 @@
+#login_panel {
+    /*background-color: red;*/
+    grid-area: "login";
+    background-color: rgba(115, 215, 255, 0.418);
+    max-width: 1500px;
+    min-width: 750px;
+    width: auto;
+
+    padding: 10px;
+
+    min-height:1fr;
+}
+
+.info_container {
+    display: block;
+}
+
+.info_title {
+    display: inline;
+    width:fit-content;
+    height: auto;
+    max-width: 100%;
+}
+
+.info_content {
+    display: inline;
+    width:fit-content;
+    height: auto;
+    max-width: 100%;
+}

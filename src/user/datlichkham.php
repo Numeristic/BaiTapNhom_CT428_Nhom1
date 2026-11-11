@@ -19,7 +19,7 @@
                     <div>
                         <form action="../server/scripts/processBooking.php" class="main_form" name="main_form" id="main_form" method="post" novalidate>
                             <div id="form_step1" class="form_steps">
-                                <label for="ho_ten" id="label_hoten">
+                                <!--<label for="ho_ten" id="label_hoten">
                                     Họ và tên người khám <p class="red_required">*</p>
                                 </label>
                                 <br>
@@ -32,7 +32,7 @@
                                 </label>
                                 <br>
                                 <input name="so_cccd" class="input_text" type="number" id="input_socccd" required>
-                                <br>
+                                <br>-->
 
                                 <label for="loai_hinh">
                                     Loại hình khám <p class="red_required">*</p>

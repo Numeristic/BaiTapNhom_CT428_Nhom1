@@ -2,17 +2,18 @@
     require("sqlCredentials.php");
 
     $mysqli = new mysqli($hostname,$username,$password);
+    $mysqli->select_db("htdlkbtt");
 
     $GET_KEYS = [
-        "ho_ten",
-        "so_cccd",
+        //"ho_ten",
+        //"so_cccd",
         "loai_hinh",
         "ck",
         "cg",
         "ly_do_kham",
         "ngay_kham",
         "khung_gio"
-    ]
+    ];
     
     function validateBooking($GET_KEYS){
         if ($_POST["loai_hinh"]=="cg"&&!isset($_POST["cg"])) {
@@ -33,7 +34,7 @@
     }
 
     //Unrelated Idea: Lịch khám liên quan tới bác sĩ trên giao diện BS.
-    function processBooking($mysqli) {
+    function processBooking($GET_KEYS,$mysqli) {
         $check_query = "";
         
         $stm = "";
@@ -46,15 +47,24 @@
             $check_query = "SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND ID_BacSi = ? AND KhungGio = ? AND NgayKham = ?;";
 
             $stm = $mysqli->prepare($check_query);
-            $stm->bind_param("ssis",$_POST["ck"],$_POST["cg"],$_POST["khung_gio"],$_POST["ngay_kham"]);
+            $stm->bind_param("siis",$_POST["ck"],$_POST["cg"],$_POST["khung_gio"],$_POST["ngay_kham"]);
         }
         if ($stm->execute()) {
             $check_result = $stm->get_result();
             if ($check_result->num_rows>0){
-                return false,"Lịch không còn trống!";
+                return [false,"Lịch không còn trống!"];
             }
-            $stm2 = $mysqli->prepare("INSERT INTO LichKham(ID,ID_BacSi,ID_BenhNhan,ID_ChuyenKhoa,ID_TrangThai,KhungGio,LyDoKham,NgayKham) VALUES(?,?,?,?,?,?,?,?)");
-            $stm2->bind_param("");
+            $stm2 = $mysqli->prepare("INSERT INTO LichKham(ID_BacSi,ID_BenhNhan,ID_ChuyenKhoa,ID_TrangThai,KhungGio,LyDoKham,NgayKham) VALUES(?,?,?,?,?,?,?)");
+           
+            $id_cg = null;
+            $id_bn = 1;
+            $id_trangthai = 1;
+            if ($_POST["loai_hinh"]=="cg") {
+                $id_cg = $_POST["cg"];
+            }
+
+            //Replace third argument with session-logged UserId later on.
+            $stm2->bind_param("iisiiss",$id_cg,$id_bn,$_POST["ck"],$id_trangthai,$_POST["khung_gio"],$_POST["ly_do_kham"],$_POST["ngay_kham"]);
             if ($stm2->execute()) {
                 //Đặt lịch khám thành công.
             } else {
@@ -66,6 +76,6 @@
         }
     }
     if (validateBooking($GET_KEYS)) {
-        $query_result, $query_err = processBooking($GET_KEYS,$mysqli);
+        $query_result = processBooking($GET_KEYS,$mysqli);
     }
 ?>
