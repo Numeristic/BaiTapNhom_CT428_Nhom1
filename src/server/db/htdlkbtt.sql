@@ -11,7 +11,7 @@ create table ThongTinTaiKhoan (
     NgaySinh date not null,
     SoDT varchar(20),
       
-    PHash char(64) not null,
+    PHash char(64) not null
 );
 
 create table BenhNhan (
