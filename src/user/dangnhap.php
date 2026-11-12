@@ -19,11 +19,11 @@
                     <h2><b>Đăng nhập</b></h2>
                     <div>
                         <form action="../server/scripts/signup.php" class="main_form" id="main_form" name="main_form" method="post">
-                            <label for="ten_tk" id="label_email">
+                            <label for="emailtk" id="label_email">
                                 Email tài khoản <p class="red_required">*</p>
                             </label>
                             <br>
-                            <input class="input_text" type="email" name="ten_tk" id="input_email">
+                            <input class="input_text" type="email" name="emailtk" id="input_email">
                             <br>
 
 
