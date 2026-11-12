@@ -86,6 +86,7 @@
         } else {
             die("Error: $stm->error");
         }*/
+        $stm = "";
         if ($check_result==0) {
             $stm = $mysqli->prepare("INSERT INTO ThongTinTaiKhoan(Email,HoTen,NgaySinh,SoCCCD,SoDT,PHash) VALUES(?,?,?,?,?,?);");
         
@@ -97,7 +98,7 @@
             }
         }
 
-        $stm2 = $mysqli->prepare("SELECT ID FROM ThongTinTaiKhoan WHERE Email = ?");
+       /* $stm2 = $mysqli->prepare("SELECT ID FROM ThongTinTaiKhoan WHERE Email = ?");
         $query3 = "INSERT INTO $register_as(ID) VALUES (?)";
         $stm3 = $mysqli->prepare($query3);
 
@@ -111,7 +112,10 @@
             if ($stm3->execute()){
                 echo "Signed up successfully.";
             }
-        }
+        }*/
+        $query2 = "INSERT INTO $register_as(ID) VALUES (?)";
+        $stm2 = $mysqli->prepare($query2);
+        $stm2->bind_param("i",$stm->insert_id);
     }
 
     $check_result = check_account_exists($POST_KEYS,"BenhNhan",$mysqli);

@@ -1,5 +1,7 @@
 <?php
 
+    include_once "../server/scripts/initSession.php";
+
     if (!isset($_SESSION["ID_TaiKhoan"])){
         header("Location: dangnhap.php");
     }
@@ -11,18 +13,17 @@
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
 
-    $stm = $mysqli->prepare("SELECT * FROM BenhNhan, BacSi, LichKham
-    WHERE ((BenhNhan.ID = ? AND BenhNhan.ID = LichKham.ID_BenhNhan) OR (BacSi.ID = ? AND BacSi.ID = LichKham.ID_BacSi) OR (QuanLy.ID = ?)) AND (LichKham.ID = ?)");
-    $stm->bind_param("iiii",$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"],$_GET["id"]);
+    $stm = $mysqli->prepare("SELECT * FROM LichKham
+    WHERE ((LichKham.ID_BenhNhan = ?) OR (LichKham.ID_BacSi = ?)) AND (LichKham.ID = ?);");
+    $stm->bind_param("iii",$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"],$_GET["id"]);
 
     $result = "";
     if ($stm->execute()) {
         $result = $stm->get_result();
-        $result = $result->fetch_assoc();
-
         if ($result->num_rows<=0) {
             die("You don't have permission to view this.");
         }
+        $result = $result->fetch_assoc();
     } else {
         die("Error: $stm->error");
     }
