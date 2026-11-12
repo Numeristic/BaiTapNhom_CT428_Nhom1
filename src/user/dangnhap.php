@@ -18,20 +18,20 @@
                 <div id="login_panel">
                     <h2><b>Đăng nhập</b></h2>
                     <div>
-                        <form action="login.php" class="main_form" name="main_form" method="post">
-                            <label for="ten_tk">
+                        <form action="../server/scripts/signup.php" class="main_form" id="main_form" name="main_form" method="post">
+                            <label for="ten_tk" id="label_email">
                                 Email tài khoản <p class="red_required">*</p>
                             </label>
                             <br>
-                            <input class="input_text" type="email" name="ten_tk" id="input_ten_tk">
+                            <input class="input_text" type="email" name="ten_tk" id="input_email">
                             <br>
 
 
-                            <label for="mk">
+                            <label for="mk" id="label_mk">
                                 Mật khẩu <p class="red_required">*</p>
                             </label>
                             <br>
-                            <input class="input_text" type="password" name="mk" id="input_ten_tk">
+                            <input class="input_text" type="password" name="mk" id="input_mk">
                             <br>
 
 
@@ -39,7 +39,7 @@
                                 <input id="login_button" for="main_form" type="submit" value="Đăng nhập">
                                 <div id="sr_container">
                                     <p id="signup_redirect_label">Chưa có tài khoản?</p>
-                                    <a id="forgot_password" href="signup.php">Đăng ký</a>
+                                    <a id="forgot_password" href="dangky.php">Đăng ký</a>
                                 </div>  
                             </div>
 

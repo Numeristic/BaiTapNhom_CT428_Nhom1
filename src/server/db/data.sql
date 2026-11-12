@@ -47,6 +47,8 @@ insert into ChuyenKhoa(ID,TenChuyenKhoa,MoTa) values("rhm", "Răng-Hàm-Mặt","
 insert into ChuyenKhoa(ID,TenChuyenKhoa,MoTa) values("tmh", "Tai-Mũi-Họng","");
 insert into ChuyenKhoa(ID,TenChuyenKhoa,MoTa) values("cdha", "Chẩn Đoán Hình Ảnh","");
 
+/* Copy code tới đây nếu chỉ cần dữ liệu danh mục. */
+
 insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12345@gmail.com",1,"Nguyễn Văn A","","","","random");
 insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12346@gmail.com",2,"Nguyễn Văn B","","","","random");
 insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12347@gmail.com",3,"Lê Thị C","","","","random");

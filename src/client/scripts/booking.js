@@ -9,7 +9,7 @@ const number_of_stages = 3;
 const xhttp = new XMLHttpRequest(); //Tìm kiếm chuyên gia dựa trên Chuyên khoa.
 const xhttp2 = new XMLHttpRequest(); //Tìm kiếm khung giờ làm việc phù hợp với Chuyên khoa/Chuyên gia.
 
-form = document.getElementById("main_form");
+let form = document.getElementById("main_form");
 const red_requireds = document.getElementsByClassName("red_required");
 
 proceed_button = document.getElementById("pbutton");
@@ -217,14 +217,14 @@ form.addEventListener("submit",function(event){
         if (!form_inputs[i][0].checkValidity() || form_inputs[i][0].value==null) {
 
             if (result==true){
-                event.preventDefault();
                 current_stage = form_inputs[i][2];
                 update_current_stage();
             }
+            result = false;
+            event.preventDefault();
 
             let tag = form_inputs[i][1].querySelector(".red_required");
             tag.style.display = 'inline';
-            result = false;
         }
     }
     return result;

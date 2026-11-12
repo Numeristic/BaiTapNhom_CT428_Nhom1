@@ -4,7 +4,11 @@
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
 
-    $GET_KEYS = [
+    if ($mysqli->connect_errno) {
+        exit;
+    }
+
+    $POST_KEYS = [
         //"ho_ten",
         //"so_cccd",
         "loai_hinh",
@@ -15,18 +19,18 @@
         "khung_gio"
     ];
     
-    function validateBooking($GET_KEYS){
+    function validateBooking($POST_KEYS){
         if ($_POST["loai_hinh"]=="cg"&&!isset($_POST["cg"])) {
             return false;
         }
-        for ($x=0;$x<count($GET_KEYS);$x++){
-            if ($GET_KEYS[$x]=="cg" || $GET_KEYS[$x]=="ly_do_kham") {
+        for ($x=0;$x<count($POST_KEYS);$x++){
+            if ($POST_KEYS[$x]=="cg" || $POST_KEYS[$x]=="ly_do_kham") {
                 continue;
             }
-            if (!isset($_POST[$GET_KEYS[$x]])) {
+            if (!isset($_POST[$POST_KEYS[$x]])) {
                 return false;
             }
-            if ($GET_KEYS[$x]=="loai_hinh" && $_POST[$GET_KEYS[$x]]=="cg" && !isset($_POST["cg"])) {
+            if ($POST_KEYS[$x]=="loai_hinh" && $_POST[$POST_KEYS[$x]]=="cg" && !isset($_POST["cg"])) {
                 return false;
             }
         }
@@ -34,7 +38,7 @@
     }
 
     //Unrelated Idea: Lịch khám liên quan tới bác sĩ trên giao diện BS.
-    function processBooking($GET_KEYS,$mysqli) {
+    function processBooking($POST_KEYS,$mysqli) {
         $check_query = "";
         
         $stm = "";
@@ -75,7 +79,7 @@
             exit;
         }
     }
-    if (validateBooking($GET_KEYS)) {
-        $query_result = processBooking($GET_KEYS,$mysqli);
+    if (validateBooking($POST_KEYS)) {
+        $query_result = processBooking($POST_KEYS,$mysqli);
     }
 ?>

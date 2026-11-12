@@ -1,21 +1,21 @@
-drop database htdlkbtt;
+drop database if exists htdlkbtt;
 create database HTDLKBTT;
 use HTDLKBTT;
 
 create table ThongTinTaiKhoan (
     Email char(255) primary key,
-    ID int unique,
+    ID int AUTO_INCREMENT unique not null,
     
     HoTen varchar(50) not null,
     SoCCCD char(12) not null,
     NgaySinh date not null,
-    SoDT varchar(20),
+    SoDT varchar(20) not null,
       
     PHash char(64) not null
 );
 
 create table BenhNhan (
-    ID int AUTO_INCREMENT primary key,
+    ID int primary key,
     constraint fk_ThongTinTKBN
     foreign key (ID)
     references ThongTinTaiKhoan(ID)
@@ -28,7 +28,7 @@ create table ChuyenKhoa (
 );
 
 create table BacSi (
-    ID int AUTO_INCREMENT primary key,
+    ID int primary key,
     ID_ChuyenKhoa char(10) not null,
 
     constraint fk_ChuyenKhoaBS
@@ -41,7 +41,7 @@ create table BacSi (
 );
 
 create table QuanLy (
-    ID int AUTO_INCREMENT primary key,
+    ID int primary key,
     HoTen varchar(50) not null,
     
     constraint fk_ThongTinTKQL
