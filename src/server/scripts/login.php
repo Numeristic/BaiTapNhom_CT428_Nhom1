@@ -1,4 +1,7 @@
 <?php
+
+    include_once "initSession.php";
+
     $POST_KEYS = [
 
         "emailtk",
@@ -36,6 +39,7 @@
                 if (password_verify($_POST["mk"],$result["PHash"])) {
                     $_SESSION['ID_TaiKhoan'] = $result["ID"];
                     $_SESSION['HoTen'] = $result["HoTen"];
+                    $_SESSION['Role'] = $dangnhap_as;
                 } else {
                     
                 }

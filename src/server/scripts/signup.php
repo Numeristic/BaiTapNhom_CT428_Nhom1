@@ -33,18 +33,18 @@
     //Các tài khoản của Bác Sĩ hoặc quản lý phải được
     //cấp thủ công bởi người có thẩm quyền (Tài khoản root)
 
-    //TODO: Trim all inputs.
+    //TODO: Trim and escape HTML for all inputs.
     function sign_up($POST_KEYS,$mysqli) {
         $stm = $mysqli->prepare("INSERT INTO ThongTinTaiKhoan(Email,HoTen,NgaySinh,SoCCCD,SoDT,PHash) VALUES(?,?,?,?,?,?);");
         
-        $hashed_pswd = password_hash($_POST["mk"],PASSWORD_BCRYPT);
-
-        $stm->bind_param("sssiss",strtolower($_POST["emailtk"]),$_POST["hoten"],$_POST["ngaysinh"],$_POST["socccd"],$_POST["sodt"],$hashed_pswd);
+        $hashed_pswd = password_hash(trim($_POST["mk"]),PASSWORD_BCRYPT);
+        $lowered_email = trim(strtolower($_POST["emailtk"]));
+        $stm->bind_param("sssiss",$lowered_email,$_POST["hoten"],$_POST["ngaysinh"],$_POST["socccd"],$_POST["sodt"],$hashed_pswd);
         if ($stm->execute()) {
             $stm2 = $mysqli->prepare("SELECT ID FROM ThongTinTaiKhoan WHERE Email = ?");
             $stm3 = $mysqli->prepare("INSERT INTO BenhNhan(ID) VALUES (?)");
 
-            $stm2->bind_param("s",strtolower($_POST["emailtk"]));
+            $stm2->bind_param("s",$lowered_email);
 
             if ($stm2->execute()) {
 
@@ -52,7 +52,7 @@
                 $stm3->bind_param("i",$id_result["ID"]);
                 
                 if ($stm3->execute()){
-
+                    echo "Signed up successfully.";
                 }
             }
             

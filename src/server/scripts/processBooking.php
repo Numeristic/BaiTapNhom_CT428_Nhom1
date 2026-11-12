@@ -81,5 +81,7 @@
     }
     if (validateBooking($POST_KEYS)) {
         $query_result = processBooking($POST_KEYS,$mysqli);
+    } else {
+        die("Invalid inputs.");
     }
 ?>
