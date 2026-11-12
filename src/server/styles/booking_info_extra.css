@@ -12,19 +12,22 @@
 }
 
 .info_container {
-    display: block;
+    display: flex;
+    max-height: 30px;
+    margin-left:10px;
 }
 
 .info_title {
     display: inline;
     width:fit-content;
-    height: auto;
+    height: 30px;
     max-width: 100%;
+    min-width:200px;
 }
 
 .info_content {
     display: inline;
     width:fit-content;
-    height: auto;
+    height: 30px;
     max-width: 100%;
 }
