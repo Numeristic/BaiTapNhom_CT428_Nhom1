@@ -51,14 +51,17 @@
             die("Error: $stm->error");
         }
     }
-    
+
     function login($POST_KEYS,$dangnhap_as,$mysqli) {
         $query = "SELECT ThongTinTaiKhoan.ID,ThongTinTaiKhoan.HoTen,ThongTinTaiKhoan.PHash FROM $dangnhap_as,ThongTinTaiKhoan WHERE ThongTinTaiKhoan.Email = ? AND ThongTinTaiKhoan.ID = $dangnhap_as.ID";
         $stm = $mysqli->prepare($query);
-        $stm->bind_param("s",strtolower($_POST["emailtk"]));
+
+        $lowered_email = strtolower($_POST["emailtk"]);
+
+        $stm->bind_param("s",$lowered_email);
         if ($stm->execute()) {
-            if ($stm->num_rows>0){
-                $result = $stm->get_result();
+            $result = $stm->get_result();
+            if ($result->num_rows>0){
                 $result = $result->fetch_assoc();
 
                 if (password_verify($_POST["mk"],$result["PHash"])) {
@@ -67,18 +70,26 @@
                     $_SESSION['Role'] = $dangnhap_as;
 
                     echo "Dang nhap thanh cong.";
+                    echo $_SESSION['ID_TaiKhoan'];
+                    echo $_SESSION['HoTen'];
+                    echo $_SESSION['Role'];
+                    echo "\n$query";
                 } else {
                     echo "No.";
                 }
             } else {
-                header("Location: ../../user/dangky.php");
+                echo "Ayo didy";
+                //header("Location: ../../user/dangky.php");
             }
         } else {
             die("Error: $stm->error");
         }
     }
     
-    if (validate($POST_KEYS) && check_account_exists($POST_KEYS,"BenhNhan",$mysqli)==0) {
+    $check_result = check_account_exists($POST_KEYS,"BenhNhan",$mysqli);
+    if (validate($POST_KEYS) && $check_result==2) {
         login($POST_KEYS,"BenhNhan",$mysqli);
+    } else {
+        echo "";
     }
 ?>

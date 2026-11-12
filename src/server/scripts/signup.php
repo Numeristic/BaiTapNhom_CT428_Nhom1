@@ -58,9 +58,9 @@
             die("Error: $stm->error");
         }
     }
-    
-    function sign_up($POST_KEYS,$register_as,$mysqli) {
-        $stm = $mysqli->prepare("INSERT INTO ThongTinTaiKhoan(Email,HoTen,NgaySinh,SoCCCD,SoDT,PHash) VALUES(?,?,?,?,?,?);");
+
+    function sign_up($POST_KEYS,$register_as,$check_result,$mysqli) {
+        /*$stm = $mysqli->prepare("INSERT INTO ThongTinTaiKhoan(Email,HoTen,NgaySinh,SoCCCD,SoDT,PHash) VALUES(?,?,?,?,?,?);");
         
         $hashed_pswd = password_hash(trim($_POST["mk"]),PASSWORD_BCRYPT);
         $lowered_email = trim(strtolower($_POST["emailtk"]));
@@ -85,10 +85,37 @@
             
         } else {
             die("Error: $stm->error");
+        }*/
+        if ($check_result==0) {
+            $stm = $mysqli->prepare("INSERT INTO ThongTinTaiKhoan(Email,HoTen,NgaySinh,SoCCCD,SoDT,PHash) VALUES(?,?,?,?,?,?);");
+        
+            $hashed_pswd = password_hash(trim($_POST["mk"]),PASSWORD_BCRYPT);
+            $lowered_email = trim(strtolower($_POST["emailtk"]));
+            $stm->bind_param("sssiss",$lowered_email,$_POST["hoten"],$_POST["ngaysinh"],$_POST["socccd"],$_POST["sodt"],$hashed_pswd);
+            if (!$stm->execute()) {
+                die("Error: $stm->error");
+            }
+        }
+
+        $stm2 = $mysqli->prepare("SELECT ID FROM ThongTinTaiKhoan WHERE Email = ?");
+        $query3 = "INSERT INTO $register_as(ID) VALUES (?)";
+        $stm3 = $mysqli->prepare($query3);
+
+        $stm2->bind_param("s",$lowered_email);
+
+        if ($stm2->execute()) {
+
+            $id_result = $stm2->get_result()->fetch_assoc();
+            $stm3->bind_param("i",$id_result["ID"]);
+            
+            if ($stm3->execute()){
+                echo "Signed up successfully.";
+            }
         }
     }
 
-    if (validate($POST_KEYS) && check_account_exists($POST_KEYS,"BenhNhan",$mysqli)==0) {
-        sign_up($POST_KEYS,$mysqli);
+    $check_result = check_account_exists($POST_KEYS,"BenhNhan",$mysqli);
+    if (validate($POST_KEYS) && $check_result<2) {
+        sign_up($POST_KEYS,"BenhNhan",$check_result,$mysqli);
     }
 ?>
