@@ -87,7 +87,7 @@
             $stm2->bind_param("i",$result->fetch_assoc()["ID"]);
         }
         if ($stm2->execute()) {
-            echo "Complete.";
+            header("Location: ../user/dangnhap.php");
         } else {
             die("Error: $stm2->error");
         }
