@@ -13,7 +13,7 @@
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
 
-    $stm = $mysqli->prepare("SELECT LichKham.ID as ID, NgayKham, ThongTinTaiKhoan.HoTen as BacSi, KhungGio.Gio_BD, KhungGio.Gio_KT, ChuyenKhoa.TenChuyenKhoa as ChuyenKhoa, LichKham.LyDoKham FROM LichKham,ChuyenKhoa,ThongTinTaiKhoan,BacSi,KhungGio
+    $stm = $mysqli->prepare("SELECT LichKham.ID as ID, NgayKham, ThongTinTaiKhoan.HoTen as BacSi, KhungGio.Gio_BD, KhungGio.Gio_KT, ChuyenKhoa.TenChuyenKhoa as ChuyenKhoa, ChuyenKhoa.ID as ID_ChuyenKhoa, LichKham.LyDoKham FROM LichKham,ChuyenKhoa,ThongTinTaiKhoan,BacSi,KhungGio
     WHERE ((LichKham.ID_BenhNhan = ?) OR (LichKham.ID_BacSi = ? AND BacSi.ID = LichKham.ID_BacSi)) AND (LichKham.ID = ?) AND (LichKham.ID_BacSi = BacSi.ID AND BacSi.ID = ThongTinTaiKhoan.ID) AND (LichKham.ID_ChuyenKhoa = ChuyenKhoa.ID) AND (LichKham.KhungGio = KhungGio.ID);");
     $stm->bind_param("iii",$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"],$_GET["id"]);
 
@@ -35,6 +35,7 @@
             include '../server/stylesheets.php'
         ?>
         <link rel="stylesheet" href="../server/styles/booking_info_extra.css">
+        <script src="../client/scripts/phieukhambenh.js" defer></script>
     </head>
     <body>
         <?php
@@ -51,93 +52,54 @@
                 <div id="login_panel">
                     <h2><b>Phiếu khám bệnh</b></h2>
                     <form id="adjust_form" class="main_form">
-                        <label for="maphieu" id="label_email">
+                        <label for="maphieu" id="label_maphieu">
                                 Mã phiếu <p class="red_required">*</p>
                         </label>
                         <br>
-                        <input class="input_text" type="text" name="maphieu" id="input_email" required>
+                        <input class="input_text" type="text" name="maphieu" id="input_maphieu" value=<?php $id = $data_result["ID"]; echo "\"$id\""; ?> required>
                         <br>
 
-                        <label for="ck" id="label_email">
+                        <label for="ck" id="label_ck">
                                 Chuyên khoa <p class="red_required">*</p>
                         </label>
                         <br>
-                        <select id="ck_selection" name="ck" class="input_text" required>
+                        <select id="input_ck" name="ck" class="input_text" required>
                             <?php 
                                 require_once("../server/scripts/loadCk.php");
                             ?>
                         </select>
                         <br>
 
-                        <label for="cg" id="label_email">
-                                Chuyên gia <p class="red_required">*</p>
+                        <label for="cg" id="label_cg">
+                            Chuyên gia <p class="red_required">*</p>
                         </label>
                         <br>
-                        <select name="cg" class="input_text" id="prof_selection">
-                                        
+                        <select name="cg" class="input_text" id="input_cg">
+                            
                         </select>
                         <br>
 
-                        <label for="ngay_kham" id="label_email">
+                        <label for="ngay_kham" id="label_ngaykham">
                                 Ngày khám <p class="red_required">*</p>
                         </label>
                         <br>
-                        <input class="input_text" type="date" name="ngay_kham" id="input_email" required>
+                        <input class="input_text" type="date" name="ngay_kham" id="input_ngaykham" value=<?php $ngay_kham = $data_result["NgayKham"]; echo "\"$ngay_kham\""; ?> required>
                         <br>
 
-                        <label for="khung_gio" id="label_email">
+                        <label for="khung_gio" id="label_khunggio">
                                 Khung giờ dự kiến <p class="red_required">*</p>
                         </label>
                         <br>
                         <div id="timeslots_container">
-                            <div id="morning_container">
-                                <p><i>Sáng</i></p>
-
-                                <input type="radio" value="time_id1" name="khung_gio" id="timeslot_id1">
-                                <label for="timeslot_id1">07:00-08:00</label>
-
-                                <br>
-                                <input type="radio" value="time_id2" name="khung_gio" id="timeslot_id2">
-                                <label for="timeslot_id2">08:00-09:00</label>
-
-                                <br>
-                                <input type="radio" value="time_id3" name="khung_gio" id="timeslot_id3">
-                                <label for="timeslot_id2">09:00-10:00</label>
-
-                                <br>
-                                <input type="radio" value="time_id4" name="khung_gio" id="timeslot_id4">
-                                <label for="timeslot_id2">10:00-11:00</label>
-
-                                <br>
-                                <input type="radio" value="time_id5" name="khung_gio" id="timeslot_id5">
-                                <label for="timeslot_id2">11:00-12:00</label>
-                            </div>
-                            <div id="night_container">
-                                <p><i>Chiều</i></p>
-
-                                <input type="radio" value="time_id1" name="khung_gio" id="timeslot_id6">
-                                <label for="timeslot_id1">13:30-14:00</label>
-
-                                <br>
-                                <input type="radio" value="time_id2" name="khung_gio" id="timeslot_id7">
-                                <label for="timeslot_id2">14:00-15:00</label>
-
-                                <br>
-                                <input type="radio" value="time_id3" name="khung_gio" id="timeslot_id8">
-                                <label for="timeslot_id2">15:00-16:00</label>
-
-                                <br>
-                                <input type="radio" value="time_id4" name="khung_gio" id="timeslot_id9">
-                                <label for="timeslot_id2">16:00-17:00</label>
-                            </div>
+                            
                         </div>
                         <br>
 
-                        <label for="lydokham" id="label_email">
+                        <label for="lydokham" id="label_lydokham">
                                 Lý do khám <p class="red_required">*</p>
                         </label>
                         <br>
-                        <textarea name="lydokham" class="input_text" type="text" id="lydokham" placeholder="Hãy ghi thêm thông tin về triệu chứng để bác sĩ có thể chẩn đoán hiệu quả hơn"></textarea>
+                        <textarea name="lydokham" class="input_text" type="text" id="input_lydokham" placeholder="Hãy ghi thêm thông tin về triệu chứng để bác sĩ có thể chẩn đoán hiệu quả hơn"; ?><?php echo $data_result["LyDoKham"]; ?></textarea>
                         <br>
 
                         <div id="form_step_proceed" class="form_footer">

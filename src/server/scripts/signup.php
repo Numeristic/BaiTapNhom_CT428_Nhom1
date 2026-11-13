@@ -67,16 +67,22 @@
     function sign_up($POST_KEYS,$register_as,$check_result,$mysqli) {
         $stm = "";
         if ($check_result==0) {
+
             $stm = $mysqli->prepare("INSERT INTO ThongTinTaiKhoan(Email,HoTen,NgaySinh,SoCCCD,SoDT,PHash) VALUES(?,?,?,?,?,?);");
         
             $hashed_pswd = password_hash(trim($_POST["mk"]),PASSWORD_BCRYPT);
             $lowered_email = trim(strtolower($_POST["emailtk"]));
             $stm->bind_param("sssiss",$lowered_email,$_POST["hoten"],$_POST["ngaysinh"],$_POST["socccd"],$_POST["sodt"],$hashed_pswd);  
+        
         } else {
+            
             $query = "SELECT * FROM ThongTinTaiKhoan WHERE ThongTinTaiKhoan.Email = ?";
-            $lowered_email = trim(strtolower($_POST["emailtk"]));
+
             $stm = $mysqli->prepare($query);
+
+            $lowered_email = trim(strtolower($_POST["emailtk"]));
             $stm->bind_param("s",$lowered_email);
+
         }
         if (!$stm->execute()) {
             $_SESSION["alertMessage"] = "Lỗi CSDL $stm->error.";
@@ -103,10 +109,15 @@
     }
 
     $check_result = check_account_exists($POST_KEYS,"BenhNhan",$mysqli);
+
     if (validate($POST_KEYS) && $check_result<2) {
+
         sign_up($POST_KEYS,"BenhNhan",$check_result,$mysqli);
+
     } else {
+
         $_SESSION["alertMessage"] = "Lỗi đầu vào/đã có tài khoản gắn với email này.";
         header("Location: ../../user/dangky.php");
+        
     }
 ?>

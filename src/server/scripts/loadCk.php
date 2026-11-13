@@ -6,6 +6,6 @@
 
     $result = $mysqli->query("SELECT DISTINCT * FROM chuyenkhoa ORDER BY TenChuyenKhoa ASC");
     while ($rows=$result->fetch_assoc()) {
-        echo "<option value=\"".htmlspecialchars_decode($rows["ID"])."\">".(htmlspecialchars_decode($rows["TenChuyenKhoa"]))."</option>\n";
+        echo "<option value=\"".htmlspecialchars($rows["ID"])."\">".(htmlspecialchars($rows["TenChuyenKhoa"]))."</option>\n";
     }
 ?>

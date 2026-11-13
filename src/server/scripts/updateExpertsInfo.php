@@ -16,7 +16,7 @@ if (isset($_GET["ck"])) {
     if ($stm->execute()) {
         $result = $stm->get_result();
         while ($row = $result->fetch_assoc()) {
-            echo "<option value=\"".htmlspecialchars_decode($row["ID"])."\">".htmlspecialchars_decode($row["HoTen"])."</option>\n";
+            echo "<option value=\"".htmlspecialchars($row["ID"])."\">".htmlspecialchars($row["HoTen"])."</option>\n";
         }
     }
 }
