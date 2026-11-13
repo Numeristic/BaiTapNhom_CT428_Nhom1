@@ -78,7 +78,6 @@
                     echo "No.";
                 }
             } else {
-                echo "Ayo didy";
                 //header("Location: ../../user/dangky.php");
             }
         } else {
@@ -90,6 +89,6 @@
     if (validate($POST_KEYS) && $check_result==2) {
         login($POST_KEYS,"BenhNhan",$mysqli);
     } else {
-        echo "";
+        echo "Account doesn't exist or bad input.";
     }
 ?>
