@@ -49,11 +49,11 @@ insert into ChuyenKhoa(ID,TenChuyenKhoa,MoTa) values("cdha", "Chẩn Đoán Hìn
 
 /* Copy code tới đây nếu chỉ cần dữ liệu danh mục. */
 
-insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12345@gmail.com",1,"Nguyễn Văn A","","","","random");
-insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12346@gmail.com",2,"Nguyễn Văn B","","","","random");
-insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12347@gmail.com",3,"Lê Thị C","","","","random");
-insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12348@gmail.com",4,"Nguyễn Thị D","","","","random");
-insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12349@gmail.com",5,"Lê Thu Hân","","","","random");
+insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12345@gmail.com",1,"Nguyễn Văn A",123456789012,"","","random");
+insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12346@gmail.com",2,"Nguyễn Văn B",123456789013,"","","random");
+insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12347@gmail.com",3,"Lê Thị C",123456789014,"","","random");
+insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12348@gmail.com",4,"Nguyễn Thị D",123456789015,"","","random");
+insert into ThongTinTaiKhoan(Email,ID,HoTen,SoCCCD,NgaySinh,SoDT,PHash) values("abcd12349@gmail.com",5,"Lê Thu Hân",123456789016,"","","random");
 insert into bacsi(ID,ID_ChuyenKhoa) values(1,"tmh");
 insert into benhnhan(ID) values(1);
 insert into bacsi(ID,ID_ChuyenKhoa) values(2,"rhm");

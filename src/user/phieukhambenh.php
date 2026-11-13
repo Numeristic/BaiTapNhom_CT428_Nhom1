@@ -51,39 +51,46 @@
                 <div id="login_panel">
                     <h2><b>Phiếu khám bệnh</b></h2>
                     <form id="adjust_form" class="main_form">
-                        <label for="emailtk" id="label_email">
+                        <label for="maphieu" id="label_email">
                                 Mã phiếu <p class="red_required">*</p>
                         </label>
                         <br>
                         <input class="input_text" type="email" name="emailtk" id="input_email" required>
                         <br>
 
-                        <label for="emailtk" id="label_email">
+                        <label for="ck" id="label_email">
                                 Chuyên khoa <p class="red_required">*</p>
                         </label>
                         <br>
-                        <input class="input_text" type="email" name="emailtk" id="input_email" required>
+                        <input class="input_text" type="email" name="ck" id="input_email" required>
                         <br>
 
-                        <label for="emailtk" id="label_email">
+                        <label for="cg" id="label_email">
                                 Chuyên gia <p class="red_required">*</p>
                         </label>
                         <br>
-                        <input class="input_text" type="email" name="emailtk" id="input_email" required>
+                        <input class="input_text" type="email" name="cg" id="input_email" required>
                         <br>
 
-                        <label for="emailtk" id="label_email">
+                        <label for="ngay_kham" id="label_email">
                                 Ngày khám <p class="red_required">*</p>
                         </label>
                         <br>
-                        <input class="input_text" type="email" name="emailtk" id="input_email" required>
+                        <input class="input_text" type="email" name="ngay_kham" id="input_email" required>
                         <br>
 
-                        <label for="emailtk" id="label_email">
+                        <label for="khung_gio" id="label_email">
                                 Khung giờ dự kiến <p class="red_required">*</p>
                         </label>
                         <br>
-                        <input class="input_text" type="email" name="emailtk" id="input_email" required>
+                        <input class="input_text" type="email" name="khung_gio" id="input_email" required>
+                        <br>
+
+                        <label for="lydokham" id="label_email">
+                                Lý do khám <p class="red_required">*</p>
+                        </label>
+                        <br>
+                        <input class="input_text" type="email" name="lydokham" id="input_email" required>
                         <br>
 
                     </form>
