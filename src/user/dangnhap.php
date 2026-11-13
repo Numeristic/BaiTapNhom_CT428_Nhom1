@@ -1,12 +1,14 @@
 <html>
     <head>
         <?php
-            include_once '../server/stylesheets.php'
+            include_once '../server/stylesheets.php';
+            include_once '../server/scripts/alert.php';
         ?>
+        <script src="../client/scripts/dangnhap.js" defer></script>
     </head>
     <body>
         <?php
-            include_once '../server/templates/header.php'
+            include_once '../server/templates/header.php';
         ?>
         <?php
             //PHP code embed here.
@@ -23,7 +25,7 @@
                                 Email tài khoản <p class="red_required">*</p>
                             </label>
                             <br>
-                            <input class="input_text" type="email" name="emailtk" id="input_email">
+                            <input class="input_text" type="email" name="emailtk" id="input_email" required>
                             <br>
 
 
@@ -31,7 +33,7 @@
                                 Mật khẩu <p class="red_required">*</p>
                             </label>
                             <br>
-                            <input class="input_text" type="password" name="mk" id="input_mk">
+                            <input class="input_text" type="password" name="mk" id="input_mk" required>
                             <br>
 
 

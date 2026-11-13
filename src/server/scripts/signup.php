@@ -11,11 +11,14 @@
     ];
 
     require("sqlCredentials.php");
+    require("initSession.php");
 
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
 
     if ($mysqli->connect_errno) {
+        $_SESSION["alertMessage"] = "CSDL lỗi!";
+        header("Location: ../../user/dangky.php");
         exit;
     }
 
@@ -55,7 +58,9 @@
                 return 0; //Returns 0: The account itself doesn't exist.
             }
         } else {
-            die("Error: $stm->error");
+            $_SESSION["alertMessage"] = "CSDL lỗi: $stm->error";
+            header("Location: ../../user/dangky.php");
+            die();
         }
     }
 
@@ -74,6 +79,8 @@
             $stm->bind_param("s",$lowered_email);
         }
         if (!$stm->execute()) {
+            $_SESSION["alertMessage"] = "Lỗi CSDL $stm->error.";
+            header("Location: ../../user/dangky.php");
             die("Error: $stm->error");
         } 
         $result = $stm->get_result();
@@ -87,14 +94,19 @@
             $stm2->bind_param("i",$result->fetch_assoc()["ID"]);
         }
         if ($stm2->execute()) {
-            header("Location: ../user/dangnhap.php");
+            $_SESSION["alertMessage"] = "Đăng ký thành công.";
+            header("Location: ../../user/dangky.php");
         } else {
-            die("Error: $stm2->error");
+            $_SESSION["alertMessage"] = "Lỗi CSDL.";
+            header("Location: ../../user/dangky.php");
         }
     }
 
     $check_result = check_account_exists($POST_KEYS,"BenhNhan",$mysqli);
     if (validate($POST_KEYS) && $check_result<2) {
         sign_up($POST_KEYS,"BenhNhan",$check_result,$mysqli);
+    } else {
+        $_SESSION["alertMessage"] = "Lỗi đầu vào/đã có tài khoản gắn với email này.";
+        header("Location: ../../user/dangky.php");
     }
 ?>

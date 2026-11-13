@@ -1,7 +1,8 @@
 <html>
     <head>
         <?php
-            include_once '../server/stylesheets.php'
+            include_once '../server/stylesheets.php';
+            include_once '../server/scripts/alert.php';
         ?>
         <script src="../client/scripts/dangky.js" defer></script>
     </head>

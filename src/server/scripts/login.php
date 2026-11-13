@@ -1,7 +1,5 @@
 <?php
 
-    include_once "initSession.php";
-
     $POST_KEYS = [
 
         "emailtk",
@@ -10,6 +8,7 @@
     ];
 
     require("sqlCredentials.php");
+    require("initSession.php");
 
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
@@ -69,12 +68,15 @@
                     $_SESSION['HoTen'] = $result["HoTen"];
                     $_SESSION['Role'] = $dangnhap_as;
 
+                    $_SESSION["alertMessage"] = "Đăng nhập thành công.";
                     header("Location: ../../../index.php");
                 } else {
-                    echo "Email hoặc mật khẩu không đúng.";
+                    $_SESSION["alertMessage"] = "Email hoặc mật khẩu không đúng.";
+                    header("Location: ../../user/dangnhap.php");
                 }
             } else {
-                //header("Location: ../../user/dangky.php");
+                $_SESSION["alertMessage"] = "Tài khoản không tồn tại. Hãy đăng ký.";
+                header("Location: ../../user/dangky.php");
             }
         } else {
             die("Error: $stm->error");
@@ -85,6 +87,7 @@
     if (validate($POST_KEYS) && $check_result==2) {
         login($POST_KEYS,"BenhNhan",$mysqli);
     } else {
-        echo "Email hoặc mật khẩu không đúng.";
+        $_SESSION["alertMessage"] = "Lỗi đầu vào hoặc tài khoản không tồn tại.";
+        header("Location: ../../user/dangnhap.php");
     }
 ?>
