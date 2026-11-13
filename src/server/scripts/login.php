@@ -69,13 +69,9 @@
                     $_SESSION['HoTen'] = $result["HoTen"];
                     $_SESSION['Role'] = $dangnhap_as;
 
-                    echo "Dang nhap thanh cong.";
-                    echo $_SESSION['ID_TaiKhoan'];
-                    echo $_SESSION['HoTen'];
-                    echo $_SESSION['Role'];
-                    echo "\n$query";
+                    header("Location: ../../../index.php");
                 } else {
-                    echo "No.";
+                    echo "Email hoặc mật khẩu không đúng.";
                 }
             } else {
                 //header("Location: ../../user/dangky.php");
@@ -89,6 +85,6 @@
     if (validate($POST_KEYS) && $check_result==2) {
         login($POST_KEYS,"BenhNhan",$mysqli);
     } else {
-        echo "Account doesn't exist or bad input.";
+        echo "Email hoặc mật khẩu không đúng.";
     }
 ?>
