@@ -66,7 +66,7 @@
                 if (password_verify($_POST["mk"],$result["PHash"])) {
                     $_SESSION['ID_TaiKhoan'] = $result["ID"];
                     $_SESSION['HoTen'] = $result["HoTen"];
-                    $_SESSION['Role'] = $dangnhap_as;
+                    //$_SESSION['Role'] = $dangnhap_as;
 
                     $_SESSION["alertMessage"] = "Đăng nhập thành công.";
                     header("Location: ../../../index.php");

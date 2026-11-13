@@ -12,11 +12,12 @@
 }
 
 #timeslots_container {
-    display:grid;
+    display:flex;
+    justify-content: space-evenly;
 
-    grid-template-areas: "sang chieu";
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 100%;
+    /*grid-template-areas: "sang chieu toi";
+    grid-template-columns: 30% 30% 30%;
+    grid-template-rows: 100%;*/
 
     width:100%;
     margin-bottom: 25px;

@@ -63,6 +63,6 @@ insert into bacsi(ID,ID_ChuyenKhoa) values(5,"dl");
 
 insert into LichLamViec(ID_BacSi,ID_KhungGio) values (4,1),(4,2),(4,3),(4,4);
 insert into LichLamViec(ID_BacSi,ID_KhungGio) values (5,1),(5,2),(5,5),(5,6),(5,7),(5,8);
-insert into LichLamViec(ID_BacSi,ID_KhungGio) values (3,1),(3,3),(3,5),(3,7),(3,8);
+insert into LichLamViec(ID_BacSi,ID_KhungGio) values (3,1),(3,3),(3,5),(3,7),(3,8),(3,10);
 
 

@@ -7,7 +7,7 @@ create table ThongTinTaiKhoan (
     ID int AUTO_INCREMENT unique not null,
     
     HoTen varchar(50) not null,
-    SoCCCD char(12) unique not null,
+    SoCCCD char(12) not null,
     NgaySinh date not null,
     SoDT varchar(20) not null,
       
