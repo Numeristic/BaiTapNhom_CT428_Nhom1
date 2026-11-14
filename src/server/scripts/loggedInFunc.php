@@ -6,10 +6,10 @@
     $SESSION_KEYS = [
         "ID_TaiKhoan",
         "HoTen",
-        "Role"
-    ]
+        //"Role"
+    ];
 
-    function is_logged_in(){
+    function is_logged_in($SESSION_KEYS){
         for ($x=0;$x<count($SESSION_KEYS);$x++){
             if (!isset($_SESSION[$SESSION_KEYS[$x]])) {
                 return false;

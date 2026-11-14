@@ -1,0 +1,19 @@
+- undo button for phieukhambenh
+- list page for phieukhambenh
+
+- thongtincanhan
+- list page for thongtincanhan
+- trangchu
+    + Danh sách các tính năng dành cho người bệnh.
+    + Danh sách các tính năng dành cho bác sĩ.
+    + Danh sách các tính năng dành cho quản lý.
+
+- manager page
+- list of chuyenkhoas
+- list of khunggios
+- list of lichnghis
+- lichnghiphep form
+- lichnghiphep approval form for managers
+
+- sanitize all inputs in server/scripts and server/norun (trim and htmlspecialchar)
+- update templates (both in hrefs and UX)

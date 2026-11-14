@@ -22,24 +22,28 @@
         $data_result = $stm->get_result();
         if ($data_result->num_rows<=0) {
             //TODO: Send user back to the viewing page.
-            die("You don't have permission to view this.");
+            //die("You don't have permission to view this.");
+            $_SESSION["alertMessage"] = "You don't have permission to view this.";
+            exit;
         }
         $data_result = $data_result->fetch_assoc();
     } else {
-        die("Error: $stm->error");
+        $_SESSION["alertMessage"] = "Error: $stm->error";
+        exit;
     }
 ?>
 <html>
     <head>
         <?php
-            include '../server/stylesheets.php'
+            include '../server/stylesheets.php';
+            include_once '../server/scripts/alert.php';
         ?>
         <link rel="stylesheet" href="../server/styles/booking_info_extra.css">
         <script src="../client/scripts/phieukhambenh.js" defer></script>
     </head>
     <body>
         <?php
-            include '../server/templates/header.php'
+            include '../server/templates/header.php';
         ?>
         <?php
             //PHP code embed here.
@@ -51,12 +55,13 @@
                 
                 <div id="login_panel">
                     <h2><b>Phiếu khám bệnh</b></h2>
-                    <form id="adjust_form" class="main_form">
-                        <label for="maphieu" id="label_maphieu">
+                    <form action="../server/scripts/updateBooking.php" method="post" id="adjust_form" class="main_form">
+                        <label for="maphieu_fake" id="label_maphieu">
                                 Mã phiếu <p class="red_required">*</p>
                         </label>
                         <br>
-                        <input class="input_text" type="text" name="maphieu" id="input_maphieu" value=<?php $id = $data_result["ID"]; echo "\"$id\""; ?> required disabled>
+                        <input class="input_text" type="text" name="maphieu_fake" id="input_maphieu" value=<?php $id = $data_result["ID"]; echo "\"$id\""; ?> required disabled>
+                        <input type="hidden" name="maphieu" value=<?php $id = $data_result["ID"]; echo "\"$id\""; ?>>
                         <br>
 
                         <label for="ck" id="label_ck">
@@ -108,9 +113,9 @@
                         <textarea name="lydokham" class="input_text" type="text" id="input_lydokham" placeholder="Hãy ghi thêm thông tin về triệu chứng để bác sĩ có thể chẩn đoán hiệu quả hơn"; ?><?php echo $data_result["LyDoKham"]; ?></textarea>
                         <br>
 
-                        <div id="form_step_proceed" class="form_footer">
-                            <div id="proceed_button" class="form_button_container"><button id="pbutton" type="button" class="form_button">Cập nhật</button></div>
-                            <div id="return_button" class="form_button_container"><button id="rbutton" type="button" class="form_button">Đặt lại</button></div>
+                        <div id="form_step_finish" class="form_footer">
+                            <input id="login_button" for="main_form" type="submit" value="Cập nhật" class="form_button_container">
+                            <div id="return_button2" class="form_button_container"><button id="rbutton2" type="button" class="form_button">Bỏ thay đổi</button></div>
                         </div>
                     </form>
                     <div>

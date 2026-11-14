@@ -7,7 +7,9 @@
     if (isset($_SESSION["alertMessage"])) {
         $alert_msg = $_SESSION["alertMessage"];
         $code = "alert(\"$alert_msg\");";
+
         echo "<script defer>$code</script>";
+        
         unset($_SESSION["alertMessage"]);
     }
 ?>
