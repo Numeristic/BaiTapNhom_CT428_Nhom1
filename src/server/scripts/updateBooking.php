@@ -43,8 +43,12 @@
 
         if ($stm->execute()) {
             $_SESSION["alertMessage"] = "Cập nhật thành công.";
+            $maphieu = $_POST["maphieu"];
+            header("Location: ../../user/phieukhambenh.php?id=$maphieu");
         } else {
             $_SESSION["alertMessage"] = "Lỗi truy vấn CSDL.\n$stm->error";
+            $maphieu = $_POST["maphieu"];
+            header("Location: ../../user/phieukhambenh.php?id=$maphieu");
         }
     }
 
@@ -65,5 +69,6 @@
         } elseif (!$verified) {
             $error_msg = "$error_msg\nBạn không có quyền cập nhật thông tin phiếu này!";
         }
+        $_SESSION["alertMessage"] = $error_msg;
     }
 ?>

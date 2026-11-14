@@ -1,5 +1,5 @@
 <?php
-    require("sqlCredentials.php");
+    require("../server/scripts/sqlCredentials.php");
 
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
@@ -9,22 +9,39 @@
     }
 
     $stm = 0;
-    if (isset($_GET["ck"]) && isset($_GET["cg"])) {
+
+    $ck_value = null;
+    $cg_value = null;
+
+    if (!isset($_GET["ck"])) {
+        $ck_value = $id_ck;
+    } else {
+        $ck_value = $_GET["ck"];
+    }
+
+    if (!isset($_GET["cg"])) {
+        $ck_value = $id_ck;
+    } else {
+        $ck_value = $_GET["ck"];
+    }
+
+
+    if ($ck_value!=null && $cg_value!=null) {
         //Set stm, bind params.$stm = $mysqli->prepare("");
         $stm = $mysqli->prepare(
             "SELECT DISTINCT KhungGio.ID as ID, Buoi.ID as BuoiID, Buoi.TenBuoi as Buoi FROM BacSi,KhungGio,Buoi,LichLamViec
             WHERE BacSi.ID = ? AND BacSi.ID_ChuyenKhoa = ? AND BacSi.ID = LichLamViec.ID_BacSi AND LichLamViec.ID_KhungGio=KhungGio.ID AND KhungGio.ID_Buoi = Buoi.ID
             ORDER BY KhungGio.ID ASC;"
         );
-        $stm->bind_param("is",$_GET["cg"],$_GET["ck"]);
-    } elseif (isset($_GET["ck"])) {
+        $stm->bind_param("is",$cg_value,$ck_value);
+    } elseif ($ck_value!=null) {
         //Set stm
         $stm = $mysqli->prepare(
             "SELECT DISTINCT KhungGio.ID as ID, Buoi.ID as BuoiID, Buoi.TenBuoi as Buoi FROM BacSi,KhungGio,Buoi,LichLamViec
             WHERE BacSi.ID_ChuyenKhoa = ? AND BacSi.ID = LichLamViec.ID_BacSi AND LichLamViec.ID_KhungGio=KhungGio.ID AND KhungGio.ID_Buoi = Buoi.ID
             ORDER BY KhungGio.ID ASC;"
         );
-        $stm->bind_param("s",$_GET["ck"]);
+        $stm->bind_param("s",$ck_value);
     } else {
         exit;
     }
@@ -79,11 +96,11 @@
                 }
 
                 $is_selected = "";
-                if ($rows["ID"]==$data_result["ID_ChuyenKhoa"]) {
+                if ($this_element["ID"]==$data_result["ID_KhungGio"]) {
                     $is_selected = "checked";
                 }
 
-                echo "<input type=\"radio\" value=\"".htmlspecialchars_decode($this_element["ID"])."\" name=\"khung_gio\" id=\"timeslot_id".htmlspecialchars_decode($this_element["ID"]).">";
+                echo "<input type=\"radio\" value=\"".htmlspecialchars_decode($this_element["ID"])."\" name=\"khung_gio\" id=\"timeslot_id".htmlspecialchars_decode($this_element["ID"])."\" $is_selected>";
                 echo "<label for=\"timeslot_id".htmlspecialchars_decode($this_element["ID"])."\">{$khung_gio[$this_element["ID"]-1]["Gio_BD"]}-{$khung_gio[$this_element["ID"]-1]["Gio_KT"]}</label>";
                 echo "<br>";
             }
