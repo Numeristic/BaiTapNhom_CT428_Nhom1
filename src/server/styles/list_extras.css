@@ -1,0 +1,12 @@
+#login_panel {
+    /*background-color: red;*/
+    grid-area: "login";
+    background-color: rgba(115, 215, 255, 0.418);
+    max-width: 1500px;
+    min-width: 750px;
+    width: auto;
+
+    padding: 10px;
+
+    min-height:1fr;
+}

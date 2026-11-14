@@ -7,6 +7,7 @@ if (isset($_GET["ck"])) {
     $mysqli->select_db("htdlkbtt");
 
     if ($mysqli->connect_errno) {
+        echo $mysqli->connect_errno;
         exit;
     }
 
@@ -18,6 +19,8 @@ if (isset($_GET["ck"])) {
         while ($row = $result->fetch_assoc()) {
             echo "<option value=\"".htmlspecialchars($row["ID"])."\">".htmlspecialchars($row["HoTen"])."</option>\n";
         }
+    } else {
+        echo "$stm->error";
     }
 }
 

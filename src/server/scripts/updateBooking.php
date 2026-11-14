@@ -71,6 +71,7 @@
         } elseif (!$verified) {
             $error_msg = "$error_msg\nBạn không có quyền cập nhật thông tin phiếu này!";
         }
+        
         $_SESSION["alertMessage"] = $error_msg;
         $maphieu = $_POST["maphieu"];
         //header("Location: ../../user/phieukhambenh.php?id=$maphieu");
