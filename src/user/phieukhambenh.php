@@ -13,7 +13,7 @@
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
 
-    $stm = $mysqli->prepare("SELECT LichKham.ID as ID, NgayKham, ThongTinTaiKhoan.HoTen as BacSi, KhungGio.Gio_BD, KhungGio.Gio_KT, ChuyenKhoa.TenChuyenKhoa as ChuyenKhoa, ChuyenKhoa.ID as ID_ChuyenKhoa, LichKham.LyDoKham FROM LichKham,ChuyenKhoa,ThongTinTaiKhoan,BacSi,KhungGio
+    $stm = $mysqli->prepare("SELECT LichKham.ID as ID, NgayKham, ThongTinTaiKhoan.HoTen as BacSi, ThongTinTaiKhoan.ID as ID_BacSi, KhungGio.Gio_BD, KhungGio.Gio_KT, ChuyenKhoa.TenChuyenKhoa as ChuyenKhoa, ChuyenKhoa.ID as ID_ChuyenKhoa, LichKham.LyDoKham FROM LichKham,ChuyenKhoa,ThongTinTaiKhoan,BacSi,KhungGio
     WHERE ((LichKham.ID_BenhNhan = ?) OR (LichKham.ID_BacSi = ? AND BacSi.ID = LichKham.ID_BacSi)) AND (LichKham.ID = ?) AND (LichKham.ID_BacSi = BacSi.ID AND BacSi.ID = ThongTinTaiKhoan.ID) AND (LichKham.ID_ChuyenKhoa = ChuyenKhoa.ID) AND (LichKham.KhungGio = KhungGio.ID);");
     $stm->bind_param("iii",$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"],$_GET["id"]);
 
@@ -56,7 +56,7 @@
                                 Mã phiếu <p class="red_required">*</p>
                         </label>
                         <br>
-                        <input class="input_text" type="text" name="maphieu" id="input_maphieu" value=<?php $id = $data_result["ID"]; echo "\"$id\""; ?> required>
+                        <input class="input_text" type="text" name="maphieu" id="input_maphieu" value=<?php $id = $data_result["ID"]; echo "\"$id\""; ?> required disabled>
                         <br>
 
                         <label for="ck" id="label_ck">
@@ -65,7 +65,7 @@
                         <br>
                         <select id="input_ck" name="ck" class="input_text" required>
                             <?php 
-                                require_once("../server/scripts/loadCk.php");
+                                require_once("../server/norun/loadCk2.php");
                             ?>
                         </select>
                         <br>

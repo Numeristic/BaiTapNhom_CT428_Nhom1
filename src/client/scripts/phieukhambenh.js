@@ -30,6 +30,7 @@ function update_db() {
 }
 
 let past_ck_value = "";
+let past_cg_value = "";
 function on_ck_change() {
     let ck_value = ck.value;
     if (past_ck_value!=ck_value) {
@@ -39,9 +40,17 @@ function on_ck_change() {
             cg.innerHTML = cgck_xhttp.responseText;
         }
     }
+    
     past_ck_value = ck_value;
+}
+function on_cg_change(){
+    let cg_value = cg.value;
+    if (past_cg_value!=cg_value) {
+        
+    }
 }
 on_ck_change();
 
 ck.addEventListener('change',on_ck_change);
+cg.addEventListener('change',on_cg_change);
 
