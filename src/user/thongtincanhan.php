@@ -83,6 +83,7 @@
             include '../server/templates/header.php'
         ?>
         <link rel="stylesheet" href="../server/styles/booking_info_extra.css">
+        <script src="../client/scripts/thongtincanhan.js" defer></script>
         <main>
             <div id="flex_div1">
                 <div class="empty"></div>

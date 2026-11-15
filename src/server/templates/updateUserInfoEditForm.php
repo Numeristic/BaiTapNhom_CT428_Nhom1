@@ -26,6 +26,9 @@
     <br>
     <?php 
         //If the user is an admin then let they change the doctor's ChuyenKhoa, and permission levels as well.
+        if ($_SESSION["Admin"]>0) {
+            require_once("../server/templates/updateUserInfoAdminOnly.php");
+        }
     ?>
 
     <div id="form_step_finish" class="form_footer">

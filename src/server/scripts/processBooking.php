@@ -68,7 +68,7 @@
             $stm2 = $mysqli->prepare("INSERT INTO LichKham(ID_BacSi,ID_BenhNhan,ID_ChuyenKhoa,ID_TrangThai,KhungGio,LyDoKham,NgayKham) VALUES(?,?,?,?,?,?,?)");
            
             
-            $id_bn = $_SESSION["ID_TaiKhoan"]; //Replace third argument with session-logged UserId later on. (Done)
+            $id_bn = $_SESSION["ID_TaiKhoan"];
             $id_trangthai = 1;
 
             $id_cg = null;

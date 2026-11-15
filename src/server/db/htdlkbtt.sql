@@ -42,7 +42,6 @@ create table BacSi (
 
 create table QuanLy (
     ID int primary key,
-    HoTen varchar(50) not null,
     
     constraint fk_ThongTinTKQL
     foreign key (ID)

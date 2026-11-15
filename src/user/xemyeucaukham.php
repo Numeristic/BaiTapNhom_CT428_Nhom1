@@ -22,7 +22,7 @@
     if ($stm->execute()) {
         $data_result = $stm->get_result();
         if ($data_result->num_rows<=0) {
-            $_SESSION["alertMessage"] = "Bạn chưa có lịch khám!";
+            $_SESSION["alertMessage"] = "Người dùng chưa có lịch khám!";
             exit;
         }
         while ($row = $data_result->fetch_assoc()) {

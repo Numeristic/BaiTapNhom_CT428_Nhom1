@@ -52,7 +52,6 @@ function show(){
     for (let x=0;x<current_radios.length;x++) {
         current_radios[x].checked = false;
         if (current_radios[x].value==saved_values["khung_gio"]) {
-            console.log("Found it.");
             index = x;
         }
     }
