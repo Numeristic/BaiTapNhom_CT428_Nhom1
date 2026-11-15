@@ -1,7 +1,8 @@
-<form action="" id="main_form" method="post" id="adjust_form" class="main_form">
+<form action="../server/scripts/updateUserInfo" id="main_form" method="post" id="adjust_form" class="main_form">
     <label for="id_tk">Mã tài khoản:</label>
     <br>
     <input name="id_tk" id="input_idtk" type="number" value=<?php echo $idtk; ?> class="input_text" disabled>
+    <input name="idtk" type="hidden" value=<?php echo $idtk; ?>>
     <br>
 
     <label for="hoten">Họ tên:</label>
@@ -18,6 +19,9 @@
     <br>
     <input name="mk" type="button" value="Đổi mật khẩu">
     <br>
+    <?php 
+        //If the user is an admin then let they change the doctor's ChuyenKhoa, and permission levels as well.
+    ?>
 
     <div id="form_step_finish" class="form_footer">
         <input id="login_button" for="main_form" type="submit" value="Cập nhật" class="form_button_container">
