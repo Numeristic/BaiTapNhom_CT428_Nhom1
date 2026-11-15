@@ -33,7 +33,25 @@
                 <div id="login_panel">
                     <h2><b>Thông tin cá nhân</b></h2>
                     <form action="../server/scripts/updateBooking.php" method="post" id="adjust_form" class="main_form">
-                        
+                        <label for="id_tk">Mã tài khoản:</label>
+                        <br>
+                        <input name="id_tk" type="number" value="" disabled>
+                        <br>
+
+                        <label for="hoten">Họ tên:</label>
+                        <br>
+                        <input name="hoten" type="text" value="">
+                        <br>
+
+                        <label for="socccd">Số CCCD:</label>
+                        <br>
+                        <input name="socccd" type="number" value="">
+                        <br>
+
+                        <label for="mk">Mật khẩu:</label>
+                        <br>
+                        <input name="mk" type="button" value="Đổi mật khẩu">
+                        <br>
 
                         <div id="form_step_finish" class="form_footer">
                             <input id="login_button" for="main_form" type="submit" value="Cập nhật" class="form_button_container">
@@ -51,22 +69,22 @@
                         </div>
                         <div class="info_container">
                             <h3 class="info_title"><b>Ngày sinh: </b></h3>
-                            <p class="info_content"><?php echo $data_result["BacSi"]; ?></p>
+                            <p class="info_content"><?php echo $_SESSION["NgaySinh"]; ?></p>
                         </div>
                         <div class="info_container">
                             <h3 class="info_title"><b>Số CCCD: </b></h3>
-                            <p class="info_content"><?php echo $data_result["NgayKham"]; ?></p>
+                            <p class="info_content"><?php echo $_SESSION["SoCCCD"]; ?></p>
                         </div>
                         <div class="info_container">
                             <h3 class="info_title"><b>Mật khẩu: </b></h3>
-                            <p class="info_content"><?php $gio_bd = $data_result["Gio_BD"]; $gio_kt = $data_result["Gio_KT"]; echo "$gio_bd-$gio_kt"; ?></p>
+                            <p>••••••••••</p>
                         </div>
                     </div>
                     <h2><b>Thông tin bác sĩ</b></h2>
                     <div>
                         <div class="info_container">
                             <h3 class="info_title"><b>Chuyên khoa: </b></h3>
-                            <p class="info_content"><?php echo $data_result["ID"]; ?></p>
+                            <p class="info_content"></p>
                         </div>
                     </div>
                 </div>
