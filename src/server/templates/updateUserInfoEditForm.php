@@ -1,4 +1,4 @@
-<form action="" method="post" id="adjust_form" class="main_form">
+<form action="" id="main_form" method="post" id="adjust_form" class="main_form">
     <label for="id_tk">Mã tài khoản:</label>
     <br>
     <input name="id_tk" id="input_idtk" type="number" value=<?php echo $idtk; ?> class="input_text" disabled>

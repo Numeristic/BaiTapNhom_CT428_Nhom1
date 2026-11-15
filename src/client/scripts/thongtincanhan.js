@@ -4,3 +4,8 @@ let form_input_ids = [
     "socccd"
 ];
 
+const form = document.getElementById("main_form");
+
+if (form) {
+    
+}
