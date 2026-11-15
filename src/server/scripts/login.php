@@ -52,7 +52,10 @@
     }
 
     function login($POST_KEYS,$dangnhap_as,$mysqli) {
-        $query = "SELECT ThongTinTaiKhoan.ID,ThongTinTaiKhoan.HoTen,ThongTinTaiKhoan.PHash FROM $dangnhap_as,ThongTinTaiKhoan WHERE ThongTinTaiKhoan.Email = ? AND ThongTinTaiKhoan.ID = $dangnhap_as.ID";
+        $query = "SELECT ThongTinTaiKhoan.ID AS ID,ThongTinTaiKhoan.HoTen,ThongTinTaiKhoan.SoCCCD, ThongTinTaiKhoan.PHash,COUNT(BacSi.ID) as LaBacSi,COUNT(QuanLy.ID) as LaQuanLy FROM ThongTinTaiKhoan 
+LEFT JOIN BacSi ON BacSi.ID = ThongTinTaiKhoan.ID
+LEFT JOIN QuanLy ON QuanLy.ID = ThongTinTaiKhoan.ID
+WHERE ThongTinTaiKhoan.Email = ?";
         $stm = $mysqli->prepare($query);
 
         $lowered_email = strtolower($_POST["emailtk"]);
@@ -66,6 +69,8 @@
                 if (password_verify($_POST["mk"],$result["PHash"])) {
                     $_SESSION['ID_TaiKhoan'] = $result["ID"];
                     $_SESSION['HoTen'] = $result["HoTen"];
+                    $_SESSION['Admin'] = $result["LaQuanLy"];
+                    $_SESSION['BacSi'] = $result["LaBacSi"];
                     //$_SESSION['Role'] = $dangnhap_as;
 
                     $_SESSION["alertMessage"] = "Đăng nhập thành công.";
