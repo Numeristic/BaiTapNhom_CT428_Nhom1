@@ -1,4 +1,4 @@
-<form action="../server/scripts/updateUserInfo" id="main_form" method="post" id="adjust_form" class="main_form">
+<form action="../server/scripts/updateUserInfo.php" id="main_form" method="post" id="adjust_form" class="main_form">
     <label for="id_tk">Mã tài khoản:</label>
     <br>
     <input name="id_tk" id="input_idtk" type="number" value=<?php echo $idtk; ?> class="input_text" disabled>
@@ -13,6 +13,11 @@
     <label for="socccd">Số CCCD:</label>
     <br>
     <input name="socccd" id="input_socccd" type="number" value=<?php echo $socccd ?> class="input_text">
+    <br>
+
+    <label for="ngaysinh">Số CCCD:</label>
+    <br>
+    <input name="ngaysinh" id="input_ngaysinh" type="date" value=<?php echo $ngaysinh ?> class="input_text">
     <br>
 
     <label for="mk">Mật khẩu:</label>

@@ -1,7 +1,11 @@
-- undo button for phieukhambenh
+- undo button for phieukhambenh (DONE)
+- permission-based viewing for phieukhambenh
 - list page for phieukhambenh (FUNCTIONALLY DONE)
 
 - thongtincanhan
+- undo button for thongtincanhan
+- password change page
+
 - list page for thongtincanhan
 - trangchu
     + Danh sách các tính năng dành cho người bệnh.

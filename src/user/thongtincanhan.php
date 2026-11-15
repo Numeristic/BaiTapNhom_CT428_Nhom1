@@ -29,6 +29,7 @@
     $ngaysinh = "";
     $is_admin = "";
     $is_bs = "";
+    
     if ($load_id != $_SESSION["ID_TaiKhoan"]) {
         if ($logged_in) {
             $query = "SELECT ThongTinTaiKhoan.ID AS ID,ThongTinTaiKhoan.HoTen,ThongTinTaiKhoan.SoCCCD,COUNT(BacSi.ID) as LaBacSi,COUNT(QuanLy.ID) as LaQuanLy, ThongTinTaiKhoan.SoCCCD as SoCCCD, ThongTinTaiKhoan.NgaySinh as NgaySinh FROM ThongTinTaiKhoan 
@@ -70,14 +71,6 @@
         $is_admin = $_SESSION["Admin"];
         $is_bs = $_SESSION["BacSi"];
     }
-   
-
-
-    
-    /*$mysqli = new mysqli($hostname,$username,$password);
-    $mysqli->select_db("htdlkbtt");*/
-
-    /*$stm = $mysqli->prepare("SELECT ThongTinTaiKhoan.ID AS ID,ThongTinTaiKhoan.HoTen,ThongTinTaiKhoan.SoCCCD,COUNT(BacSi.ID) AS LaBacSi, COUNT(QuanLy.ID) AS LaQuanLy FROM ThongTinTaiKhoan,BacSi,QuanLy WHERE (ThongTinTaiKhoan.Email = ?) AND BacSi.ID = ThongTinTaiKhoan.ID AND QuanLy.ID = ThongTinTaiKhoan.ID GROUP BY ThongTinTaiKhoan.ID;");*/
 ?>
 <html>
     <head>
