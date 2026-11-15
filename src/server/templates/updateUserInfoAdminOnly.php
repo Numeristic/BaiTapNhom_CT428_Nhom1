@@ -15,7 +15,7 @@
 
 <label for="ck" id="label_ck">Chuyên khoa:</label>
 <br>
-<select name="ck" id="input_ck">
+<select name="ck" id="input_ck" value=<?php?>>
     <option value="">Chọn chuyên khoa</option>
     <?php 
         require_once("../server/scripts/loadCk.php");
