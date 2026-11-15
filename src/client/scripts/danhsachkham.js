@@ -1,7 +1,7 @@
 let danh_sach = document.getElementsByClassName("lichkham_card");
 
 const form = document.getElementById("main_form");
-let ck = document.getElementById('ck');
+const ck = document.getElementById('ck');
 const cg = document.getElementById('cg');
 const khoang = document.getElementById('khoang');
 const ngaykham = document.getElementById('ngaykham');

@@ -6,6 +6,10 @@
     $SESSION_KEYS = [
         "ID_TaiKhoan",
         "HoTen",
+        "SoCCCD",
+        "NgaySinh",
+        "Admin",
+        "BacSi"
         //"Role"
     ];
 

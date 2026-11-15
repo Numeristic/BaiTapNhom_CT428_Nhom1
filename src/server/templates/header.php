@@ -14,7 +14,7 @@
         <p id="user_specialization">Chuyên Khoa: Nội</p>
     </div>
     <div id="account_actions">
-        <div class="action_button"><a href="login.php">Đăng nhập</a></div>
+        <div class="action_button"><a href="dangnhap.php">Đăng nhập</a></div>
         <div class="action_button"><a>Đăng xuất</a></div>
     </div>
 </header>

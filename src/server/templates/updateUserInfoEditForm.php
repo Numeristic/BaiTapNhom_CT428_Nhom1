@@ -1,0 +1,26 @@
+<form action="" method="post" id="adjust_form" class="main_form">
+    <label for="id_tk">Mã tài khoản:</label>
+    <br>
+    <input name="id_tk" id="input_idtk" type="number" value=<?php echo $idtk; ?> class="input_text" disabled>
+    <br>
+
+    <label for="hoten">Họ tên:</label>
+    <br>
+    <input name="hoten" id="input_hoten" type="text" value="<?php echo $hoten; ?>" class="input_text">
+    <br>
+
+    <label for="socccd">Số CCCD:</label>
+    <br>
+    <input name="socccd" id="input_socccd" type="number" value=<?php echo $socccd ?> class="input_text">
+    <br>
+
+    <label for="mk">Mật khẩu:</label>
+    <br>
+    <input name="mk" type="button" value="Đổi mật khẩu">
+    <br>
+
+    <div id="form_step_finish" class="form_footer">
+        <input id="login_button" for="main_form" type="submit" value="Cập nhật" class="form_button_container">
+        <div id="return_button2" class="form_button_container"><button id="rbutton2" type="button" class="form_button">Bỏ thay đổi</button></div>
+    </div>
+</form>

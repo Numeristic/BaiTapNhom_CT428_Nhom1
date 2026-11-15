@@ -53,9 +53,10 @@
 
     function login($POST_KEYS,$dangnhap_as,$mysqli) {
         $query = "SELECT ThongTinTaiKhoan.ID AS ID,ThongTinTaiKhoan.HoTen,ThongTinTaiKhoan.SoCCCD, ThongTinTaiKhoan.PHash,COUNT(BacSi.ID) as LaBacSi,COUNT(QuanLy.ID) as LaQuanLy, ThongTinTaiKhoan.SoCCCD, ThongTinTaiKhoan.NgaySinh FROM ThongTinTaiKhoan 
-LEFT JOIN BacSi ON BacSi.ID = ThongTinTaiKhoan.ID
-LEFT JOIN QuanLy ON QuanLy.ID = ThongTinTaiKhoan.ID
-WHERE ThongTinTaiKhoan.Email = ?";
+        LEFT JOIN BacSi ON BacSi.ID = ThongTinTaiKhoan.ID
+        LEFT JOIN QuanLy ON QuanLy.ID = ThongTinTaiKhoan.ID
+        WHERE ThongTinTaiKhoan.Email = ?";
+        
         $stm = $mysqli->prepare($query);
 
         $lowered_email = strtolower($_POST["emailtk"]);
