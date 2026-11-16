@@ -1,9 +1,10 @@
 - undo button for phieukhambenh (DONE)
-- permission-based viewing for phieukhambenh
+- permission-based viewing for phieukhambenh (HALF-DONE)
 - list page for phieukhambenh (FUNCTIONALLY DONE)
+- Allow admins (and admin only) to change the status of the appointment
 
-- thongtincanhan
-- undo button for thongtincanhan
+- thongtincanhan (DONE)
+- undo button for thongtincanhan (DONE)
 - password change page
 
 - list page for thongtincanhan

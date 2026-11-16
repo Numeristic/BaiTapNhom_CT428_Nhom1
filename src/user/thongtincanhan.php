@@ -32,7 +32,7 @@
     
     if ($load_id != $_SESSION["ID_TaiKhoan"]) {
         if ($logged_in) {
-            $query = "SELECT ThongTinTaiKhoan.ID AS ID,ThongTinTaiKhoan.HoTen,ThongTinTaiKhoan.SoCCCD,COUNT(BacSi.ID) as LaBacSi,COUNT(QuanLy.ID) as LaQuanLy, ThongTinTaiKhoan.SoCCCD as SoCCCD, ThongTinTaiKhoan.NgaySinh as NgaySinh FROM ThongTinTaiKhoan 
+            $query = "SELECT ThongTinTaiKhoan.ID AS ID,ThongTinTaiKhoan.HoTen,ThongTinTaiKhoan.SoCCCD,COUNT(BacSi.ID) as LaBacSi,COUNT(QuanLy.ID) as LaQuanLy, BacSi.ID_ChuyenKhoa as ID_ChuyenKhoa, ThongTinTaiKhoan.SoCCCD as SoCCCD, ThongTinTaiKhoan.NgaySinh as NgaySinh FROM ThongTinTaiKhoan 
             LEFT JOIN BacSi ON BacSi.ID = ThongTinTaiKhoan.ID
             LEFT JOIN QuanLy ON QuanLy.ID = ThongTinTaiKhoan.ID
             WHERE ThongTinTaiKhoan.ID = ?";
