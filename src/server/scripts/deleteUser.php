@@ -19,7 +19,7 @@
 
         if (!$stm->execute()) {
             $_SESSION["alertMessage"] = "Lỗi CSDL! $stm->error";
-            header("Location: ");
+            //header("Location: ");
         }
         
         $result = $stm->get_result();
@@ -29,7 +29,7 @@
             $_SESSION["alertMessage"] = "Không tìm thấy người dùng cần xóa!";
         }
 
-        header("Location: ");
+        //header("Location: ");
     }
     
     $logged_in = is_logged_in($SESSION_KEYS);
@@ -45,6 +45,6 @@
         } elseif (!isset($_POST["id"])) {
             $_SESSION["alertMessage"] = "Lỗi đầu vào.";
         }
-        header("Location: ");
+        //header("Location: ");
     }
 ?>

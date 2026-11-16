@@ -29,7 +29,7 @@
             $_SESSION["alertMessage"] = "Không tìm thấy lịch khám cần xóa!";
         }
 
-        header("Location: ");
+        //header("Location: ../../user/xemyeucaukham.php");
     }
     
     $logged_in = is_logged_in($SESSION_KEYS);
@@ -45,6 +45,6 @@
         } elseif (!isset($_POST["id"])) {
             $_SESSION["alertMessage"] = "Lỗi đầu vào.";
         }
-        header("Location: ");
+        //header("Location: ../../user/xemyeucaukham.php");
     }
 ?>

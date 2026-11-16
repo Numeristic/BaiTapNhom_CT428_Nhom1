@@ -108,19 +108,21 @@ undo_button.addEventListener('click',show);
 
 if (delete_button && maphieu){
 
-    delete_button.addEventListener("click",function(){
+    delete_button.addEventListener("click",function(event){
+        event.preventDefault();
         let prompt_result = confirm("Bạn có chắc muốn xóa lịch khám này?");
-        if (prompt_result){
+        if (prompt_result==true){
             let delete_xhttp = new XMLHttpRequest;
             delete_xhttp.open("POST","../server/scripts/deleteBooking.php",false);
             delete_xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             delete_xhttp.send(`id=${maphieu.value}`);
             
             if (delete_xhttp.readyState==4 && delete_xhttp.status==200) {
-                alert("Xóa thành công.");
+                /*alert("Xóa thành công.");*/
                 window.location.href = "../user/xemyeucaukham.php";
             } else {
-                console.log(`${delete_xhttp.statusText}`)
+                console.log(`${delete_xhttp.statusText}`);
+                console.log(`${delete_xhttp.status}`);
             }
         }
     });
