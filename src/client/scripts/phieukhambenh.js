@@ -3,10 +3,9 @@ const input_keys = [
     "ck",
     "cg",
     "ngaykham",
-    "lydokham"
+    "lydokham",
+    "tt"
 ];
-const checked_keys = [];
-const selection_keys = [];
 
 let ck = document.getElementById('input_ck');
 let cg = document.getElementById('input_cg');
@@ -23,7 +22,9 @@ for (let x=0;x<input_keys.length;x++){
     //var label = document.getElementById(`label_${input_keys[x]}`);
     var input_obj = document.getElementById(`input_${input_keys[x]}`);
     //console.log(`input_${input_keys[x]}`);
-    saved_values[input_keys[x]] = input_obj.value;
+    if (input_obj){
+        saved_values[input_keys[x]] = input_obj.value;
+    }
 }
 for (let x=0;x<radios.length;x++) {
     if (radios[x].tagName=="INPUT" && radios[x].checked) {
@@ -39,13 +40,16 @@ console.log(saved_values);
 function show(){
     for (let x=0;x<input_keys.length;x++){
         var input_obj = document.getElementById(`input_${input_keys[x]}`);
-        input_obj.value = saved_values[input_keys[x]];
-        if (input_keys[x]=="ck") {
-            on_ck_change();
+        if (input_obj){
+            input_obj.value = saved_values[input_keys[x]];
+            if (input_keys[x]=="ck") {
+                on_ck_change();
+            }
+            if (input_keys[x]=="cg") {
+                on_cg_change();
+            }
         }
-        if (input_keys[x]=="cg") {
-            on_cg_change();
-        }
+        
     }
     let current_radios = document.getElementsByName("khung_gio");
     let index = -1;

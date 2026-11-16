@@ -22,8 +22,6 @@ if ($ck_value!=null) {
     
     if ($stm->execute()) {
         $result = $stm->get_result();
-
-        echo "<option value=\"\">Trống (Khám theo chuyên khoa)</option>\n";
         while ($row = $result->fetch_assoc()) {
             $is_selected = "";
             if ($row["ID"]==$data_result["ID_BacSi"]) {

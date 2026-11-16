@@ -1,19 +1,23 @@
 - undo button for phieukhambenh (DONE)
 - permission-based viewing for phieukhambenh (HALF-DONE)
 - list page for phieukhambenh (FUNCTIONALLY DONE)
-- Allow admins (and admin only) to change the status of the appointment
+
+- Allow admins (and admin only) to change the status of the appointment  (DONE)
+    + Make it function.
 
 - thongtincanhan (DONE)
 - undo button for thongtincanhan (DONE)
-- password change page
+- password change page (DONE)
 
 - list page for thongtincanhan
-- trangchu
+
+- trangchu (DONE UI wise, need to make the buttons actually work)
     + Danh sách các tính năng dành cho người bệnh.
     + Danh sách các tính năng dành cho bác sĩ.
     + Danh sách các tính năng dành cho quản lý.
 
-- manager page
+- manager page (No need, integrated with trangchu)
+
 - list of chuyenkhoas
 - list of khunggios
 - list of lichnghis
@@ -21,4 +25,5 @@
 - lichnghiphep approval form for managers
 
 - sanitize all inputs in server/scripts and server/norun (trim and htmlspecialchar)
+- input validation on server-side.
 - update templates (both in hrefs and UX)

@@ -23,6 +23,7 @@
     </label>
     <br>
     <select name="cg" class="input_text" id="input_cg">
+        <option value="">Trống (Khám theo chuyên khoa)</option>
         <?php 
             $id_ck = $data_result["ID_ChuyenKhoa"];
             require_once("../server/norun/updateExpertsInfo2.php");

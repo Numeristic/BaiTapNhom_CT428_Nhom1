@@ -20,9 +20,9 @@
     }
 
     if (!isset($_GET["cg"])) {
-        $ck_value = $id_ck;
+        $cg_value = $id_cg;
     } else {
-        $ck_value = $_GET["ck"];
+        $cg_value = $_GET["cg"];
     }
 
 

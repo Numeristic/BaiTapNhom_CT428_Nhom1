@@ -37,11 +37,47 @@
             return false;
         }
     }
+    function verify_inputs($mysqli){
+        $stm = "";
+        if ($_POST["cg"]!="") {
+            $query = "SELECT LichLamViec.ID_KhungGio
+            FROM ChuyenKhoa,BacSi,LichLamViec 
+            WHERE BacSi.ID = ? AND BacSi.ID_ChuyenKhoa = ChuyenKhoa.ID AND ChuyenKhoa.ID = ? AND BacSi.ID = LichLamViec.ID_BacSi AND LichLamViec.ID_KhungGio = ?;";
+            $stm = $mysqli->prepare($query);
+            $stm->bind_param("isi",$_POST["cg"],$_POST["ck"],$_POST["khung_gio"]);
+        } else {
+            $query = "SELECT DISTINCT LichLamViec.ID_KhungGio
+            FROM ChuyenKhoa,BacSi,LichLamViec 
+            WHERE BacSi.ID_ChuyenKhoa = ChuyenKhoa.ID AND ChuyenKhoa.ID = ? AND BacSi.ID = LichLamViec.ID_BacSi AND LichLamViec.ID_KhungGio = ?;";
+            $stm = $mysqli->prepare($query);
+            $stm->bind_param("si",$_POST["ck"],$_POST["khung_gio"]);
+        }
+       
+        if (!$stm->execute()) {
+            $_SESSION["alertMessage"] = "Lỗi CSDL! $stm->error";
+            header("Location: ../../user/phieukhambenh.php?id=$maphieu");
+            exit;
+        }
+        $input_result = $stm->get_result();
+
+        if ($input_result->num_rows<=0) {
+            return false;
+        }
+        return true;
+    }
     function update_pkb($POST_KEYS,$mysqli) {
-        $stm = $mysqli->prepare("UPDATE LichKham
-        SET KhungGio = ?, NgayKham = ?, LyDoKham = ?
-        WHERE ID = ?");
-        $stm->bind_param("issi",$_POST["khung_gio"],$_POST["ngay_kham"],$_POST["lydokham"],$_POST["maphieu"]);
+        $stm = "";
+        if ($_SESSION["Admin"]>0 && isset($_POST["tt"])) {
+            $stm = $mysqli->prepare("UPDATE LichKham
+            SET KhungGio = ?, NgayKham = ?, LyDoKham = ?, ID_TrangThai = ?, ID_BacSi = ?, ID_ChuyenKhoa = ?
+            WHERE ID = ?");
+            $stm->bind_param("issiisi",$_POST["khung_gio"],$_POST["ngay_kham"],$_POST["lydokham"],$_POST["tt"],$_POST["cg"],$_POST["ck"],$_POST["maphieu"]);
+        } else {
+            $stm = $mysqli->prepare("UPDATE LichKham
+            SET KhungGio = ?, NgayKham = ?, LyDoKham = ?, ID_BacSi = ?, ID_ChuyenKhoa = ?
+            WHERE ID = ?");
+            $stm->bind_param("issisi",$_POST["khung_gio"],$_POST["ngay_kham"],$_POST["lydokham"],$_POST["cg"],$_POST["ck"],$_POST["maphieu"]);
+        }
 
         if ($stm->execute()) {
             $_SESSION["alertMessage"] = "Cập nhật thành công.";
@@ -57,12 +93,12 @@
     $has_all_keys = validate($POST_KEYS);
     $logged_in = is_logged_in($SESSION_KEYS);
     $verified = verify_user_has_access($POST_KEYS,$mysqli);
+    $input_verified = verify_inputs($mysqli);
 
-    if ($has_all_keys && $logged_in && $verified) {
+    if ($has_all_keys && $logged_in && $verified && $input_verified) {
         update_pkb($POST_KEYS,$mysqli);
     } else {
-        /*$_SESSION["alertMessage"] = "Bạn không có quyền cập nhật thông tin phiếu khám bệnh này.";
-        header("");*/
+        
         $error_msg = "Đã gặp các lỗi:";
         if (!$has_all_keys) {
             $error_msg = "$error_msg\nLỗi đầu vào!";
@@ -70,11 +106,13 @@
             $error_msg = "$error_msg\nBạn chưa đăng nhập vào tài khoản nào cả!";
         } elseif (!$verified) {
             $error_msg = "$error_msg\nBạn không có quyền cập nhật thông tin phiếu này!";
+        } elseif (!$input_verified){ 
+            $error_msg = "$error_msg\nDữ liệu đầu vào không hợp lệ.";
         }
         
         $_SESSION["alertMessage"] = $error_msg;
         $maphieu = $_POST["maphieu"];
-        //header("Location: ../../user/phieukhambenh.php?id=$maphieu");
+        header("Location: ../../user/phieukhambenh.php?id=$maphieu");
         echo $error_msg;
     }
 ?>

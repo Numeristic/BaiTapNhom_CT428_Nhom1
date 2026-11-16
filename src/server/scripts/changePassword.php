@@ -14,7 +14,7 @@
 
     function update_password($mysqli,$POST_KEYS) {
         if ($_SESSION["ID_TaiKhoan"] != $_POST["idtk"] && $_SESSION["Admin"]<=0) {
-            $_SESSION["alertMessage"] = "Bạn không thể cập nhật mật khẩu cho tài khoản này!";
+            $_SESSION["alertMessage"] = "Bạn không có quyền cập nhật mật khẩu cho tài khoản này!";
             header("Location: ");
             exit;
         }

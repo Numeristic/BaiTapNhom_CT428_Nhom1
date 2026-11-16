@@ -5,6 +5,6 @@
 <select name="tt" class="input_text" id="input_tt">
     <?php 
         $id_tt = $data_result["ID_TrangThai"];
-        require_once("../server/norun/loadTrangThai.php");
+        require_once("../server/norun/loadTrangThai2.php");
     ?>
 </select>
