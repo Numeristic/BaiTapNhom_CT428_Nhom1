@@ -13,9 +13,19 @@
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
 
-    $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID as ID, NgayKham, ThongTinTaiKhoan.HoTen as BacSi, ThongTinTaiKhoan.ID as ID_BacSi, KhungGio.ID as ID_KhungGio, KhungGio.Gio_BD, KhungGio.Gio_KT, ChuyenKhoa.TenChuyenKhoa as ChuyenKhoa, ChuyenKhoa.ID as ID_ChuyenKhoa, LichKham.LyDoKham FROM LichKham,ChuyenKhoa,ThongTinTaiKhoan,BacSi,KhungGio
-    WHERE ((LichKham.ID_BenhNhan = ?) OR (LichKham.ID_BacSi = ? AND BacSi.ID = LichKham.ID_BacSi)) AND (LichKham.ID = ?) AND (LichKham.ID_BacSi = BacSi.ID AND BacSi.ID = ThongTinTaiKhoan.ID) AND (LichKham.ID_ChuyenKhoa = ChuyenKhoa.ID) AND (LichKham.KhungGio = KhungGio.ID);");
-    $stm->bind_param("iii",$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"],$_GET["id"]);
+    $stm = "";
+    if ($_SESSION["Admin"]<=0) {
+        $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID as ID, TrangThai.ID AS ID_TrangThai, NgayKham, ThongTinTaiKhoan.HoTen as BacSi, ThongTinTaiKhoan.ID as ID_BacSi, KhungGio.ID as ID_KhungGio, KhungGio.Gio_BD, KhungGio.Gio_KT, ChuyenKhoa.TenChuyenKhoa as ChuyenKhoa, ChuyenKhoa.ID as ID_ChuyenKhoa, LichKham.LyDoKham FROM LichKham,ChuyenKhoa,ThongTinTaiKhoan,BacSi,KhungGio,TrangThai
+        WHERE ((LichKham.ID_BenhNhan = ?) OR (LichKham.ID_BacSi = ? AND BacSi.ID = LichKham.ID_BacSi)) AND (LichKham.ID = ?) AND (LichKham.ID_BacSi = BacSi.ID AND BacSi.ID = ThongTinTaiKhoan.ID) AND (LichKham.ID_ChuyenKhoa = ChuyenKhoa.ID) AND (LichKham.KhungGio = KhungGio.ID)
+        AND (LichKham.ID_TrangThai = TrangThai.ID);");
+        $stm->bind_param("iii",$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"],$_GET["id"]);
+    } else {
+        $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID as ID, TrangThai.ID AS ID_TrangThai, NgayKham, ThongTinTaiKhoan.HoTen as BacSi, ThongTinTaiKhoan.ID as ID_BacSi, KhungGio.ID as ID_KhungGio, KhungGio.Gio_BD, KhungGio.Gio_KT, ChuyenKhoa.TenChuyenKhoa as ChuyenKhoa, ChuyenKhoa.ID as ID_ChuyenKhoa, LichKham.LyDoKham FROM LichKham,ChuyenKhoa,ThongTinTaiKhoan,BacSi,KhungGio,TrangThai
+        WHERE (LichKham.ID = ?) AND (LichKham.ID_BacSi = BacSi.ID AND BacSi.ID = ThongTinTaiKhoan.ID) AND (LichKham.ID_ChuyenKhoa = ChuyenKhoa.ID) AND (LichKham.KhungGio = KhungGio.ID)
+        AND (LichKham.ID_TrangThai = TrangThai.ID);");
+        $stm->bind_param("i",$_GET["id"]);
+    }
+    
 
     $data_result = "";
     if ($stm->execute()) {
@@ -56,7 +66,6 @@
                 <div id="login_panel">
                     <h2><b>Phiếu khám bệnh</b></h2>
                     <?php 
-
                         require_once("../server/templates/updateBookingInfoEditForm.php");
                     ?>
                     <div>

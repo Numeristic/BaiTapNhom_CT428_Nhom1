@@ -2,7 +2,7 @@
     <label for="id_tk">Mã tài khoản:</label>
     <br>
     <input name="id_tk" id="input_idtk" type="number" value=<?php echo $idtk; ?> class="input_text" disabled>
-    <input name="idtk" type="hidden" value=<?php echo $idtk; ?>>
+    <input name="idtk" id="input_idtkreal" type="hidden" value=<?php echo $idtk; ?>>
     <br>
 
     <label for="hoten">Họ tên:</label>
@@ -22,7 +22,7 @@
 
     <label for="mk">Mật khẩu:</label>
     <br>
-    <input name="mk" type="button" value="Đổi mật khẩu">
+    <input name="mk" id="input_mk" type="button" value="Đổi mật khẩu">
     <br>
     <?php 
         //If the user is an admin then let they change the doctor's ChuyenKhoa, and permission levels as well.

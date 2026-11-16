@@ -6,7 +6,8 @@
     </head>
     <body>
         <?php
-            include '../server/templates/header.php'
+            include '../server/templates/header.php';
+            include_once '../server/scripts/alert.php';
         ?>
         <?php
             //PHP code embed here.

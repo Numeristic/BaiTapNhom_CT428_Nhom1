@@ -56,6 +56,14 @@
     <textarea name="lydokham" class="input_text" type="text" id="input_lydokham" placeholder="Hãy ghi thêm thông tin về triệu chứng để bác sĩ có thể chẩn đoán hiệu quả hơn"; ?><?php echo $data_result["LyDoKham"]; ?></textarea>
     <br>
 
+    <?php 
+    
+        if ($_SESSION["Admin"]>0) {
+            require_once("../server/templates/updateBookingInfoAdminOnly.php");
+        }
+
+    ?>
+
     <div id="form_step_finish" class="form_footer">
         <input id="login_button" for="main_form" type="submit" value="Cập nhật" class="form_button_container">
         <div id="return_button2" class="form_button_container"><button id="rbutton2" type="button" class="form_button">Bỏ thay đổi</button></div>

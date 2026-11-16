@@ -9,7 +9,7 @@
     </head>
     <body>
         <?php
-            include_once '../server/templates/header.php'
+            include_once '../server/templates/header.php';
         ?>
         <main>
             <div id="flex_div1">

@@ -34,7 +34,9 @@
             exit;
         }
 
-        if (!password_verify($_POST["oldmk"],$check_result["PHash"],PASSWORD_BCRYPT)) {
+        $check_result = $check_result->fetch_assoc();
+
+        if (!password_verify($_POST["oldmk"],$check_result["PHash"])) {
             $_SESSION["alertMessage"] = "Mật khẩu cũ không đúng.";
             header("Location: ");
             exit;
@@ -45,7 +47,7 @@
 
         $update_stm->bind_param("si",$hashed_new_password,$_POST["idtk"]);
 
-        $_SESSION["alertMessage"] = "Cập nhật mật khẩu thành công."
+        $_SESSION["alertMessage"] = "Cập nhật mật khẩu thành công.";
         if (!$update_stm->execute()) {
             $_SESSION["alertMessage"] = "Lỗi CSDL. Cập nhật mật khẩu thất bại!\n$update_stm->error";
         }

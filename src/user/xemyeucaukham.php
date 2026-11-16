@@ -36,7 +36,8 @@
 <html>
     <head>
         <?php
-            include '../server/stylesheets.php'
+            include '../server/stylesheets.php';
+            require_once("../server/scripts/alert.php");
         ?>
         <link rel="stylesheet" href="../server/styles/list_extras.css">
         <script src="../client/scripts/danhsachkham.js" defer></script>

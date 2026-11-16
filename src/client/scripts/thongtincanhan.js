@@ -4,8 +4,10 @@ let input_keys = [
     "socccd"
 ];
 
+const idtk = document.getElementById("input_idtkreal")
 const bs_perms = document.getElementById("input_bacsi");
 const admin_perms = document.getElementById("input_admin");
+const mk = document.getElementById("input_mk");
 const return_button = document.getElementById("return_button2");
 
 const label_ck = document.getElementById("label_ck");
@@ -59,7 +61,12 @@ if (bs_perms && admin_perms && label_ck && ck) {
     on_bs_change();
     bs_perms.addEventListener("change",on_bs_change);
 }
+if (mk){
+    mk.addEventListener("click",function(){
+        window.location.href = `../user/doimatkhau.php?id=${idtk.value}`;
+    });
+}
 
 return_button.addEventListener("click",function(){
     show();
-})
+});

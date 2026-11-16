@@ -67,7 +67,7 @@
             if ($result->num_rows>0){
                 $result = $result->fetch_assoc();
 
-                if (password_verify($_POST["mk"],$result["PHash"],PASSWORD_BCRYPT)) {
+                if (password_verify($_POST["mk"],$result["PHash"])) {
                     $_SESSION['ID_TaiKhoan'] = $result["ID"];
                     $_SESSION['HoTen'] = $result["HoTen"];
                     $_SESSION['SoCCCD'] = $result["SoCCCD"];

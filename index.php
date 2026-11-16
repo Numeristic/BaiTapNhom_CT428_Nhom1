@@ -7,7 +7,8 @@
     </head>
     <body>
         <?php
-            include 'src/server/templates/header_special.php'
+            include 'src/server/templates/header_special.php';
+            require_once("src/server/scripts/alert.php");
         ?>
         <?php
             //PHP code embed here.

@@ -3,7 +3,6 @@
     require_once("../server/scripts/sqlCredentials.php");
     require_once("../server/scripts/loggedInFunc.php");
     require_once("../server/scripts/initSession.php");
-    require_once("../server/scripts/alert.php");
 
 
     $load_id = 0;
@@ -75,7 +74,8 @@
 <html>
     <head>
         <?php
-            include '../server/stylesheets.php'
+            include '../server/stylesheets.php';
+            require_once("../server/scripts/alert.php");
         ?>
     </head>
     <body>
