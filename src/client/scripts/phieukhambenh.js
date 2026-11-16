@@ -7,9 +7,11 @@ const input_keys = [
     "tt"
 ];
 
+let maphieu = document.getElementById('input_maphieu');
 let ck = document.getElementById('input_ck');
 let cg = document.getElementById('input_cg');
 let undo_button = document.getElementById("return_button2");
+let delete_button = document.getElementById("delete_button");
 let timeslot_container = document.getElementById('timeslots_container');
 
 let cgck_xhttp = new XMLHttpRequest;
@@ -101,5 +103,27 @@ function on_ck_change() {
 
 ck.addEventListener('change',on_ck_change);
 cg.addEventListener('change',on_cg_change);
+
 undo_button.addEventListener('click',show);
+
+if (delete_button && maphieu){
+
+    delete_button.addEventListener("click",function(){
+        let prompt_result = confirm("Bạn có chắc muốn xóa lịch khám này?");
+        if (prompt_result){
+            let delete_xhttp = new XMLHttpRequest;
+            delete_xhttp.open("POST","../server/scripts/deleteBooking.php",false);
+            delete_xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            delete_xhttp.send(`id=${maphieu.value}`);
+            
+            if (delete_xhttp.readyState==4 && delete_xhttp.status==200) {
+                alert("Xóa thành công.");
+                window.location.href = "../user/xemyeucaukham.php";
+            } else {
+                console.log(`${delete_xhttp.statusText}`)
+            }
+        }
+    });
+
+}
 

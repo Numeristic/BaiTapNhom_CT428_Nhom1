@@ -34,5 +34,12 @@
     <div id="form_step_finish" class="form_footer">
         <input id="login_button" for="main_form" type="submit" value="Cập nhật" class="form_button_container">
         <div id="return_button2" class="form_button_container"><button id="rbutton2" type="button" class="form_button">Bỏ thay đổi</button></div>
+        <?php 
+        
+        if ($_SESSION["Admin"]>0) {
+            echo '<div id="return_button3" class="form_delete_container"><button id="delete_button" type="button" class="delete_button">Xóa tài khoản</button></div>';
+        }
+        
+        ?>
     </div>
 </form>

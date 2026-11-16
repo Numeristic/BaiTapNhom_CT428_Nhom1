@@ -15,14 +15,24 @@
 
     $stm = "";
     if ($_SESSION["Admin"]<=0) {
-        $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID as ID, TrangThai.ID AS ID_TrangThai, NgayKham, ThongTinTaiKhoan.HoTen as BacSi, ThongTinTaiKhoan.ID as ID_BacSi, KhungGio.ID as ID_KhungGio, KhungGio.Gio_BD, KhungGio.Gio_KT, ChuyenKhoa.TenChuyenKhoa as ChuyenKhoa, ChuyenKhoa.ID as ID_ChuyenKhoa, LichKham.LyDoKham FROM LichKham,ChuyenKhoa,ThongTinTaiKhoan,BacSi,KhungGio,TrangThai
-        WHERE ((LichKham.ID_BenhNhan = ?) OR (LichKham.ID_BacSi = ? AND BacSi.ID = LichKham.ID_BacSi)) AND (LichKham.ID = ?) AND (LichKham.ID_BacSi = BacSi.ID AND BacSi.ID = ThongTinTaiKhoan.ID) AND (LichKham.ID_ChuyenKhoa = ChuyenKhoa.ID) AND (LichKham.KhungGio = KhungGio.ID)
-        AND (LichKham.ID_TrangThai = TrangThai.ID);");
-        $stm->bind_param("iii",$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"],$_GET["id"]);
+        $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID as ID, TrangThai.ID AS ID_TrangThai, NgayKham, ThongTinTaiKhoan.HoTen as BacSi, ThongTinTaiKhoan.ID as ID_BacSi, KhungGio.ID as ID_KhungGio, KhungGio.Gio_BD, KhungGio.Gio_KT, ChuyenKhoa.TenChuyenKhoa as ChuyenKhoa, ChuyenKhoa.ID as ID_ChuyenKhoa, LichKham.LyDoKham FROM
+        LichKham
+        LEFT JOIN ChuyenKhoa ON LichKham.ID_ChuyenKhoa = ChuyenKhoa.ID
+        LEFT JOIN BacSi ON LichKham.ID_BacSi = BacSi.ID
+        LEFT JOIN ThongTinTaiKhoan ON LichKham.ID_BacSi = ThongTinTaiKhoan.ID
+        LEFT JOIN KhungGio ON LichKham.KhungGio = KhungGio.ID
+        LEFT JOIN TrangThai ON LichKham.ID_TrangThai = TrangThai.ID
+        WHERE LichKham.ID = ? AND (LichKham.ID_BacSi=? OR LichKham.ID_BenhNhan=?);");
+        $stm->bind_param("iii",$_GET["id"],$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"]);
     } else {
-        $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID as ID, TrangThai.ID AS ID_TrangThai, NgayKham, ThongTinTaiKhoan.HoTen as BacSi, ThongTinTaiKhoan.ID as ID_BacSi, KhungGio.ID as ID_KhungGio, KhungGio.Gio_BD, KhungGio.Gio_KT, ChuyenKhoa.TenChuyenKhoa as ChuyenKhoa, ChuyenKhoa.ID as ID_ChuyenKhoa, LichKham.LyDoKham FROM LichKham,ChuyenKhoa,ThongTinTaiKhoan,BacSi,KhungGio,TrangThai
-        WHERE (LichKham.ID = ?) AND (LichKham.ID_BacSi = BacSi.ID AND BacSi.ID = ThongTinTaiKhoan.ID) AND (LichKham.ID_ChuyenKhoa = ChuyenKhoa.ID) AND (LichKham.KhungGio = KhungGio.ID)
-        AND (LichKham.ID_TrangThai = TrangThai.ID);");
+        $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID as ID, TrangThai.ID AS ID_TrangThai, NgayKham, ThongTinTaiKhoan.HoTen as BacSi, ThongTinTaiKhoan.ID as ID_BacSi, KhungGio.ID as ID_KhungGio, KhungGio.Gio_BD, KhungGio.Gio_KT, ChuyenKhoa.TenChuyenKhoa as ChuyenKhoa, ChuyenKhoa.ID as ID_ChuyenKhoa, LichKham.LyDoKham FROM
+        LichKham
+        LEFT JOIN ChuyenKhoa ON LichKham.ID_ChuyenKhoa = ChuyenKhoa.ID
+        LEFT JOIN BacSi ON LichKham.ID_BacSi = BacSi.ID
+        LEFT JOIN ThongTinTaiKhoan ON LichKham.ID_BacSi = ThongTinTaiKhoan.ID
+        LEFT JOIN KhungGio ON LichKham.KhungGio = KhungGio.ID
+        LEFT JOIN TrangThai ON LichKham.ID_TrangThai = TrangThai.ID
+        WHERE LichKham.ID = ?;");
         $stm->bind_param("i",$_GET["id"]);
     }
     
@@ -33,7 +43,8 @@
         if ($data_result->num_rows<=0) {
             //TODO: Send user back to the viewing page.
             //die("You don't have permission to view this.");
-            $_SESSION["alertMessage"] = "You don't have permission to view this.";
+            $_SESSION["alertMessage"] = "Phiếu khám bệnh không tồn tại hoặc bạn không có quyền xem.";
+            header("Location: xemyeucaukham.php");
             exit;
         }
         $data_result = $data_result->fetch_assoc();

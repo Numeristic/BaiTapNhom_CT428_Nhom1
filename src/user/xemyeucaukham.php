@@ -7,14 +7,33 @@
         $_SESSION["alertMessage"] = "Bạn chưa đăng nhập!";
         header("Location: dangnhap.php");
     }
+    
+    $load_id = 0;
+    if (isset($_GET["id"])) {
+        $load_id = $_GET["id"];
+    } else {
+        $load_id = $_SESSION["ID_TaiKhoan"];
+    }
+
+    if ($load_id!=$_SESSION["ID_TaiKhoan"] && !($_SESSION["Admin"]>0 || $_SESSION["BacSi"]>0)) {
+        $_SESSION["alertMessage"] = "Bạn không có quyền xem lịch sử đặt lịch của tài khoản này!";
+        header("Location: ../../index.php");
+        exit;
+    }
 
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
+
     $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID as ID, LichKham.ID_BacSi, LichKham.ID_BenhNhan, LichKham.ID_ChuyenKhoa, LichKham.LyDoKham, LichKham.ID_TrangThai, LichKham.NgayKham, ThongTinTaiKhoan.HoTen as HoTen_BacSi, ChuyenKhoa.TenChuyenKhoa as Ten_ChuyenKhoa, TrangThai.TenTrangThai as Ten_TrangThai 
-    FROM LichKham,BacSi,ChuyenKhoa,ThongTinTaiKhoan,TrangThai
-    WHERE ((ID_BenhNhan = ?) OR (ID_BacSi = ?)) AND (BacSi.ID = LichKham.ID_BacSi AND BacSi.ID = ThongTinTaiKhoan.ID) AND (LichKham.ID_ChuyenKhoa = ChuyenKhoa.ID) AND (LichKham.ID_TrangThai = TrangThai.ID)");
-    
-    $stm->bind_param("ii",$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"]);
+    FROM LichKham
+    LEFT JOIN ChuyenKhoa ON LichKham.ID_ChuyenKhoa = ChuyenKhoa.ID
+    LEFT JOIN BacSi ON LichKham.ID_BacSi = BacSi.ID
+    LEFT JOIN ThongTinTaiKhoan ON LichKham.ID_BacSi = ThongTinTaiKhoan.ID
+    LEFT JOIN KhungGio ON LichKham.KhungGio = KhungGio.ID
+    LEFT JOIN TrangThai ON LichKham.ID_TrangThai = TrangThai.ID
+    WHERE (LichKham.ID_BacSi=? OR LichKham.ID_BenhNhan=?);");
+
+    $stm->bind_param("ii",$load_id,$load_id);
 
     $data_result = "";
 
@@ -23,6 +42,7 @@
         $data_result = $stm->get_result();
         if ($data_result->num_rows<=0) {
             $_SESSION["alertMessage"] = "Người dùng chưa có lịch khám!";
+             header("Location: ../../index.php");
             exit;
         }
         while ($row = $data_result->fetch_assoc()) {

@@ -20,6 +20,7 @@ for (let x=0;x<input_keys.length;x++){
     //console.log(`input_${input_keys[x]}`);
     saved_values[input_keys[x]] = input_obj.value;
 }
+
 if (ck) {
     saved_values["ck"] = ck.value;
 }

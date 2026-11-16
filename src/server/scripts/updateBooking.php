@@ -67,16 +67,21 @@
     }
     function update_pkb($POST_KEYS,$mysqli) {
         $stm = "";
+
+        $cg_val = $_POST["cg"];
+        if ($cg_val==""){
+            $cg_val = null;
+        }
         if ($_SESSION["Admin"]>0 && isset($_POST["tt"])) {
             $stm = $mysqli->prepare("UPDATE LichKham
             SET KhungGio = ?, NgayKham = ?, LyDoKham = ?, ID_TrangThai = ?, ID_BacSi = ?, ID_ChuyenKhoa = ?
             WHERE ID = ?");
-            $stm->bind_param("issiisi",$_POST["khung_gio"],$_POST["ngay_kham"],$_POST["lydokham"],$_POST["tt"],$_POST["cg"],$_POST["ck"],$_POST["maphieu"]);
+            $stm->bind_param("issiisi",$_POST["khung_gio"],$_POST["ngay_kham"],$_POST["lydokham"],$_POST["tt"],$cg_val,$_POST["ck"],$_POST["maphieu"]);
         } else {
             $stm = $mysqli->prepare("UPDATE LichKham
             SET KhungGio = ?, NgayKham = ?, LyDoKham = ?, ID_BacSi = ?, ID_ChuyenKhoa = ?
             WHERE ID = ?");
-            $stm->bind_param("issisi",$_POST["khung_gio"],$_POST["ngay_kham"],$_POST["lydokham"],$_POST["cg"],$_POST["ck"],$_POST["maphieu"]);
+            $stm->bind_param("issisi",$_POST["khung_gio"],$_POST["ngay_kham"],$_POST["lydokham"],$cg_val,$_POST["ck"],$_POST["maphieu"]);
         }
 
         if ($stm->execute()) {
