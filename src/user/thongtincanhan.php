@@ -99,7 +99,7 @@
                     <?php 
                     
                     if ($load_id == $_SESSION["ID_TaiKhoan"] || $_SESSION["Admin"]>0) {
-                        include_once "../server/templates/updateUserInfoEditForm.php";
+                        include_once "../server/templates/update_user_info_form.php";
                     }
                     
                     ?>

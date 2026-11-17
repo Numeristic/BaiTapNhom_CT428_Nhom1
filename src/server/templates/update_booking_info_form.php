@@ -60,7 +60,7 @@
     <?php 
     
         if ($_SESSION["Admin"]>0) {
-            require_once("../server/templates/updateBookingInfoAdminOnly.php");
+            require_once("../server/templates/update_booking_info_adminonly.php");
         }
 
     ?>

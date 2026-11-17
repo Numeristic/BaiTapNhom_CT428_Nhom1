@@ -60,6 +60,8 @@
                             <option value="">Chọn chuyên khoa</option>
                         </select>
 
+                        <input>
+
                         <input type="submit" value="Lọc">
 
                     </form>

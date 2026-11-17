@@ -16,6 +16,7 @@
 
     if (is_logged_in($SESSION_KEYS)) {
         $_SESSION["alertMessage"] = "Bạn đã đăng nhập rồi.";
+        header("Location: ../../user/dangky.php");
         exit;
     }
 

@@ -32,7 +32,7 @@
                                     - Không cần thủ tục rườm rà. <br>
                                     - Vào là khám ngay.
                                 </p>
-                                <button class="feature_button">Đặt ngay</button>
+                                <button onclick="location.href = 'src/user/datlichkham.php'" class="feature_button">Đặt ngay</button>
                             </div>
 
                             <div class="feature_container">
@@ -41,7 +41,7 @@
                                 <p class="feature_description">
                                     Xem danh sách lịch khám bạn đã đặt.
                                 </p>
-                                <button class="feature_button">Xem ngay</button>
+                                <button onclick="location.href = 'src/user/xemyeucaukham.php'" class="feature_button">Xem ngay</button>
                             </div>
                         </div>
 
@@ -67,7 +67,7 @@
                                 <p class="feature_description">
                                     Xem thông tin, trạng thái của lịch khám.
                                 </p>
-                                <button class="feature_button">Vào</button>
+                                <button onclick="location.href = 'src/user/xemdanhsachlichkham.php'" class="feature_button">Vào</button>
                             </div>
 
                             <div class="feature_container">
@@ -76,19 +76,27 @@
                                 <p class="feature_description">
                                     Thêm/sửa/xóa thông tin chuyên khoa.
                                 </p>
-                                <button class="feature_button">Vào</button>
+                                <button onclick="location.href = 'src/user/quanlychuyenkhoa.php'" class="feature_button">Vào</button>
                             </div>
 
                             <div class="feature_container">
                                 <img src="img/user-star.png" class="feature_img">
-                                <p class="feature_title"><b>Quản lý tài khoản</b></p>
+                                <p class="feature_title"><b>Quản lý tài khoản bệnh nhân</b></p>
                                 <p class="feature_description">
-                                    Thêm/sửa/xóa thông tin, cấp quyền cho người dùng.
+                                    Thêm/sửa/xóa thông tin, cấp quyền cho bệnh nhân.
                                 </p>
-                                <button class="feature_button">Vào</button>
+                                <button onclick="location.href = 'src/user/xemdanhsachbn.php'" class="feature_button">Vào</button>
+                            </div>
+
+                            <div class="feature_container">
+                                <img src="img/user-star.png" class="feature_img">
+                                <p class="feature_title"><b>Quản lý tài khoản bác sĩ</b></p>
+                                <p class="feature_description">
+                                    Thêm/sửa/xóa thông tin, cấp quyền cho bác sĩ.
+                                </p>
+                                <button onclick="location.href = 'src/user/xemdanhsachnv.php'" class="feature_button">Vào</button>
                             </div>
                         </div>
-                        <div></div>
                     </div>
                 </div>
                 <div class="empty"></div>

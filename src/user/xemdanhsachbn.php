@@ -18,9 +18,11 @@
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
 
-    $list_query = $mysqli->query("SELECT * FROM ThongTinTaiKhoan");
+    $list_query = $mysqli->query("SELECT ThongTinTaiKhoan.ID, ThongTinTaiKhoan.HoTen, ThongTinTaiKhoan.SoCCCD, ThongTinTaiKhoan.SoDT, COUNT(BacSi.ID) AS LaBacSi
+    FROM ThongTinTaiKhoan
+    LEFT JOIN BacSi ON ThongTinTaiKhoan.ID = BacSi.ID;");
 
-    $thongtin_bacsi = [];
+    $thongtin_benhnhan = [];
 
     if (!$list_query) {
         $_SESSION["alertMessage"] = "Lỗi truy vấn CSDL!";
@@ -28,7 +30,10 @@
     }
 
     while ($row = $list_query->fetch_assoc()) {
-        $thongtin_bacsi[] = $row;
+        if ($row["LaBacSi"]>0) {
+            continue;
+        }
+        $thongtin_benhnhan[] = $row;
     }
 ?>
 
@@ -39,7 +44,7 @@
             require_once("../server/scripts/alert.php");
         ?>
         <link rel="stylesheet" href="../server/styles/list_extras.css">
-        <script src="../client/scripts/danhsachbacsi.js" defer></script>
+        <!--<script src="../client/scripts/danhsachbacsi.js" defer></script>-->
     </head>
     <body>
         <?php
@@ -66,23 +71,19 @@
                             <td>Họ tên</td>
                             <td>Số CCCD</td>
                             <td>Số ĐT</td>
-                            <td>Chuyên khoa</td>
                             <td>Thông tin cá nhân</td>
                             <td>Lịch sử khám</td>
-                            <td>Lịch làm việc</td>
                         </tr>
                         <?php
 
-                            for ($x=0;$x<count($thongtin_bacsi);$x++){
+                            for ($x=0;$x<count($thongtin_benhnhan);$x++){
                                 $stt = $x+1;
-                                $this_element = $thongtin_bacsi[$x];
+                                $this_element = $thongtin_benhnhan[$x];
                                 $id = $this_element["ID"];
 
                                 $ht_bs = $this_element["HoTen"];
                                 $so_cccd = $this_element["SoCCCD"];
                                 $so_dt = $this_element["SoDT"];
-                                $id_ck = $this_element["ID_ChuyenKhoa"];
-                                $ten_ck = $this_element["TenChuyenKhoa"];
 
                                 $card = "<tr class=\"lichkham_card\">
 
@@ -91,11 +92,8 @@
                                     <td>$ht_bs</td>
                                     <td>$so_cccd</td>
                                     <td>$so_dt</td>
-                                    <td>$ten_ck</td>
-                                    <td style=\"display: none;\">$id_ck</td>
                                     <td><a href=\"thongtincanhan.php?id=$id\">Xem</a></td>
                                     <td><a href=\"xemyeucaukham.php?id=$id\">Xem</a></td>
-                                    <td><a href=\"quanlylichlamviec.php?id=$id\">Xem</a></td>
                                 </tr>";
                                 echo $card;
                             }

@@ -77,7 +77,7 @@
                 <div id="login_panel">
                     <h2><b>Phiếu khám bệnh</b></h2>
                     <?php 
-                        require_once("../server/templates/updateBookingInfoEditForm.php");
+                        require_once("../server/templates/update_booking_info_form.php");
                     ?>
                     <div>
                         <div class="info_container">
