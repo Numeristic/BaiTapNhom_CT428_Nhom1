@@ -12,6 +12,12 @@
 
     require("sqlCredentials.php");
     require("initSession.php");
+    require("loggedInFunc.php");
+
+    if (is_logged_in($SESSION_KEYS)) {
+        $_SESSION["alertMessage"] = "Bạn đã đăng nhập rồi.";
+        exit;
+    }
 
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");

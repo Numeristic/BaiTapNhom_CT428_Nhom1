@@ -2,6 +2,7 @@
     <head>
         <?php
             include_once '../server/stylesheets.php';
+            include_once '../server/scripts/initSession.php';
             include_once '../server/scripts/alert.php';
         ?>
         <link rel="stylesheet" href="../server/styles/multistep_form_extra.css">

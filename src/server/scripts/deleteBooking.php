@@ -20,6 +20,7 @@
         if (!$stm->execute()) {
             $_SESSION["alertMessage"] = "Lỗi CSDL! $stm->error";
             header("Location: ");
+            exit;
         }
         
         $result = $stm->get_result();

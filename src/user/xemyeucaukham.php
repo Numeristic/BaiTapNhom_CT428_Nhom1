@@ -2,6 +2,7 @@
 
     require_once "../server/scripts/loggedInFunc.php";
     require_once "../server/scripts/sqlCredentials.php";
+    include_once '../server/scripts/initSession.php';
 
     if (!is_logged_in($SESSION_KEYS)) {
         $_SESSION["alertMessage"] = "Bạn chưa đăng nhập!";

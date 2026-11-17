@@ -63,6 +63,7 @@
         <?php
             include '../server/stylesheets.php';
             include_once '../server/scripts/alert.php';
+            include_once '../server/scripts/initSession.php';
         ?>
     </head>
     <body>

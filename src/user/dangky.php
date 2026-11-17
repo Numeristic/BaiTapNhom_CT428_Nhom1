@@ -3,6 +3,7 @@
         <?php
             include_once '../server/stylesheets.php';
             include_once '../server/scripts/alert.php';
+            include_once '../server/scripts/initSession.php';
         ?>
         <script src="../client/scripts/dangky.js" defer></script>
     </head>

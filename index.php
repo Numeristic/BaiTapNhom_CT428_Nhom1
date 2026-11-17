@@ -8,6 +8,7 @@
     <body>
         <?php
             include 'src/server/templates/header_special.php';
+            include_once 'src/server/scripts/initSessionSpecial.php';
             require_once("src/server/scripts/alert.php");
         ?>
         <?php

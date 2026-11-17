@@ -20,11 +20,12 @@
         if (!$stm->execute()) {
             $_SESSION["alertMessage"] = "Lỗi CSDL! $stm->error";
             //header("Location: ");
+            exit;
         }
         
         $result = $stm->get_result();
 
-        $_SESSION["alertMessage"] = "";
+        $_SESSION["alertMessage"] = "Xóa thành công.";
         if ($result->num_rows<=0) {
             $_SESSION["alertMessage"] = "Không tìm thấy người dùng cần xóa!";
         }
@@ -36,7 +37,7 @@
     $verified = verify_user_has_access($mysqli);
 
     if ($logged_in && $verified && isset($_POST["id"])) {
-        delete_booking($mysqli);
+        delete_user($mysqli);
     } else {
         if (!$logged_in) {
             $_SESSION["alertMessage"] = "Bạn chưa đăng nhập!";

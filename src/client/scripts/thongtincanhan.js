@@ -8,6 +8,7 @@ const idtk = document.getElementById("input_idtkreal")
 const bs_perms = document.getElementById("input_bacsi");
 const admin_perms = document.getElementById("input_admin");
 const mk = document.getElementById("input_mk");
+let delete_button = document.getElementById("delete_button");
 const return_button = document.getElementById("return_button2");
 
 const label_ck = document.getElementById("label_ck");
@@ -71,3 +72,29 @@ if (mk){
 return_button.addEventListener("click",function(){
     show();
 });
+
+if (delete_button && idtk){
+
+    delete_button.addEventListener("click",function(event){
+        event.preventDefault();
+        let prompt_result = confirm("Bạn có chắc muốn xóa lịch khám này?");
+        if (prompt_result==true){
+            let delete_xhttp = new XMLHttpRequest;
+            delete_xhttp.open("POST","../server/scripts/deleteUser.php",false);
+            delete_xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            delete_xhttp.send(`id=${idtk.value}`);
+            
+            console.log(idtk.value);
+
+            if (delete_xhttp.readyState==4 && delete_xhttp.status==200) {
+                /*alert("Xóa thành công.");*/
+                //window.location.href = "../user/thongtincanhan.php";
+                console.log(delete_xhttp.responseText);
+            } else {
+                console.log(`${delete_xhttp.statusText}`);
+                console.log(`${delete_xhttp.status}`);
+            }
+        }
+    });
+
+}

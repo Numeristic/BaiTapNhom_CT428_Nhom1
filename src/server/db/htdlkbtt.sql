@@ -19,6 +19,7 @@ create table BenhNhan (
     constraint fk_ThongTinTKBN
     foreign key (ID)
     references ThongTinTaiKhoan(ID)
+    on delete cascade
 );
 
 create table ChuyenKhoa (
@@ -33,11 +34,13 @@ create table BacSi (
 
     constraint fk_ChuyenKhoaBS
     foreign key (ID_ChuyenKhoa)
-    references ChuyenKhoa(ID),
+    references ChuyenKhoa(ID)
+    on delete no action,
     
     constraint fk_ThongTinTKBS
     foreign key (ID)
     references ThongTinTaiKhoan(ID)
+    on delete cascade
 );
 
 create table QuanLy (
@@ -46,6 +49,7 @@ create table QuanLy (
     constraint fk_ThongTinTKQL
     foreign key (ID)
     references ThongTinTaiKhoan(ID)
+    on delete cascade
 );
 
 create table TrangThai (
@@ -67,6 +71,7 @@ create table KhungGio(
     constraint fk_Buoi
     foreign key (ID_Buoi)
     references Buoi(ID)
+    on delete no action
 );
 
 create table LichKham (
@@ -83,19 +88,23 @@ create table LichKham (
     
     constraint fk_BenhNhan
     foreign key (ID_BenhNhan)
-    references BenhNhan(ID),
+    references BenhNhan(ID)
+    on delete no action,
     
     constraint fk_BacSi
     foreign key (ID_BacSi)
-    references BacSi(ID),
+    references BacSi(ID)
+    on delete no action,
     
     constraint fk_TrangThai
     foreign key (ID_TrangThai)
-    references TrangThai(ID),
+    references TrangThai(ID)
+    on delete no action,
 
     constraint fk_KhungGioKham
     foreign key (KhungGio)
     references KhungGio(ID)
+    on delete no action
 );
 
 create table Thu(
@@ -109,11 +118,13 @@ create table LichLamViec (
     
   constraint fk_LichCuaBacSi
   foreign key (ID_BacSi)
-  references BacSi(ID),
+  references BacSi(ID)
+  on delete cascade,
   
   constraint fk_BuoiLamViec
   foreign key (ID_KhungGio)
-  references KhungGio(ID),
+  references KhungGio(ID)
+  on delete cascade,
     
   constraint pk_LichLamViec
   primary key (ID_BacSi,ID_KhungGio)
@@ -128,11 +139,13 @@ create table LichNghiPhep (
     
     constraint fk_BacSiNghiPhep
     foreign key (ID_BacSi)
-    references BacSi(ID),
+    references BacSi(ID)
+    on delete cascade,
 
     constraint fk_TrangThaiDXNP
     foreign key (TrangThai)
     references TrangThai(ID)
+    on delete no action
 );
 
 create table LichNghi (
@@ -141,11 +154,13 @@ create table LichNghi (
     
     constraint fk_BacSiNghi
     foreign key (ID_BacSi)
-    references BacSi(ID),
+    references BacSi(ID)
+    on delete cascade,
     
     constraint fk_NgayNghi
     foreign key (ID_Thu)
-    references Thu(ID),
+    references Thu(ID)
+    on delete cascade,
     
     constraint pk_NgayNghiBacSi
     primary key (ID_BacSi, ID_Thu)
