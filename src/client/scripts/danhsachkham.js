@@ -60,7 +60,7 @@ function applyFilter(bacsi,chuyenkhoa,ngay_type,ngay,trangthai) {
     for (let x=0;x<danh_sach.length;x++) {
         var this_element = danh_sach[x];
         var childs = this_element.children;
-        pass = true;
+        let pass = true;
         /*
 
         0 <td>$stt</td>

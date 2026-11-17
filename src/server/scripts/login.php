@@ -34,7 +34,7 @@
     }
 
     function check_account_exists($POST_KEYS,$exist_as,$mysqli) {
-        $query = "select ThongTinTaiKhoan.ID,ThongTinTaiKhoan.HoTen,count($exist_as.ID) as IDCount from ThongTinTaiKhoan left join $exist_as on $exist_as.ID = ThongTinTaiKhoan.ID
+        $query = "SELECT ThongTinTaiKhoan.ID,ThongTinTaiKhoan.HoTen,count($exist_as.ID) as IDCount from ThongTinTaiKhoan left join $exist_as on $exist_as.ID = ThongTinTaiKhoan.ID
         where ThongTinTaiKhoan.Email = ?
         group by ThongTinTaiKhoan.ID;";
 

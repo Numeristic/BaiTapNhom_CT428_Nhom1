@@ -42,9 +42,9 @@
     if ($stm->execute()) {
         $data_result = $stm->get_result();
         if ($data_result->num_rows<=0) {
-            $_SESSION["alertMessage"] = "Người dùng chưa có lịch khám!";
+            /*$_SESSION["alertMessage"] = "Người dùng chưa có lịch khám!";
              header("Location: ../../index.php");
-            exit;
+            exit;*/
         }
         while ($row = $data_result->fetch_assoc()) {
             $lich_kham[] = $row;

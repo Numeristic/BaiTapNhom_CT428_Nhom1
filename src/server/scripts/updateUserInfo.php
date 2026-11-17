@@ -38,13 +38,6 @@
         $has_bs = isset($_POST['bs_perms']);
         $has_admin = isset($_POST['admin_perms']);
 
-        /*if (isset($_POST['bs_perms'])) {
-            $has_bs = 1;
-        }
-        if (isset($_POST['admin_perms'])) {
-            $has_admin = 1;
-        }*/
-
         $check_stm = $mysqli->prepare("SELECT COUNT(BacSi.ID) AS LaBacSi, COUNT(QuanLy.ID) AS LaQuanLy FROM ThongTinTaiKhoan
         LEFT JOIN BacSi ON ThongTinTaiKhoan.ID = BacSi.ID
         LEFT JOIN QuanLy ON ThongTinTaiKhoan.ID = QuanLy.ID
@@ -57,22 +50,6 @@
         }
         $check_result = $check_stm->get_result();
         $check_row = $check_result->fetch_assoc();
-
-        /*if (isset($_POST["ck"]) && !($_SESSION["Admin"]>0)) {
-            if ($_SESSION["Admin"]<=0 || $check_result->num_rows<=0 || $check_row['LaBacSi']<=0) {
-                if ($_SESSION["Admin"]<=0) {
-                    $_SESSION["alertMessage"] = "Bạn không có quyền thay đổi thông tin liên quan đến bác sĩ!";
-                } else {
-                    $_SESSION["alertMessage"] = "Tài khoản này không phải là tài khoản Bác Sĩ!";
-                }
-                header("Location: $home_url?ck=".$_POST["idtk"]);
-                exit;
-            } else {
-                echo "What?";
-                echo $_POST["bs_perms"];
-                $has_ck = 1;
-            }
-        }*/
 
         $query = "UPDATE ThongTinTaiKhoan SET HoTen = ?, SoCCCD = ?, NgaySinh = ? WHERE ID = ?";
         $stm = $mysqli->prepare($query);
@@ -147,15 +124,7 @@
                 $_SESSION["alertMessage"] = "";
             }
         }
-
-        /*if ($has_ck==true) {
-            $bs_stm = $mysqli->prepare("UPDATE BacSi SET ID_ChuyenKhoa = ? WHERE BacSi.ID = ?");
-            $bs_stm->bind_param("si",$_POST["ck"],$_POST["idtk"]);
-
-            if (!$bs_stm->execute()) {
-                $_SESSION["alertMessage"] = "Cập nhật thông tin bác sĩ thất bại!";
-            }
-        }*/
+        
         echo $_POST["idtk"]."\n";
         echo $_POST["hoten"]."\n";
         echo $_POST["socccd"]."\n";
