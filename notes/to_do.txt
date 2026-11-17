@@ -2,7 +2,7 @@
 - Make ck in personal information page update correctly. (DONE)
 - Make delete buttons work for Booking and Accounts. (DONE)
 - undo button for phieukhambenh (DONE)
-- permission-based viewing for phieukhambenh (HALF-DONE)
+- permission-based viewing for phieukhambenh (DONE)
 - list page for phieukhambenh (FUNCTIONALLY DONE)
 
 - Allow admins (and admin only) to change the status of the appointment  (DONE)
@@ -12,7 +12,7 @@
 - undo button for thongtincanhan (DONE)
 - password change page (DONE)
 
-- list page for thongtincanhan (can be considered done, only missing features)
+- list page for thongtincanhan (DONE - Add features)
 
 - trangchu (DONE)
     + Danh sách các tính năng dành cho người bệnh.
@@ -32,4 +32,5 @@
 
 - sanitize all inputs in server/scripts and server/norun (trim and htmlspecialchar)
 - input validation on server-side.
+- make sure everything in scripts lead to a header() safely at some point
 - update templates (both in hrefs and UX)
