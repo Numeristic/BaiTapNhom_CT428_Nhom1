@@ -15,6 +15,6 @@
     </div>
     <div id="account_actions">
         <div class="action_button"><a href="dangnhap.php">Đăng nhập</a></div>
-        <div class="action_button"><a>Đăng xuất</a></div>
+        <div class="action_button"><a href="dangxuat.php">Đăng xuất</a></div>
     </div>
 </header>

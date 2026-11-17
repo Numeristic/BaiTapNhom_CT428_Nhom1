@@ -1,7 +1,7 @@
 <html>
     <head>
         <?php
-            include 'src/server/stylesheets_special.php'
+            include 'src/server/stylesheets_special.php';
         ?>
         <link rel="stylesheet" href="src/server/styles/trangchu_extra.css">
     </head>
@@ -21,7 +21,7 @@
                 <div id="login_panel">
                     <h2><b>Trang chủ</b></h2>
                     <div>
-                        <h3>Người khám</h3>
+                        <!--<h3>Người khám</h3>
                         <div class="feature_list">
 
                             <div class="feature_container">
@@ -43,9 +43,28 @@
                                 </p>
                                 <button onclick="location.href = 'src/user/xemyeucaukham.php'" class="feature_button">Xem ngay</button>
                             </div>
-                        </div>
+                        </div>-->
 
-                        <h3>Bác sĩ</h3>
+
+                        <?php
+
+                        if (isset($_SESSION["ID_TaiKhoan"]) && $_SESSION["ID_TaiKhoan"]>0) {
+                            include_once "src/server/templates/trangchu_benhnhan.php";
+                        } else {
+                            include_once "src/server/templates/trangchu_chuadangnhap.php";
+                        }
+                        
+                        if (isset($_SESSION["BacSi"]) && $_SESSION["BacSi"]>0){
+                            include_once "src/server/templates/trangchu_bacsi.php";
+                        }
+
+                        if (isset($_SESSION["Admin"]) && $_SESSION["Admin"]>0){
+                            include_once "src/server/templates/trangchu_admin.php";
+                        }
+                        
+                        ?>
+
+                        <!--<h3>Bác sĩ</h3>
                         <div class="feature_list">
 
                             <div class="feature_container">
@@ -56,9 +75,9 @@
                                 </p>
                                 <button class="feature_button">Viết đơn</button>
                             </div>
-                        </div>
+                        </div>-->
 
-                        <h3>Quản lý</h3>
+                        <!--<h3>Quản lý</h3>
                         <div class="feature_list">
 
                             <div class="feature_container">
@@ -96,7 +115,7 @@
                                 </p>
                                 <button onclick="location.href = 'src/user/xemdanhsachnv.php'" class="feature_button">Vào</button>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="empty"></div>

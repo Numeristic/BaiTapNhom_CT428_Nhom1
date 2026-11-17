@@ -1,4 +1,5 @@
-- Make ck in personal information page update correctly.
+- Dang Xuat (DONE)
+- Make ck in personal information page update correctly. (DONE)
 - Make delete buttons work for Booking and Accounts. (DONE)
 - undo button for phieukhambenh (DONE)
 - permission-based viewing for phieukhambenh (HALF-DONE)
@@ -11,19 +12,21 @@
 - undo button for thongtincanhan (DONE)
 - password change page (DONE)
 
-- list page for thongtincanhan
+- list page for thongtincanhan (can be considered done, only missing features)
 
-- trangchu (DONE UI wise, need to make the buttons actually work)
+- trangchu (DONE)
     + Danh sách các tính năng dành cho người bệnh.
     + Danh sách các tính năng dành cho bác sĩ.
     + Danh sách các tính năng dành cho quản lý.
-- trangchu cho nguoi chua dang nhap
+- trangchu cho nguoi chua dang nhap (DONE)
 
 - manager page (No need, integrated with trangchu)
 
 - list of chuyenkhoas
 - list of khunggios
 - list of lichnghis
+- Adjust LichLamViec
+
 - lichnghiphep form
 - lichnghiphep approval form for managers
 

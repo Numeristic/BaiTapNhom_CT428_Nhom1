@@ -39,6 +39,17 @@
     justify-content: space-between;
 }
 
+.khung_gio_list {
+    display: flex;
+    flex-direction:row;
+
+    padding:0px 10px;
+    margin-bottom: 15px;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
 #login_button {
 
     background-color: rgb(0, 119, 199);

@@ -53,14 +53,14 @@
             <div id="flex_div1">
                 <div class="empty"></div>
                 <div id="login_panel">
-                    <h2><b>Danh sách lịch khám</b></h2>
+                    <h2><b>Danh sách tài khoản bác sĩ</b></h2>
                     <form id="main_form">
-
+                        
+                        <input type="text" id="ten_bs" placeholder="Nhập tên...">
                         <select id="ck">
                             <option value="">Chọn chuyên khoa</option>
                         </select>
-
-                        <input>
+                        
 
                         <input type="submit" value="Lọc">
 

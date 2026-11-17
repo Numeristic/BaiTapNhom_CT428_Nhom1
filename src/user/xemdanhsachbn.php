@@ -54,7 +54,7 @@
             <div id="flex_div1">
                 <div class="empty"></div>
                 <div id="login_panel">
-                    <h2><b>Danh sách lịch khám</b></h2>
+                    <h2><b>Danh sách tài khoản bệnh nhân</b></h2>
                     <form id="main_form">
 
                         <select id="ck">
