@@ -25,6 +25,7 @@
         }
         return $returned_value;
     }
+
     function verify_user_has_access($POST_KEYS,$mysqli){
         $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID, LichKham.ID_BenhNhan, LichKham.ID_BacSi FROM LichKham,BacSi WHERE (LichKham.ID = ?) AND ((LichKham.ID_BenhNhan = ?) OR (LichKham.ID_BacSi = ? AND LichKham.ID_BacSi = BacSi.ID));");
         $stm->bind_param("iii",$_POST["maphieu"],$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"]);
@@ -37,6 +38,7 @@
             return false;
         }
     }
+    
     function verify_inputs($mysqli){
         $stm = "";
         if ($_POST["cg"]!="") {
@@ -65,6 +67,7 @@
         }
         return true;
     }
+
     function update_pkb($POST_KEYS,$mysqli) {
         $stm = "";
 

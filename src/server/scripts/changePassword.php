@@ -15,7 +15,7 @@
     function update_password($mysqli,$POST_KEYS) {
         if ($_SESSION["ID_TaiKhoan"] != $_POST["idtk"] && $_SESSION["Admin"]<=0) {
             $_SESSION["alertMessage"] = "Bạn không có quyền cập nhật mật khẩu cho tài khoản này!";
-            header("Location: ");
+            header("Location: ../../user/thongtincanhan.php?id=".$_POST["idtk"]);
             exit;
         }
 
@@ -24,13 +24,13 @@
 
         if (!$check_stm->execute()) {
             $_SESSION["alertMessage"] = "Lỗi CSDL: $stm->error";
-            header("Location: ");
+            header("Location: ../../user/doimatkhau.php?id=".$_POST["idtk"]);
             exit;
         }
         $check_result = $check_stm->get_result();
         if ($check_result->num_rows<=0) {
             $_SESSION["alertMessage"] = "Tài khoản chưa được đăng ký!";
-            header("Location: ");
+            header("Location: ../../../index.php");
             exit;
         }
 
@@ -38,7 +38,7 @@
 
         if (!password_verify($_POST["oldmk"],$check_result["PHash"])) {
             $_SESSION["alertMessage"] = "Mật khẩu cũ không đúng.";
-            header("Location: ");
+            header("Location: ../../user/doimatkhau.php?id=".$_POST["idtk"]);
             exit;
         }
 
@@ -51,7 +51,7 @@
         if (!$update_stm->execute()) {
             $_SESSION["alertMessage"] = "Lỗi CSDL. Cập nhật mật khẩu thất bại!\n$update_stm->error";
         }
-        header("Location: ");
+        header("Location: ../../user/thongtincanhan.php?id=".$_POST["idtk"]);
     }
 
     function validate($POST_KEYS){

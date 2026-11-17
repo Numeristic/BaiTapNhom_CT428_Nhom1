@@ -34,17 +34,16 @@
     }
     
     function update_personal_info($mysqli,$home_url) {
-        $has_ck = 0;
-        $has_bs = 0;
-        $has_admin = 0;
+        $has_ck = false;
+        $has_bs = isset($_POST['bs_perms']);
+        $has_admin = isset($_POST['admin_perms']);
 
-        if (isset($_POST['bs_perms'])) {
+        /*if (isset($_POST['bs_perms'])) {
             $has_bs = 1;
         }
         if (isset($_POST['admin_perms'])) {
             $has_admin = 1;
-        }
-
+        }*/
 
         $check_stm = $mysqli->prepare("SELECT COUNT(BacSi.ID) AS LaBacSi, COUNT(QuanLy.ID) AS LaQuanLy FROM ThongTinTaiKhoan
         LEFT JOIN BacSi ON ThongTinTaiKhoan.ID = BacSi.ID
@@ -59,7 +58,7 @@
         $check_result = $check_stm->get_result();
         $check_row = $check_result->fetch_assoc();
 
-        if (isset($_POST["ck"]) && $has_bs == 0) {
+        /*if (isset($_POST["ck"]) && !($_SESSION["Admin"]>0)) {
             if ($_SESSION["Admin"]<=0 || $check_result->num_rows<=0 || $check_row['LaBacSi']<=0) {
                 if ($_SESSION["Admin"]<=0) {
                     $_SESSION["alertMessage"] = "Bạn không có quyền thay đổi thông tin liên quan đến bác sĩ!";
@@ -70,9 +69,10 @@
                 exit;
             } else {
                 echo "What?";
+                echo $_POST["bs_perms"];
                 $has_ck = 1;
             }
-        }
+        }*/
 
         $query = "UPDATE ThongTinTaiKhoan SET HoTen = ?, SoCCCD = ?, NgaySinh = ? WHERE ID = ?";
         $stm = $mysqli->prepare($query);
@@ -93,35 +93,48 @@
 
         $_SESSION["alertMessage"] = "Cập nhật thành công!";
 
-        if ($has_bs && (($check_row['LaBacSi']>0)!=($_POST['bs_perms']>0))) {
+        if ($_SESSION["Admin"]>0) {
             $query = "";
 
             $bsupdate_stm = "";
-            if ($_POST['bs_perms']==true) {
-                if (!isset($_POST['ck'])) {
-                    $_SESSION['alertMessage'] = "";
+            if (($check_row['LaBacSi']>0)!=($has_bs)){
+                if ($has_bs) {
+                    if (!isset($_POST['ck']) || $_POST['ck']=="") {
+                        $_SESSION['alertMessage'] = "Chuyên khoa không thể để trống!";
+                        header("Location: $home_url?ck=".$_POST["idtk"]);
+                        exit;
+                    }
+                    $query = "INSERT INTO BacSi(ID,ID_ChuyenKhoa) VALUES (?,?)";
+                    $bsupdate_stm = $mysqli->prepare($query);
+                    $bsupdate_stm->bind_param("is",$_POST['idtk'],$_POST['ck']);
+                } else {
+                    $query = "DELETE FROM BacSi WHERE ID = ?";
+                    $bsupdate_stm = $mysqli->prepare($query);
+                    $bsupdate_stm->bind_param('i',$_POST['idtk']);
+                }
+                if (!$bsupdate_stm->execute()) {
+                    $_SESSION["alertMessage"] = "";
+                }
+            } elseif ($check_row['LaBacSi']>0) {
+                if (!isset($_POST['ck']) || $_POST['ck']=="") {
+                    $_SESSION['alertMessage'] = "Chuyên khoa không thể để trống!";
                     header("Location: $home_url?ck=".$_POST["idtk"]);
                     exit;
                 }
-                $query = "INSERT INTO BacSi(ID,ID_ChuyenKhoa) VALUES (?,?)";
+                $query = "UPDATE BacSi SET ID_ChuyenKhoa = ? WHERE BacSi.ID = ?";
                 $bsupdate_stm = $mysqli->prepare($query);
-                $bsupdate_stm->bind_param("is",$_POST['idtk'],$_POST['ck']);
-            } else {
-                $query = "DELETE FROM BacSi WHERE ID = ?";
-                $bsupdate_stm = $mysqli->prepare($query);
-                $bsupdate_stm->bind_param('i',$_POST['idtk']);
-            }
-
-            if (!$bsupdate_stm->execute()) {
-                $_SESSION["alertMessage"] = "";
+                $bsupdate_stm->bind_param('si',$_POST['ck'],$_POST['idtk']);
+                if (!$bsupdate_stm->execute()) {
+                    $_SESSION["alertMessage"] = "";
+                 }
             }
         }
 
-        if ($has_admin && (($check_row['LaQuanLy']>0)!=($_POST['admin_perms']>0))) {
+        if ($_SESSION["Admin"]>0 && (($check_row['LaQuanLy']>0)!=($has_admin))) {
             $query = "";
 
             $adminupdate_stm = "";
-            if ($_POST['admin_perms']==true) {
+            if ($has_admin) {
                 $query = "INSERT INTO QuanLy VALUES (?)";
             } else {
                 $query = "DELETE FROM QuanLy WHERE ID = ?";
@@ -134,14 +147,15 @@
                 $_SESSION["alertMessage"] = "";
             }
         }
-        if ($has_ck==true) {
+
+        /*if ($has_ck==true) {
             $bs_stm = $mysqli->prepare("UPDATE BacSi SET ID_ChuyenKhoa = ? WHERE BacSi.ID = ?");
             $bs_stm->bind_param("si",$_POST["ck"],$_POST["idtk"]);
 
             if (!$bs_stm->execute()) {
                 $_SESSION["alertMessage"] = "Cập nhật thông tin bác sĩ thất bại!";
             }
-        }
+        }*/
         echo $_POST["idtk"]."\n";
         echo $_POST["hoten"]."\n";
         echo $_POST["socccd"]."\n";

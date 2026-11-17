@@ -18,6 +18,8 @@
 <select name="ck" id="input_ck" class="input_text">
     <option value="">Chọn chuyên khoa</option>
     <?php 
+        require_once("../server/scripts/sqlCredentials.php");
+
         require_once("../server/norun/loadCk2.php");
     ?>
 </select>

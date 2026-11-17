@@ -1,4 +1,5 @@
-- Make delete buttons work for Booking and Accounts.
+- Make ck in personal information page update correctly.
+- Make delete buttons work for Booking and Accounts. (DONE)
 - undo button for phieukhambenh (DONE)
 - permission-based viewing for phieukhambenh (HALF-DONE)
 - list page for phieukhambenh (FUNCTIONALLY DONE)
