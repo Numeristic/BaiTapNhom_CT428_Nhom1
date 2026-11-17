@@ -1,23 +1,23 @@
 <form action="../server/scripts/updateUserInfo.php" id="main_form" method="post" id="adjust_form" class="main_form">
     <label for="id_tk">Mã tài khoản:</label>
     <br>
-    <input name="id_tk" id="input_idtk" type="number" value=<?php echo $idtk; ?> class="input_text" disabled>
-    <input name="idtk" id="input_idtkreal" type="hidden" value=<?php echo $idtk; ?>>
+    <input name="id_tk" id="input_idtk" type="number" value="<?php echo $data_result["ID"]; ?>" class="input_text" disabled>
+    <input name="idtk" id="input_idtkreal" type="hidden" value=<?php echo $data_result["ID"]; ?>>
     <br>
 
     <label for="hoten">Họ tên:</label>
     <br>
-    <input name="hoten" id="input_hoten" type="text" value="<?php echo $hoten; ?>" class="input_text">
+    <input name="hoten" id="input_hoten" type="text" value="<?php echo $data_result["HoTen"]; ?>" class="input_text">
     <br>
 
     <label for="socccd">Số CCCD:</label>
     <br>
-    <input name="socccd" id="input_socccd" type="number" value=<?php echo $socccd ?> class="input_text">
+    <input name="socccd" id="input_socccd" type="number" value="<?php echo $data_result["SoCCCD"] ?>" class="input_text">
     <br>
 
-    <label for="ngaysinh">Số CCCD:</label>
+    <label for="ngaysinh">Ngày sinh:</label>
     <br>
-    <input name="ngaysinh" id="input_ngaysinh" type="date" value=<?php echo $ngaysinh ?> class="input_text">
+    <input name="ngaysinh" id="input_ngaysinh" type="date" value="<?php echo $data_result["NgaySinh"] ?>" class="input_text">
     <br>
 
     <label for="mk">Mật khẩu:</label>

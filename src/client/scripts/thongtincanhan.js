@@ -1,7 +1,8 @@
 let input_keys = [
     "idtk",
     "hoten",
-    "socccd"
+    "socccd",
+    "ngaysinh"
 ];
 
 const idtk = document.getElementById("input_idtkreal")
@@ -77,7 +78,7 @@ if (delete_button && idtk){
 
     delete_button.addEventListener("click",function(event){
         event.preventDefault();
-        let prompt_result = confirm("Bạn có chắc muốn xóa lịch khám này?");
+        let prompt_result = confirm("Bạn có chắc muốn xóa tài khoản này?");
         if (prompt_result==true){
             let delete_xhttp = new XMLHttpRequest;
             delete_xhttp.open("POST","../server/scripts/deleteUser.php",false);

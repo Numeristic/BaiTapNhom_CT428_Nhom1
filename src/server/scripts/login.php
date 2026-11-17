@@ -13,6 +13,7 @@
 
     if (is_logged_in($SESSION_KEYS)) {
         $_SESSION["alertMessage"] = "Bạn đã đăng nhập rồi.";
+        header("Location: ../../../index.php");
         exit;
     }
 
@@ -58,7 +59,7 @@
     }
 
     function login($POST_KEYS,$dangnhap_as,$mysqli) {
-        $query = "SELECT ThongTinTaiKhoan.ID AS ID,ThongTinTaiKhoan.HoTen,ThongTinTaiKhoan.SoCCCD, ThongTinTaiKhoan.PHash,COUNT(BacSi.ID) as LaBacSi,COUNT(QuanLy.ID) as LaQuanLy, ThongTinTaiKhoan.SoCCCD, ThongTinTaiKhoan.NgaySinh FROM ThongTinTaiKhoan 
+        $query = "SELECT ThongTinTaiKhoan.ID AS ID,ThongTinTaiKhoan.HoTen,ThongTinTaiKhoan.SoCCCD, ThongTinTaiKhoan.PHash,COUNT(BacSi.ID) as LaBacSi,COUNT(QuanLy.ID) as LaQuanLy, BacSi.ID_ChuyenKhoa, ThongTinTaiKhoan.SoCCCD, ThongTinTaiKhoan.NgaySinh FROM ThongTinTaiKhoan 
         LEFT JOIN BacSi ON BacSi.ID = ThongTinTaiKhoan.ID
         LEFT JOIN QuanLy ON QuanLy.ID = ThongTinTaiKhoan.ID
         WHERE ThongTinTaiKhoan.Email = ?";
@@ -80,6 +81,7 @@
                     $_SESSION['NgaySinh'] = $result["NgaySinh"];
                     $_SESSION['Admin'] = $result["LaQuanLy"];
                     $_SESSION['BacSi'] = $result["LaBacSi"];
+                    $_SESSION['ChuyenKhoa'] = $result["ID_ChuyenKhoa"];
                     //$_SESSION['Role'] = $dangnhap_as;
 
                     $_SESSION["alertMessage"] = "Đăng nhập thành công.";

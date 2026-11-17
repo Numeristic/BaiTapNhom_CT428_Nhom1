@@ -14,10 +14,11 @@
         unset($_SESSION['NgaySinh']);
         unset($_SESSION['Admin']);
         unset($_SESSION['BacSi']);
+        unset($_SESSION['ChuyenKhoa']);
     }
 
     if (isset($_SESSION['ID_TaiKhoan'])) {
-        $account_verify_stm = $mysqli->prepare("SELECT ThongTinTaiKhoan.ID, ThongTinTaiKhoan.HoTen, ThongTinTaiKhoan.SoCCCD, ThongTinTaiKhoan.NgaySinh, COUNT(BacSi.ID) as LaBacSi, COUNT(QuanLy.ID) as LaQuanLy
+        $account_verify_stm = $mysqli->prepare("SELECT ThongTinTaiKhoan.ID, ThongTinTaiKhoan.HoTen, ThongTinTaiKhoan.SoCCCD, ThongTinTaiKhoan.NgaySinh, COUNT(BacSi.ID) as LaBacSi, BacSi.ID_ChuyenKhoa, COUNT(QuanLy.ID) as LaQuanLy
         FROM ThongTinTaiKhoan
         LEFT JOIN BacSi ON ThongTinTaiKhoan.ID = BacSi.ID
         LEFT JOIN QuanLy ON ThongTinTaiKhoan.ID = QuanLy.ID
@@ -48,5 +49,11 @@
         $_SESSION['HoTen'] = $result["HoTen"];
         $_SESSION['SoCCCD'] = $result["SoCCCD"];
         $_SESSION['NgaySinh'] = $result['NgaySinh'];
+
+        if ($result['ID_ChuyenKhoa']!=null) {
+            $_SESSION['ChuyenKhoa'] = $result['ID_ChuyenKhoa'];
+        } else {
+            $_SESSION['ChuyenKhoa'] = "";
+        }
     }
 ?>
