@@ -2,6 +2,7 @@
     <head>
         <?php
             include_once '../server/stylesheets.php';
+            include_once '../server/scripts/alert.php';
             require_once "../server/scripts/loggedInFunc.php";
             require_once "../server/scripts/sqlCredentials.php";
             include_once '../server/scripts/initSession.php';
@@ -15,6 +16,35 @@
                 $_SESSION["alertMessage"] = "Bạn cần có quyền quản trị để xem trang này.";
                 header("Location: ../../index.php");
             }
+
+            $load_id = 0;
+            if (isset($_GET["id"])) {
+                $load_id = $_GET["id"];
+            } else {
+                $_SESSION["alertMessage"] = "Lỗi đầu vào.";
+                header("Location: ../../index.php");
+            }
+
+            $mysqli = new mysqli($hostname,$username,$password);
+            $mysqli->select_db("htdlkbtt");
+
+            $stm = $mysqli->prepare("SELECT * FROM LichLamViec WHERE ID_BacSi = ?");
+            $stm->bind_param("i",$load_id);
+
+            if (!$stm->execute()) {
+                $_SESSION["alertMessage"] = "Lỗi CSDL! $stm->error";
+                header("Location: ../../index.php");
+            }
+            $result = $stm->get_result();
+
+            $khung_gio = [];
+
+            if ($result->num_rows>0) {
+                while ($row=$result->fetch_assoc()) {
+                    $khung_gio[] = $row["ID_KhungGio"];
+                }
+            }
+
         ?>
         <link rel="stylesheet" href="../server/styles/booking_info_extra.css">
         <script src="" defer></script>
@@ -33,12 +63,13 @@
                 <div id="login_panel">
                     <h2><b>Quản lý lịch làm việc</b></h2>
                     <div>
-                        <form action="" class="main_form" id="main_form" name="main_form" method="post">
+                        <form action="../server/scripts/updateWorkTimes.php" class="main_form" id="main_form" name="main_form" method="post">
                             <label for="idtk" id="label_email">
                                 ID <p class="red_required">*</p>
                             </label>
                             <br>
-                            <input class="input_text" type="number" name="idtk" id="input_email" disabled>
+                            <input class="input_text" type="number" name="idtk" id="input_email" value="<?php echo $load_id; ?>" disabled>
+                            <input class="input_text" type="number" name="id" id="input_email" value="<?php echo $load_id; ?>" hidden>
                             <br>
 
                             <label id="label_khunggio">
@@ -47,7 +78,7 @@
                             <div class="khung_gio_list">
 
                                 <?php
-                                    require_once('../server/scripts/loadAllTimeSlots.php');
+                                    require_once('../server/norun/loadAllTimeSlots.php');
                                 ?>
 
 
