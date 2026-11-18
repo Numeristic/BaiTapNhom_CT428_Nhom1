@@ -23,9 +23,9 @@
 - manager page (No need, integrated with trangchu)
 
 - list of chuyenkhoas
-- list of khunggios
+- list of khunggios (Might not be needed?)
 - list of lichnghis
-- Adjust LichLamViec
+- Adjust LichLamViec 
 
 - lichnghiphep form
 - lichnghiphep approval form for managers
