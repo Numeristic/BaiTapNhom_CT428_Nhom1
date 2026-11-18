@@ -29,6 +29,9 @@
 
         return $check_result->num_rows>0;
     }
+    function verify_safe($mysqli) {
+        return true;
+    }
 
     function delete_ck($mysqli){
         $update_stm = $mysqli->prepare("DELETE FROM ChuyenKhoa WHERE ID = ?");
@@ -44,7 +47,7 @@
         //header("Location: ../../user/thongtinck.php?id=".$_POST["idck"]);
     }
 
-    if (verify_exist($mysqli)) {
+    if (verify_exist($mysqli) && verify_safe($mysqli)) {
         delete_ck($mysqli);
     }
 

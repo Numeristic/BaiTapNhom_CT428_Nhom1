@@ -1,3 +1,8 @@
+- updateBooking: Make it so it checks for empty schedules as well.
+- processBooking: Make it check if the doctor's available during the selected time.
+- make header template's user updates correctly.
+- write the document.
+
 - Dang Xuat (DONE)
 - Make ck in personal information page update correctly. (DONE)
 - Make delete buttons work for Booking and Accounts. (DONE)
