@@ -16,7 +16,7 @@
         <p class="feature_description">
             Thêm/sửa/xóa thông tin chuyên khoa.
         </p>
-        <button onclick="location.href = 'src/user/quanlychuyenkhoa.php'" class="feature_button">Vào</button>
+        <button onclick="location.href = 'src/user/xemdanhsachck.php'" class="feature_button">Vào</button>
     </div>
 
     <div class="feature_container">

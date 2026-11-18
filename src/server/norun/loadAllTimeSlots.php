@@ -38,10 +38,12 @@
         for ($y=0;$y<count($this_buoi);$y++) {
             $this_element = $this_buoi[$y];
             $selected = "";
-            
+            if (in_array($this_element["ID"],$khung_gio,false)) {
+                $selected = "checked";
+            }
 
-            echo "<input type=\"checkbox\" name=\"".$this_element["ID"]."\">\n";
-            echo "<label for=\"".$this_element["ID"]."\">".$this_element["Gio_BD"]."-".$this_element["Gio_KT"]."</label>\n";
+            echo "<input type=\"checkbox\" name=\"kg_".$this_element["ID"]."\" $selected>\n";
+            echo "<label for=\"kg_".$this_element["ID"]."\" >".$this_element["Gio_BD"]."-".$this_element["Gio_KT"]."</label>\n";
             echo "<br>";
         }
         echo "</div>\n";

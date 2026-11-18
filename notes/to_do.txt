@@ -1,3 +1,8 @@
+- updateBooking: Make it so it checks for empty schedules as well.
+- processBooking: Make it check if the doctor's available during the selected time.
+- make header template's user updates correctly.
+- write the document.
+
 - Dang Xuat (DONE)
 - Make ck in personal information page update correctly. (DONE)
 - Make delete buttons work for Booking and Accounts. (DONE)
@@ -22,13 +27,13 @@
 
 - manager page (No need, integrated with trangchu)
 
-- list of chuyenkhoas
-- list of khunggios (Might not be needed?)
-- list of lichnghis
-- Adjust LichLamViec 
+- list of chuyenkhoas (DONE)
+- list of khunggios (Optional?)
+- list of lichnghis  (Optional?)
+- Adjust LichLamViec (DONE)
 
-- lichnghiphep form
-- lichnghiphep approval form for managers
+- lichnghiphep form (Optional?)
+- lichnghiphep approval form for managers (Optional?)
 
 - sanitize all inputs in server/scripts and server/norun (trim and htmlspecialchar)
 - input validation on server-side.
