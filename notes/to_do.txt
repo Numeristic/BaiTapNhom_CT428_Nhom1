@@ -22,7 +22,7 @@
 
 - manager page (No need, integrated with trangchu)
 
-- list of chuyenkhoas 
+- list of chuyenkhoas (DONE)
 - list of khunggios (Optional?)
 - list of lichnghis  (Optional?)
 - Adjust LichLamViec (DONE)

@@ -35,7 +35,7 @@
             require_once("../server/scripts/alert.php");
         ?>
         <link rel="stylesheet" href="../server/styles/list_extras.css">
-        <script src="../client/scripts/danhsachkham.js" defer></script>
+        <script src="../client/scripts/danhsachck.js" defer></script>
     </head>
     <body>
         <?php
@@ -48,8 +48,8 @@
                     <h2><b>Danh sách chuyên khoa</b></h2>
                     <form id="main_form">
                         
-                        <input type="text" id="id_ck" placeholder="Nhập mã chuyên khoa..." required>
-                        <input type="text" id="ten_ck" placeholder="Nhập tên chuyên khoa..." required>
+                        <input type="text" id="input_idck" placeholder="Nhập mã chuyên khoa..." required>
+                        <input type="text" id="input_tenck" placeholder="Nhập tên chuyên khoa..." required>
 
                         <input type="submit" value="Thêm">
 
@@ -74,7 +74,7 @@
                                     <td>$stt</td>
                                     <td>$id</td>
                                     <td>$ten_ck</td>
-                                    <td><a href=\"quanlychuyenkhoa.php?id=$id\">Xem</a></td>
+                                    <td><a href=\"thongtinck.php?id=$id\">Xem</a></td>
 
                                 </tr>";
                                 echo $card;

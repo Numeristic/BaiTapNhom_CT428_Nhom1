@@ -19,6 +19,7 @@
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
 
+    $recover_stm = $mysqli->prepare("SELECT * FROM LichLamViec WHERE ID_BacSi = ?");
     $clear_stm = $mysqli->prepare("DELETE FROM LichLamViec WHERE ID_BacSi = ?");
     $all_keys = $mysqli->query("SELECT * FROM KhungGio");
     $key_list = [];
@@ -34,7 +35,13 @@
     }
 
     $clear_stm->bind_param("i",$_POST["id"]);
+    $recover_stm->bind_param("i",$_POST["id"]);
 
+    if (!$recover_stm->execute()) {
+        $_SESSION["alertMessage"] = "Lỗi CSDL! Hãy thử lại. $recover_stm->error";
+        header("Location: ../../user/quanlylichlamviec.php?id=".$_POST["id"]);
+        exit;
+    }
     if (!$clear_stm->execute()){
         $_SESSION["alertMessage"] = "Lỗi CSDL! $clear_stm->error";
         header("Location: ../../user/quanlylichlamviec.php?id=".$_POST["id"]);

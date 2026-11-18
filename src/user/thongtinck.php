@@ -20,11 +20,30 @@
     if (isset($_GET["id"])) {
         $load_id = $_GET["id"];
     } else {
-        
+        $_SESSION["alertMessage"] = "Đầu vào không hợp lệ.";
+        header("Location: ../../index.php");
+        exit;
     }
 
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
+
+    $stm = $mysqli->prepare("SELECT * FROM ChuyenKhoa WHERE ID = ?");
+    $stm->bind_param("s",$_GET["id"]);
+
+    if (!$stm->execute()) {
+        $_SESSION["alertMessage"] = "Lỗi CSDL! $stm->error";
+        header("Location: xemdanhsachck.php");
+        exit;
+    }
+
+    $result = $stm->get_result();
+    if ($result->num_rows<=0){ 
+        $_SESSION["alertMessage"] = "Không có chuyên khoa này!";
+        header("Location: xemdanhsachck.php");
+    }
+
+    $data_result = $result->fetch_assoc();
 
     /*$idtk = "";
     $hoten = "";
@@ -42,34 +61,34 @@
             include '../server/stylesheets.php';
             require_once("../server/scripts/alert.php");
         ?>
+        <link rel="stylesheet" href="../server/styles/booking_info_extra.css">
+        <script src="../client/scripts/thongtinck.js" defer></script>
     </head>
     <body>
         <?php
             include '../server/templates/header.php'
         ?>
-        <link rel="stylesheet" href="../server/styles/booking_info_extra.css">
-        <script src="../client/scripts/thongtincanhan.js" defer></script>
         <main>
             <div id="flex_div1">
                 <div class="empty"></div>
                 <div id="login_panel">
                     <h2><b>Thông tin chuyên khoa</b></h2>
                     <div>
-                        <form action="../server/scripts/login.php" class="main_form" id="main_form" name="main_form" method="post">
-                            <label for="mack" id="label_mack">
+                        <form action="../server/scripts/updateCk.php" class="main_form" id="main_form" name="main_form" method="post">
+                            <label for="ma_ck" id="label_mack">
                                 Mã chuyên khoa <p class="red_required">*</p>
                             </label>
                             <br>
-                            <input class="input_text" type="text" name="mack" id="input_email" disabled>
-                            <input class="input_text" type="hidden" name="ma_ck" id="input_email" required>
+                            <input class="input_text" type="text" name="ma_ck" id="input_mack" value="<?php echo $data_result["ID"]; ?>" disabled>
+                            <input class="input_text" type="hidden" name="idck" id="input_idck" value="<?php echo $data_result["ID"]; ?>" required>
                             <br>
 
 
-                            <label for="ten_ck" id="label_tenck">
+                            <label for="tenck" id="label_tenck">
                                 Tên chuyên khoa <p class="red_required">*</p>
                             </label>
                             <br>
-                            <input class="input_text" type="text" name="ten_ckz" id="input_tenck" required>
+                            <input class="input_text" type="text" name="tenck" id="input_tenck" value="<?php echo $data_result["TenChuyenKhoa"]; ?>" required>
                             <br>
 
 
