@@ -9,9 +9,9 @@
 
     $title =  "Bệnh nhân";
     $ck = "";
-    if (isset($_SESSION["BacSi"])) {
+    if (isset($_SESSION["BacSi"]) && $_SESSION["BacSi"]>0) {
         $title = "Bác sĩ";
-        if (isset($_SESSION["ChuyenKhoa"])) {
+        if (isset($_SESSION["ChuyenKhoa"]) && $_SESSION["ChuyenKhoa"]!="") {
             $ck_stm = $mysqli->prepare("SELECT * FROM ChuyenKhoa WHERE ID = ?");
             $ck_stm->bind_param("i",$_SESSION["ChuyenKhoa"]);
             if (!$ck_stm->execute()) {
@@ -64,7 +64,7 @@
                 echo "<div class=\"action_button\"><a href=\"dangxuat.php\">Đăng xuất</a></div>";
             } else {
                 echo "<div class=\"action_button\"><a href=\"dangnhap.php\">Đăng nhập</a></div>
-                <div class=\"action_button\"><a href=\dangky.php\">Đăng ký</a></div>";
+                <div class=\"action_button\"><a href=\"dangky.php\">Đăng ký</a></div>";
             }
 
         ?>

@@ -1,10 +1,18 @@
+<?php
+    include_once '../server/scripts/initSession.php';
+    include_once '../server/scripts/loggedInFunc.php';
+    include_once '../server/scripts/alert.php';
+
+    if (!is_logged_in($SESSION_KEYS)) {
+        $_SESSION["alertMessage"] = "Bạn phải có tài khoản để thực hiện đặt khám!";
+        header("Location: ../../index.php");
+    }
+?>
+
 <html>
     <head>
         <?php
             include_once '../server/stylesheets.php';
-            include_once '../server/scripts/initSession.php';
-            include_once '../server/scripts/alert.php';
-            include_once '../server/scripts/loggedInFunc.php';
         ?>
         <link rel="stylesheet" href="../server/styles/multistep_form_extra.css">
         <script src="../client/scripts/booking.js" defer></script>

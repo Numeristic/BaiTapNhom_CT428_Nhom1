@@ -1,6 +1,6 @@
 - updateBooking: Make it so it checks for empty schedules as well.
 - processBooking: Make it check if the doctor's available during the selected time.
-- make header template's user updates correctly.
+- make header template's user updates correctly. (DONE)
 - write the document.
 
 - Dang Xuat (DONE)

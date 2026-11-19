@@ -42,6 +42,9 @@
         header("Location: ../../user/quanlylichlamviec.php?id=".$_POST["id"]);
         exit;
     }
+    $recover_result = $recover_stm->get_result();
+
+
     if (!$clear_stm->execute()){
         $_SESSION["alertMessage"] = "Lỗi CSDL! $clear_stm->error";
         header("Location: ../../user/quanlylichlamviec.php?id=".$_POST["id"]);
