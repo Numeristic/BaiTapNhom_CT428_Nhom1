@@ -56,17 +56,31 @@
         
         $input_result = $stm->get_result();
         if ($input_result->num_rows<=0) {
-            $_SESSION["alertMessage"] = "Khung giờ này không khả dụng!";
+            $_SESSION["alertMessage"] = "Không có bác sĩ nào khả dụng ở khung giờ này! Có thể lịch làm việc vừa được cập nhật.";
             header("Location: ../../user/phieukhambenh.php?id=$maphieu");
             exit;
         }
+
+        if ($_POST["cg"]!="") {
+            $found_cg = false;
+            while ($row = $input_result->fetch_assoc()) {
+                if ($row["ID"]==(int)$_POST["cg"]) {
+                    $found_cg = true;
+                    break;
+                }
+            }
+            if (!$found_cg) {
+                $_SESSION["alertMessage"] = "Bác sĩ không khả dụng ở khung giờ này nữa. Có thể lịch làm việc vừa được cập nhật.";
+                header("Location: ../../user/phieukhambenh.php?id=$maphieu");
+                exit;
+            }
+        }
+
         return $input_result->num_rows;
     }
 
     function update_pkb($POST_KEYS,$mysqli,$limit) {
         $stm = "";
-        $check_stm = "";
-        $check2_result = "";
 
         $cg_val = $_POST["cg"];
         if ($cg_val==""){
@@ -74,20 +88,8 @@
         }
 
 
-        $check_stm = $mysqli->prepare("SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND KhungGio = ? AND NgayKham = ?;");
+        $check_stm = $mysqli->prepare("SELECT LichKham.ID, LichKham.ID_BacSi from LichKham WHERE ID_ChuyenKhoa = ? AND KhungGio = ? AND NgayKham = ?;");
         $check_stm->bind_param("sis",$_POST["ck"],$_POST["khung_gio"],$_POST["ngay_kham"]);
-
-        if ($cg_val!=null) {
-            $check2_stm = $mysqli->prepare("SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND ID_BacSi = ? AND KhungGio = ? AND NgayKham = ?;");
-            $check2_stm->bind_param("siis",$_POST["ck"],$_POST["cg"],$_POST["khung_gio"],$_POST["ngay_kham"]);
-            if (!$check2_stm->execute()) {
-                $_SESSION["alertMessage"] = "Lỗi truy vấn CSDL.\n$check2_stm->error";
-                $maphieu = $_POST["maphieu"];
-                header("Location: ../../user/phieukhambenh.php?id=$maphieu");
-                exit;
-            }
-            $check2_result = $check2_stm->get_result();
-        }
 
         if ($_SESSION["Admin"]>0 && isset($_POST["tt"])) {
             $stm = $mysqli->prepare("UPDATE LichKham
@@ -109,26 +111,21 @@
         $check_result = $check_stm->get_result();
 
         $ck_amount = $check_result->num_rows;
-        $cg_amount = 0;
 
+        $found_cg = false;
         while ($available_row = $check_result->fetch_assoc()) {
             if ($available_row["ID"]==(int)$_POST["maphieu"]) {
                 $ck_amount-=1;
                 break;
             }
-        }
-        if ($check2_result!=""){
-            $cg_amount = $check2_result->num_rows;
-            while ($available_row = $check2_result->fetch_assoc()) {
-                if ($available_row["ID"]==(int)$_POST["maphieu"]) {
-                    $cg_amount-=1;
-                    break;
-                }
+            if ($cg_val!="" && $available_row["ID_BacSi"]==(int)$cg_val) {
+                $found_cg = true;
             }
         }
-       
 
-        if ($ck_amount>=$limit || ($check2_result!="" && $cg_amount>=1)) {
+        $cg_available = !$found_cg; 
+
+        if ($ck_amount>=$limit || !$cg_available) {
             $_SESSION["alertMessage"] = "Lịch không còn trống!";
             $maphieu = $_POST["maphieu"];
             header("Location: ../../user/phieukhambenh.php?id=$maphieu");

@@ -51,8 +51,22 @@
         }
         $available_result = $available_time_stm->get_result();
         if ($available_result->num_rows<=0) {
-            $_SESSION["alertMessage"] = "Không có bác sĩ nào khả dụng ở khung giờ này! Có thể lịch khám vừa được cập nhật.";
+            $_SESSION["alertMessage"] = "Không có bác sĩ nào khả dụng ở khung giờ này! Có thể lịch làm việc vừa được cập nhật.";
             return false;
+        }
+
+        
+        if ($_POST["loai_hinh"]=="cg") {
+            $found_cg = false;
+            while ($row = $available_result->fetch_assoc()) {
+                if ($row["ID"] == $_POST["cg"]) {
+                    $found_cg = true;
+                } 
+            }
+            if (!$found_cg) {
+                $_SESSION["alertMessage"] = "Bác sĩ không khả dụng ở khung giờ này nữa. Có thể lịch làm việc vừa được cập nhật.";
+                return false;
+            }
         }
 
         return $available_result->num_rows;
@@ -60,25 +74,10 @@
 
     function processBooking($POST_KEYS,$mysqli,$limit) {
         $stm = "";
-        $check2_result = "";
 
-
-        $check_query = "SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND KhungGio = ? AND NgayKham = ?;";
+        $check_query = "SELECT LichKham.ID, LichKham.ID_BacSi from LichKham WHERE ID_ChuyenKhoa = ? AND KhungGio = ? AND NgayKham = ?;";
         $stm = $mysqli->prepare($check_query);
         $stm->bind_param("sis",$_POST["ck"],$_POST["khung_gio"],$_POST["ngay_kham"]);
-
-        if ($_POST["loai_hinh"]=="cg") {
-            $check_query2 = "SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND ID_BacSi = ? AND KhungGio = ? AND NgayKham = ?;";
-
-            $cg_stm = $mysqli->prepare($check_query2);
-            $cg_stm->bind_param("siis",$_POST["ck"],$_POST["cg"],$_POST["khung_gio"],$_POST["ngay_kham"]);
-            if (!$cg_stm->execute()) { 
-                $_SESSION["alertError"] = "Lỗi CSDL! $cg_stm->error";
-                header("Location: ../../user/datlichkham.php?");
-                exit;
-            }
-            $check2_result = $cg_stm->get_result();
-        }
 
         if ($stm->execute()) {
 
@@ -88,8 +87,19 @@
             //-> Không tạo lịch khám vì lịch không còn trống.
 
             //Có dấu bằng vì tạo lịch sẽ thêm một phiếu mới.
-            
-            if ($check_result->num_rows>=$limit || ($check2_result!="" && $check2_result->num_rows >= 1)) {
+            $cg_available = true;
+            if ($_POST["loai_hinh"]=="cg") {
+                $found_cg = false;
+                while ($row = $check_result->fetch_assoc()) {
+                    if ($row["ID_BacSi"]==$_POST["cg"]) {
+                        $found_cg = true;
+                        break;
+                    }
+                }
+                $cg_available = !$found_cg;
+            }
+
+            if ($check_result->num_rows>=$limit || !$cg_available) {
                 $_SESSION["alertMessage"] = "Lịch không còn trống!";
                 header("Location: ../../user/datlichkham.php?");
                 exit;
