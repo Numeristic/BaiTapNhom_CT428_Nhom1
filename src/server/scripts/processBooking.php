@@ -1,5 +1,6 @@
 <?php
     require("sqlCredentials.php");
+    require("loggedInFunc.php");
     require("initSession.php");
 
     $mysqli = new mysqli($hostname,$username,$password);
@@ -19,6 +20,12 @@
         "ngay_kham",
         "khung_gio"
     ];
+
+    if (!logged_in_func($SESSION_KEYS)) {
+        $_SESSION["alertMessage"] = "Bạn cần phải đăng nhập để sử dụng chức năng này!";
+        header("Location: ../../../index.php");
+        exit;
+    }
     
     function validateBooking($POST_KEYS,$mysqli){
 

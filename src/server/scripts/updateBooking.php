@@ -116,7 +116,7 @@
         while ($available_row = $check_result->fetch_assoc()) {
             if ($available_row["ID"]==(int)$_POST["maphieu"]) {
                 $ck_amount-=1;
-                break;
+                continue;
             }
             if ($cg_val!="" && $available_row["ID_BacSi"]==(int)$cg_val) {
                 $found_cg = true;
