@@ -37,19 +37,10 @@
             }
         }
 
-        //Mặc định cho lịch khám hình thức theo chuyên khoa.
         $query = "SELECT BacSi.ID FROM BacSi,KhungGio,LichLamViec 
         WHERE KhungGio.ID = ? AND BacSi.ID_ChuyenKhoa = ? AND BacSi.ID = LichLamViec.ID_BacSi AND KhungGio.ID = LichLamViec.ID_KhungGio";
         $params = "is";
         $arguments = [$_POST["khung_gio"],$_POST["ck"]];
-        
-        //Nếu có chuyên gia, thì điều chỉnh lại.
-        if ($_POST["loai_hinh"]=="cg") {
-            $query = "SELECT BacSi.ID FROM BacSi,KhungGio,LichLamViec 
-            WHERE KhungGio.ID = ? AND BacSi.ID = ? AND BacSi.ID_ChuyenKhoa = ? AND BacSi.ID = LichLamViec.ID_BacSi AND KhungGio.ID = LichLamViec.ID_KhungGio";
-            $params = "iis";
-            $arguments = [$_POST["khung_gio"],$_POST["cg"],$_POST["ck"]];
-        }
 
         $available_time_stm = $mysqli->prepare($query);
         $available_time_stm->bind_param($params,...$arguments);
@@ -64,35 +55,31 @@
             return false;
         }
 
-        //Lúc này, số lượng hàng được trả về là số lượng bác sĩ
-        //có lịch làm việc tại thời điểm hẹn lịch khám.
-        
-        //Để hiệu quả, thay vì trả về true. Ta trả về số lượng
-        //bác sĩ có lịch làm việc tại thời điểm đó để có thể sử
-        //dụng trong hàm processBooking().
         return $available_result->num_rows;
     }
 
     function processBooking($POST_KEYS,$mysqli,$limit) {
-        $check_query = "";
-        
         $stm = "";
+        $check2_result = "";
 
 
-        if ($_POST["loai_hinh"]=="ck") {
-            $check_query = "SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND KhungGio = ? AND NgayKham = ?;";
-            $stm = $mysqli->prepare($check_query);
-            $stm->bind_param("sis",$_POST["ck"],$_POST["khung_gio"],$_POST["ngay_kham"]);
+        $check_query = "SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND KhungGio = ? AND NgayKham = ?;";
+        $stm = $mysqli->prepare($check_query);
+        $stm->bind_param("sis",$_POST["ck"],$_POST["khung_gio"],$_POST["ngay_kham"]);
 
-            //Nếu là khám chuyên khoa thì số lượng lịch khám không được quá số lượng bác sĩ của khoa đó.
-            //(Trong bài này, ta cho rằng mỗi bác sĩ xử lý được 1 lịch khám đặt trước mỗi khung giờ)
+        if ($_POST["loai_hinh"]=="cg") {
+            $check_query2 = "SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND ID_BacSi = ? AND KhungGio = ? AND NgayKham = ?;";
 
-        } elseif ($_POST["loai_hinh"]=="cg") {
-            $check_query = "SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND ID_BacSi = ? AND KhungGio = ? AND NgayKham = ?;";
-
-            $stm = $mysqli->prepare($check_query);
-            $stm->bind_param("siis",$_POST["ck"],$_POST["cg"],$_POST["khung_gio"],$_POST["ngay_kham"]);
+            $cg_stm = $mysqli->prepare($check_query2);
+            $cg_stm->bind_param("siis",$_POST["ck"],$_POST["cg"],$_POST["khung_gio"],$_POST["ngay_kham"]);
+            if (!$cg_stm->execute()) { 
+                $_SESSION["alertError"] = "Lỗi CSDL! $cg_stm->error";
+                header("Location: ../../user/datlichkham.php?");
+                exit;
+            }
+            $check2_result = $cg_stm->get_result();
         }
+
         if ($stm->execute()) {
 
             $check_result = $stm->get_result();
@@ -101,7 +88,8 @@
             //-> Không tạo lịch khám vì lịch không còn trống.
 
             //Có dấu bằng vì tạo lịch sẽ thêm một phiếu mới.
-            if ($check_result->num_rows>=$limit){
+            
+            if ($check_result->num_rows>=$limit || ($check2_result!="" && $check2_result->num_rows >= 1)) {
                 $_SESSION["alertMessage"] = "Lịch không còn trống!";
                 header("Location: ../../user/datlichkham.php?");
                 exit;
@@ -121,15 +109,18 @@
             $stm2->bind_param("iisiiss",$id_cg,$id_bn,$_POST["ck"],$id_trangthai,$_POST["khung_gio"],$_POST["ly_do_kham"],$_POST["ngay_kham"]);
             if ($stm2->execute()) {
                 //Đặt lịch khám thành công.
-                $_SESSION["alertMessage"] = "Đặt lịch khám thành công!";
+                $_SESSION["alertMessage"] = "Đặt lịch khám thành công! $check_result->num_rows AND $limit";
                 header("Location: ../../user/phieukhambenh.php?id=$stm2->insert_id");
             } else {
-                die("Error while inserting data: $stm2->error");
+                $_SESSION["alertMessage"] = "Lỗi CSDL! $stm2->error";
+                header("Location: ../../user/datlichkham.php");
+                exit;
             }
 
         } else {
 
-            die("Error: $stm->error");
+            $_SESSION["alertMessage"] = "Lỗi CSDL! $stm->error";
+            header("Location: ../../user/datlichkham.php");
             exit;
 
         }
@@ -137,7 +128,7 @@
 
     $limit = validateBooking($POST_KEYS,$mysqli);
     if ($limit!=false) {
-        $query_result = processBooking($POST_KEYS,$limit);
+        $query_result = processBooking($POST_KEYS,$mysqli,$limit);
     } else {
         header("Location: ../../user/datlichkham.php?");
     }

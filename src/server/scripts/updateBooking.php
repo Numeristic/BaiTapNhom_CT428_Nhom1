@@ -41,19 +41,12 @@
     
     function verify_inputs($mysqli){
         $stm = "";
-        if ($_POST["cg"]!="") {
-            $query = "SELECT LichLamViec.ID_KhungGio
-            FROM ChuyenKhoa,BacSi,LichLamViec 
-            WHERE BacSi.ID = ? AND BacSi.ID_ChuyenKhoa = ChuyenKhoa.ID AND ChuyenKhoa.ID = ? AND BacSi.ID = LichLamViec.ID_BacSi AND LichLamViec.ID_KhungGio = ?;";
-            $stm = $mysqli->prepare($query);
-            $stm->bind_param("isi",$_POST["cg"],$_POST["ck"],$_POST["khung_gio"]);
-        } else {
-            $query = "SELECT DISTINCT LichLamViec.ID_KhungGio
-            FROM ChuyenKhoa,BacSi,LichLamViec 
-            WHERE BacSi.ID_ChuyenKhoa = ChuyenKhoa.ID AND ChuyenKhoa.ID = ? AND BacSi.ID = LichLamViec.ID_BacSi AND LichLamViec.ID_KhungGio = ?;";
-            $stm = $mysqli->prepare($query);
-            $stm->bind_param("si",$_POST["ck"],$_POST["khung_gio"]);
-        }
+
+        $query = "SELECT DISTINCT BacSi.ID
+        FROM ChuyenKhoa,BacSi,LichLamViec 
+        WHERE BacSi.ID_ChuyenKhoa = ChuyenKhoa.ID AND ChuyenKhoa.ID = ? AND BacSi.ID = LichLamViec.ID_BacSi AND LichLamViec.ID_KhungGio = ?;";
+        $stm = $mysqli->prepare($query);
+        $stm->bind_param("si",$_POST["ck"],$_POST["khung_gio"]);
        
         if (!$stm->execute()) {
             $_SESSION["alertMessage"] = "Lỗi CSDL! $stm->error";
@@ -73,19 +66,27 @@
     function update_pkb($POST_KEYS,$mysqli,$limit) {
         $stm = "";
         $check_stm = "";
+        $check2_result = "";
 
         $cg_val = $_POST["cg"];
         if ($cg_val==""){
             $cg_val = null;
         }
 
-        $limit = 0;
+
+        $check_stm = $mysqli->prepare("SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND KhungGio = ? AND NgayKham = ?;");
+        $check_stm->bind_param("sis",$_POST["ck"],$_POST["khung_gio"],$_POST["ngay_kham"]);
+
         if ($cg_val!=null) {
-            $check_stm = $mysqli->prepare("SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND ID_BacSi = ? AND KhungGio = ? AND NgayKham = ?;");
-            $check_stm->bind_param("siis",$_POST["ck"],$_POST["cg"],$_POST["khung_gio"],$_POST["ngay_kham"]);
-        } else {
-            $check_stm = $mysqli->prepare("SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND KhungGio = ? AND NgayKham = ?;");
-            $check_stm->bind_param("sis",$_POST["ck"],$_POST["khung_gio"],$_POST["ngay_kham"]);
+            $check2_stm = $mysqli->prepare("SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND ID_BacSi = ? AND KhungGio = ? AND NgayKham = ?;");
+            $check2_stm->bind_param("siis",$_POST["ck"],$_POST["cg"],$_POST["khung_gio"],$_POST["ngay_kham"]);
+            if (!$check2_stm->execute()) {
+                $_SESSION["alertMessage"] = "Lỗi truy vấn CSDL.\n$check2_stm->error";
+                $maphieu = $_POST["maphieu"];
+                header("Location: ../../user/phieukhambenh.php?id=$maphieu");
+                exit;
+            }
+            $check2_result = $check2_stm->get_result();
         }
 
         if ($_SESSION["Admin"]>0 && isset($_POST["tt"])) {
@@ -106,16 +107,28 @@
             exit;
         }
         $check_result = $check_stm->get_result();
-        $real_amount = $check_result->num_rows;
+
+        $ck_amount = $check_result->num_rows;
+        $cg_amount = 0;
 
         while ($available_row = $check_result->fetch_assoc()) {
             if ($available_row["ID"]==(int)$_POST["maphieu"]) {
-                $real_amount-=1;
+                $ck_amount-=1;
                 break;
             }
         }
+        if ($check2_result!=""){
+            $cg_amount = $check2_result->num_rows;
+            while ($available_row = $check2_result->fetch_assoc()) {
+                if ($available_row["ID"]==(int)$_POST["maphieu"]) {
+                    $cg_amount-=1;
+                    break;
+                }
+            }
+        }
+       
 
-        if ($real_amount>=$limit) {
+        if ($ck_amount>=$limit || ($check2_result!="" && $cg_amount>=1)) {
             $_SESSION["alertMessage"] = "Lịch không còn trống!";
             $maphieu = $_POST["maphieu"];
             header("Location: ../../user/phieukhambenh.php?id=$maphieu");
