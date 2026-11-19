@@ -1,5 +1,7 @@
 - updateBooking: Make it so it checks for empty schedules as well.
-- processBooking: Make it check if the doctor's available during the selected time.
+- updateWorkTime: If the update query fails, use the $recover_stm statement result to rollback
+initial working schedule.
+- processBooking: Make it check if the doctor's available during the selected time. (DONE)
 - make header template's user updates correctly. (DONE)
 - write the document.
 
