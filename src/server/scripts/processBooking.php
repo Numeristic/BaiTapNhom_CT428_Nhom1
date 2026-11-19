@@ -73,7 +73,6 @@
         $stm = "";
         if ($_POST["loai_hinh"]=="ck") {
             $check_query = "SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND KhungGio = ? AND NgayKham = ?;";
-
             $stm = $mysqli->prepare($check_query);
             $stm->bind_param("sis",$_POST["ck"],$_POST["khung_gio"],$_POST["ngay_kham"]);
         } elseif ($_POST["loai_hinh"]=="cg") {

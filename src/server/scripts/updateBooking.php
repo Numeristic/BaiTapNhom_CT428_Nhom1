@@ -70,11 +70,21 @@
 
     function update_pkb($POST_KEYS,$mysqli) {
         $stm = "";
+        $check_stm = "";
 
         $cg_val = $_POST["cg"];
         if ($cg_val==""){
             $cg_val = null;
         }
+
+        if ($cg_val!=null) {
+            $check_stm = $mysqli->prepare("SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND ID_BacSi = ? AND KhungGio = ? AND NgayKham = ?;");
+            $check_stm->bind_param("siis",$_POST["ck"],$_POST["cg"],$_POST["khung_gio"],$_POST["ngay_kham"]);
+        } else {
+            $check_stm = $mysqli->prepare("SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND KhungGio = ? AND NgayKham = ?;");
+            $check_stm->bind_param("sis",$_POST["ck"],$_POST["khung_gio"],$_POST["ngay_kham"]);
+        }
+
         if ($_SESSION["Admin"]>0 && isset($_POST["tt"])) {
             $stm = $mysqli->prepare("UPDATE LichKham
             SET KhungGio = ?, NgayKham = ?, LyDoKham = ?, ID_TrangThai = ?, ID_BacSi = ?, ID_ChuyenKhoa = ?
@@ -86,6 +96,13 @@
             WHERE ID = ?");
             $stm->bind_param("issisi",$_POST["khung_gio"],$_POST["ngay_kham"],$_POST["lydokham"],$cg_val,$_POST["ck"],$_POST["maphieu"]);
         }
+
+        if (!$check_stm->execute()) {
+            $_SESSION["alertMessage"] = "Lỗi truy vấn CSDL.\n$stm->error";
+            header("Location: ../../user/phieukhambenh.php?id=$maphieu");
+            exit;
+        }
+        
 
         if ($stm->execute()) {
             $_SESSION["alertMessage"] = "Cập nhật thành công.";
