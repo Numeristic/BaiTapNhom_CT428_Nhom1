@@ -67,15 +67,15 @@
                     </form>
                     <table>
                         <tr>
-                            <td>STT</td>
-                            <td>Mã tài khoản</td>
-                            <td>Họ tên</td>
-                            <td>Số CCCD</td>
-                            <td>Số ĐT</td>
-                            <td>Chuyên khoa</td>
-                            <td>Thông tin cá nhân</td>
-                            <td>Lịch sử khám</td>
-                            <td>Lịch làm việc</td>
+                            <td class="list_title">STT</td>
+                            <td class="list_title">Mã tài khoản</td>
+                            <td class="list_title">Họ tên</td>
+                            <td class="list_title">Số CCCD</td>
+                            <td class="list_title">Số ĐT</td>
+                            <td class="list_title">Chuyên khoa</td>
+                            <td class="list_title">Thông tin cá nhân</td>
+                            <td class="list_title">Lịch sử khám</td>
+                            <td class="list_title">Lịch làm việc</td>
                         </tr>
                         <?php
 

@@ -66,13 +66,13 @@
                     </form>
                     <table>
                         <tr>
-                            <td>STT</td>
-                            <td>Mã tài khoản</td>
-                            <td>Họ tên</td>
-                            <td>Số CCCD</td>
-                            <td>Số ĐT</td>
-                            <td>Thông tin cá nhân</td>
-                            <td>Lịch sử khám</td>
+                            <td class="list_title">STT</td>
+                            <td class="list_title">Mã tài khoản</td>
+                            <td class="list_title">Họ tên</td>
+                            <td class="list_title">Số CCCD</td>
+                            <td class="list_title">Số ĐT</td>
+                            <td class="list_title">Thông tin cá nhân</td>
+                            <td class="list_title">Lịch sử khám</td>
                         </tr>
                         <?php
 
@@ -87,13 +87,13 @@
 
                                 $card = "<tr class=\"lichkham_card\">
 
-                                    <td>$stt</td>
+                                    <td class=\"card_stt\">$stt</td>
                                     <td>$id</td>
                                     <td>$ht_bs</td>
                                     <td>$so_cccd</td>
                                     <td>$so_dt</td>
-                                    <td><a href=\"thongtincanhan.php?id=$id\">Xem</a></td>
-                                    <td><a href=\"xemyeucaukham.php?id=$id\">Xem</a></td>
+                                    <td class=\"card_link\"><a href=\"thongtincanhan.php?id=$id\">Xem</a></td>
+                                    <td class=\"card_link\"><a href=\"xemyeucaukham.php?id=$id\">Xem</a></td>
                                 </tr>";
                                 echo $card;
                             }

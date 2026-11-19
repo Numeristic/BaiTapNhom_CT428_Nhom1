@@ -56,10 +56,10 @@
                     </form>
                     <table>
                         <tr>
-                            <td>STT</td>
-                            <td>Mã chuyên khoa</td>
-                            <td>Tên chuyên khoa</td>
-                            <td>Chỉnh sửa</td>
+                            <td class="list_title">STT</td>
+                            <td class="list_title">Mã chuyên khoa</td>
+                            <td class="list_title">Tên chuyên khoa</td>
+                            <td class="list_title">Chỉnh sửa</td>
                         </tr>
                         <?php
 
