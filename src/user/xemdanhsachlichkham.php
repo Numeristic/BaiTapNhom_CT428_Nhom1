@@ -87,15 +87,15 @@
                     </form>
                     <table>
                         <tr>
-                            <td>STT</td>
-                            <td>Mã phiếu</td>
-                            <td>Lập bởi</td>
-                            <td>Chuyên khoa</td>
-                            <td>Chuyên gia</td>
-                            <td>Ngày khám</td>
-                            <td>Lý do</td>
-                            <td>Trạng thái</td>
-                            <td>Tùy chọn</td>
+                            <td class="list_title">STT</td>
+                            <td class="list_title">Mã phiếu</td>
+                            <td class="list_title">Lập bởi</td>
+                            <td class="list_title">Chuyên khoa</td>
+                            <td class="list_title">Chuyên gia</td>
+                            <td class="list_title">Ngày khám</td>
+                            <td class="list_title">Lý do</td>
+                            <td class="list_title">Trạng thái</td>
+                            <td class="list_title">Tùy chọn</td>
                         </tr>
                         <?php
 
