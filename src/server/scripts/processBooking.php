@@ -37,11 +37,13 @@
             }
         }
 
+        //Mặc định cho lịch khám hình thức theo chuyên khoa.
         $query = "SELECT BacSi.ID FROM BacSi,KhungGio,LichLamViec 
         WHERE KhungGio.ID = ? AND BacSi.ID_ChuyenKhoa = ? AND BacSi.ID = LichLamViec.ID_BacSi AND KhungGio.ID = LichLamViec.ID_KhungGio";
         $params = "is";
         $arguments = [$_POST["khung_gio"],$_POST["ck"]];
         
+        //Nếu có chuyên gia, thì điều chỉnh lại.
         if ($_POST["loai_hinh"]=="cg") {
             $query = "SELECT BacSi.ID FROM BacSi,KhungGio,LichLamViec 
             WHERE KhungGio.ID = ? AND BacSi.ID = ? AND BacSi.ID_ChuyenKhoa = ? AND BacSi.ID = LichLamViec.ID_BacSi AND KhungGio.ID = LichLamViec.ID_KhungGio";
@@ -62,19 +64,29 @@
             return false;
         }
 
-        return true;
+        //Lúc này, số lượng hàng được trả về là số lượng bác sĩ
+        //có lịch làm việc tại thời điểm hẹn lịch khám.
         
+        //Để hiệu quả, thay vì trả về true. Ta trả về số lượng
+        //bác sĩ có lịch làm việc tại thời điểm đó để có thể sử
+        //dụng trong hàm processBooking().
+        return $available_result->num_rows;
     }
 
-    //Unrelated Idea: Lịch khám liên quan tới bác sĩ trên giao diện BS.
-    function processBooking($POST_KEYS,$mysqli) {
+    function processBooking($POST_KEYS,$mysqli,$limit) {
         $check_query = "";
         
         $stm = "";
+
+
         if ($_POST["loai_hinh"]=="ck") {
             $check_query = "SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND KhungGio = ? AND NgayKham = ?;";
             $stm = $mysqli->prepare($check_query);
             $stm->bind_param("sis",$_POST["ck"],$_POST["khung_gio"],$_POST["ngay_kham"]);
+
+            //Nếu là khám chuyên khoa thì số lượng lịch khám không được quá số lượng bác sĩ của khoa đó.
+            //(Trong bài này, ta cho rằng mỗi bác sĩ xử lý được 1 lịch khám đặt trước mỗi khung giờ)
+
         } elseif ($_POST["loai_hinh"]=="cg") {
             $check_query = "SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND ID_BacSi = ? AND KhungGio = ? AND NgayKham = ?;";
 
@@ -85,9 +97,11 @@
 
             $check_result = $stm->get_result();
 
-            if ($check_result->num_rows>0){
-                /*echo "Lich khong con trong.";
-                return [false,"Lịch không còn trống!"];*/
+            //Nếu số lượng lịch khám trong thời điểm đó vượt quá giới hạn đã được tính
+            //-> Không tạo lịch khám vì lịch không còn trống.
+
+            //Có dấu bằng vì tạo lịch sẽ thêm một phiếu mới.
+            if ($check_result->num_rows>=$limit){
                 $_SESSION["alertMessage"] = "Lịch không còn trống!";
                 header("Location: ../../user/datlichkham.php?");
                 exit;
@@ -120,8 +134,10 @@
 
         }
     }
-    if (validateBooking($POST_KEYS,$mysqli)) {
-        $query_result = processBooking($POST_KEYS,$mysqli);
+
+    $limit = validateBooking($POST_KEYS,$mysqli);
+    if ($limit!=false) {
+        $query_result = processBooking($POST_KEYS,$limit);
     } else {
         header("Location: ../../user/datlichkham.php?");
     }

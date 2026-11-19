@@ -60,15 +60,17 @@
             header("Location: ../../user/phieukhambenh.php?id=$maphieu");
             exit;
         }
+        
         $input_result = $stm->get_result();
-
         if ($input_result->num_rows<=0) {
-            return false;
+            $_SESSION["alertMessage"] = "Khung giờ này không khả dụng!";
+            header("Location: ../../user/phieukhambenh.php?id=$maphieu");
+            exit;
         }
-        return true;
+        return $input_result->num_rows;
     }
 
-    function update_pkb($POST_KEYS,$mysqli) {
+    function update_pkb($POST_KEYS,$mysqli,$limit) {
         $stm = "";
         $check_stm = "";
 
@@ -77,6 +79,7 @@
             $cg_val = null;
         }
 
+        $limit = 0;
         if ($cg_val!=null) {
             $check_stm = $mysqli->prepare("SELECT LichKham.ID from LichKham WHERE ID_ChuyenKhoa = ? AND ID_BacSi = ? AND KhungGio = ? AND NgayKham = ?;");
             $check_stm->bind_param("siis",$_POST["ck"],$_POST["cg"],$_POST["khung_gio"],$_POST["ngay_kham"]);
@@ -102,7 +105,22 @@
             header("Location: ../../user/phieukhambenh.php?id=$maphieu");
             exit;
         }
-        
+        $check_result = $check_stm->get_result();
+        $real_amount = $check_result->num_rows;
+
+        while ($available_row = $check_result->fetch_assoc()) {
+            if ($available_row["ID"]==(int)$_POST["maphieu"]) {
+                $real_amount-=1;
+                break;
+            }
+        }
+
+        if ($real_amount>=$limit) {
+            $_SESSION["alertMessage"] = "Lịch không còn trống!";
+            $maphieu = $_POST["maphieu"];
+            header("Location: ../../user/phieukhambenh.php?id=$maphieu");
+            exit;
+        }
 
         if ($stm->execute()) {
             $_SESSION["alertMessage"] = "Cập nhật thành công.";
@@ -120,8 +138,8 @@
     $verified = verify_user_has_access($POST_KEYS,$mysqli);
     $input_verified = verify_inputs($mysqli);
 
-    if ($has_all_keys && $logged_in && $verified && $input_verified) {
-        update_pkb($POST_KEYS,$mysqli);
+    if ($has_all_keys && $logged_in && $verified && $input_verified!=false) {
+        update_pkb($POST_KEYS,$mysqli,$input_verified);
     } else {
         
         $error_msg = "Đã gặp các lỗi:";
