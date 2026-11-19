@@ -18,7 +18,7 @@
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
 
-    $list_query = $mysqli->query("SELECT ThongTinTaiKhoan.ID, ThongTinTaiKhoan.HoTen, ThongTinTaiKhoan.SoCCCD, ThongTinTaiKhoan.SoDT, COUNT(BacSi.ID) AS LaBacSi
+    $list_query = $mysqli->query("SELECT ThongTinTaiKhoan.ID, ThongTinTaiKhoan.HoTen, ThongTinTaiKhoan.SoCCCD, ThongTinTaiKhoan.SoDT, BacSi.ID as ID_BacSi
     FROM ThongTinTaiKhoan
     LEFT JOIN BacSi ON ThongTinTaiKhoan.ID = BacSi.ID;");
 
@@ -30,7 +30,7 @@
     }
 
     while ($row = $list_query->fetch_assoc()) {
-        if ($row["LaBacSi"]>0) {
+        if ($row["ID_BacSi"]!=null && $row["ID_BacSi"]>0) {
             continue;
         }
         $thongtin_benhnhan[] = $row;
