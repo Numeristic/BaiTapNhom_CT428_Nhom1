@@ -13,7 +13,7 @@
         $title = "Bác sĩ";
         if (isset($_SESSION["ChuyenKhoa"]) && $_SESSION["ChuyenKhoa"]!="") {
             $ck_stm = $mysqli->prepare("SELECT * FROM ChuyenKhoa WHERE ID = ?");
-            $ck_stm->bind_param("i",$_SESSION["ChuyenKhoa"]);
+            $ck_stm->bind_param("s",$_SESSION["ChuyenKhoa"]);
             if (!$ck_stm->execute()) {
                 alert("Đã lỗi khi load chuyên khoa cá nhân.\n\n$ck_stm->error");
             }
