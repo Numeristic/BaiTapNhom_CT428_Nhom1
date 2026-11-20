@@ -2,6 +2,7 @@ let danh_sach = document.getElementsByClassName("lichkham_card");
 
 const form = document.getElementById("main_form");
 const ck = document.getElementById('ck');
+const ten_bs = document.getElementById('ten_bs');
 
 const init_ck_inner = ck.innerHTML;
 
@@ -19,7 +20,13 @@ function loadCk() {
 }
 loadCk();
 
-function applyFilter(chuyenkhoa) {
+function removeAccents(str) {
+  return str.normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/đ/g, 'd').replace(/Đ/g, 'D');
+}
+
+function applyFilter(chuyenkhoa,ten) {
 
     for (let x=0;x<danh_sach.length;x++) {
         var this_element = danh_sach[x];
@@ -28,6 +35,12 @@ function applyFilter(chuyenkhoa) {
 
         if (chuyenkhoa!=null) {
             if (childs[6].innerHTML!=chuyenkhoa) {
+                pass = false;
+            }
+        }
+        if (ten!=null) {
+            let text = removeAccents(childs[2].innerHTML.toLowerCase());
+            if (!text.includes(removeAccents(ten.toLowerCase()))) {
                 pass = false;
             }
         }
@@ -49,5 +62,5 @@ function sanitize(value) {
 }
 form.addEventListener("submit",function(event){
     event.preventDefault();
-    applyFilter(sanitize(ck.value));
+    applyFilter(sanitize(ck.value),sanitize(ten_bs.value));
 });

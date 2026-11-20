@@ -44,7 +44,7 @@
             require_once("../server/scripts/alert.php");
         ?>
         <link rel="stylesheet" href="../server/styles/list_extras.css">
-        <!--<script src="../client/scripts/danhsachbacsi.js" defer></script>-->
+        <script src="../client/scripts/danhsachbenhnhan.js" defer></script>
     </head>
     <body>
         <?php
