@@ -21,7 +21,7 @@
         "khung_gio"
     ];
 
-    if (!logged_in_func($SESSION_KEYS)) {
+    if (!is_logged_in($SESSION_KEYS)) {
         $_SESSION["alertMessage"] = "Bạn cần phải đăng nhập để sử dụng chức năng này!";
         header("Location: ../../../index.php");
         exit;
@@ -126,7 +126,7 @@
             $stm2->bind_param("iisiiss",$id_cg,$id_bn,$_POST["ck"],$id_trangthai,$_POST["khung_gio"],$_POST["ly_do_kham"],$_POST["ngay_kham"]);
             if ($stm2->execute()) {
                 //Đặt lịch khám thành công.
-                $_SESSION["alertMessage"] = "Đặt lịch khám thành công! $check_result->num_rows AND $limit";
+                $_SESSION["alertMessage"] = "Đặt lịch khám thành công!";
                 header("Location: ../../user/phieukhambenh.php?id=$stm2->insert_id");
             } else {
                 $_SESSION["alertMessage"] = "Lỗi CSDL! $stm2->error";
