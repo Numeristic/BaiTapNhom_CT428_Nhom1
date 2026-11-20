@@ -45,7 +45,7 @@
         $check_stm->bind_param("i",$_POST["idtk"]);
         if (!$check_stm->execute()) {
             $_SESSION["alertMessage"] = "Lỗi truy vấn! $check_stm->error";
-            header("Location: $home_url?ck=".$_POST["idtk"]);
+            header("Location: $home_url?id=".$_POST["idtk"]);
             exit;
         }
         $check_result = $check_stm->get_result();
@@ -58,7 +58,7 @@
         $success = $stm->execute();
         if (!$success) {
             $_SESSION["alertMessage"] = "Lỗi thao tác CSDL! $stm->error";
-            header("Location: $home_url?ck=".$_POST["idtk"]);
+            header("Location: $home_url?id=".$_POST["idtk"]);
             exit;
         }
 
@@ -78,7 +78,7 @@
                 if ($has_bs) {
                     if (!isset($_POST['ck']) || $_POST['ck']=="") {
                         $_SESSION['alertMessage'] = "Chuyên khoa không thể để trống!";
-                        header("Location: $home_url?ck=".$_POST["idtk"]);
+                        header("Location: $home_url?id=".$_POST["idtk"]);
                         exit;
                     }
                     $query = "INSERT INTO BacSi(ID,ID_ChuyenKhoa) VALUES (?,?)";
@@ -95,7 +95,7 @@
             } elseif ($check_row['LaBacSi']>0) {
                 if (!isset($_POST['ck']) || $_POST['ck']=="") {
                     $_SESSION['alertMessage'] = "Chuyên khoa không thể để trống!";
-                    header("Location: $home_url?ck=".$_POST["idtk"]);
+                    header("Location: $home_url?id=".$_POST["idtk"]);
                     exit;
                 }
                 $query = "UPDATE BacSi SET ID_ChuyenKhoa = ? WHERE BacSi.ID = ?";
@@ -129,7 +129,7 @@
         echo $_POST["hoten"]."\n";
         echo $_POST["socccd"]."\n";
         echo $_POST["ngaysinh"]."\n";
-        header("Location: $home_url?ck=".$_POST["idtk"]);
+        header("Location: $home_url?id=".$_POST["idtk"]);
     }
 
     $valid = validate($POST_KEYS);
@@ -138,6 +138,19 @@
 
     if ($valid && $logged_in && $verified) {
         update_personal_info($mysqli,$home_url);
+    } else {
+        if (!$valid) {
+            $_SESSION['alertMessage'] = "Đầu vào không hợp lệ!";
+            header("Location: $home_url");
+        } 
+        if (!$logged_in) {
+            $_SESSION['alertMessage'] = "Bạn phải có tài khoản để thực hiện tác vụ này";
+            header("Location: $home_url?id=".$_POST["idtk"]);
+        }
+        if (!$verified){
+            $_SESSION['alertMessage'] = "Bạn không có quyền thực hiện thao tác này.";
+            header("Location: $home_url?id=".$_POST["idtk"]);
+        }
     }
 
 ?>

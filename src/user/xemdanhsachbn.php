@@ -57,10 +57,7 @@
                     <h2><b>Danh sách tài khoản bệnh nhân</b></h2>
                     <form id="main_form">
 
-                        <select id="ck">
-                            <option value="">Chọn chuyên khoa</option>
-                        </select>
-
+                        <input type="text" id="ten_bn" placeholder="Nhập tên...">
                         <input type="submit" value="Lọc">
 
                     </form>
