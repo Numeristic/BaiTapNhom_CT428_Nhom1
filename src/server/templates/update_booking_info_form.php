@@ -79,7 +79,7 @@
 
         <?php 
         
-        if ($_SESSION["Admin"]>0) {
+        if ($_SESSION["Admin"]>0 || $_SESSION["ID_TaiKhoan"]==$data_result["ID_BenhNhan"]) {
             echo '<div id="return_button3" class="form_delete_container"><button id="delete_button" type="button" class="delete_button">Xóa lịch khám</button></div>';
         }
 

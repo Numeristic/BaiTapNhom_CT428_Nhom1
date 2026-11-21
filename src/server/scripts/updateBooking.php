@@ -27,14 +27,21 @@
     }
 
     function verify_user_has_access($POST_KEYS,$mysqli){
-        $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID, LichKham.ID_BenhNhan, LichKham.ID_BacSi FROM LichKham,BacSi 
+        $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID, LichKham.ID_BenhNhan, LichKham.ID_BacSi, LichKham.ID_TrangThai FROM LichKham,BacSi 
         WHERE (LichKham.ID = ?) 
         AND ((LichKham.ID_BenhNhan = ?) OR ((LichKham.ID_BacSi = ? AND LichKham.ID_BacSi = BacSi.ID) OR (LichKham.ID_BacSi IS NULL AND LichKham.ID_ChuyenKhoa = ?)));");
         $stm->bind_param("iiis",$_POST["maphieu"],$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"],$_SESSION["ChuyenKhoa"]);
         
         if ($stm->execute()) {
             $result = $stm->get_result();
-            return $result->num_rows>0;
+            $has_access = $result->num_rows>0;
+            $result = $result->fetch_assoc();
+
+            if ($_SESSION["Admin"]<=0 && $_SESSION["BacSi"]<=0 && $result["ID_TrangThai"]>1) {
+                $has_access = false;
+            }
+           
+            return $has_access;
         } else {
             echo "\n$stm->error";
             return false;
@@ -154,15 +161,15 @@
         update_pkb($POST_KEYS,$mysqli,$input_verified);
     } else {
         
-        $error_msg = "Đã gặp các lỗi:";
+        $error_msg = "Đã gặp các lỗi: ";
         if (!$has_all_keys) {
-            $error_msg = "$error_msg\nLỗi đầu vào!";
+            $error_msg = $error_msg."Lỗi đầu vào!";
         } elseif (!$logged_in) {
-            $error_msg = "$error_msg\nBạn chưa đăng nhập vào tài khoản nào cả!";
+            $error_msg = $error_msg."Bạn chưa đăng nhập vào tài khoản nào cả!";
         } elseif (!$verified) {
-            $error_msg = "$error_msg\nBạn không có quyền cập nhật thông tin phiếu này!";
+            $error_msg = $error_msg."Bạn không có quyền cập nhật thông tin phiếu này!";
         } elseif (!$input_verified){ 
-            $error_msg = "$error_msg\nDữ liệu đầu vào không hợp lệ.";
+            $error_msg = $error_msg."Dữ liệu đầu vào không hợp lệ.";
         }
         
         $_SESSION["alertMessage"] = $error_msg;

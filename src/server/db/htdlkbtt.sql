@@ -89,12 +89,12 @@ create table LichKham (
     constraint fk_BenhNhan
     foreign key (ID_BenhNhan)
     references ThongTinTaiKhoan(ID)
-    on delete no action,
+    on delete cascade,
     
     constraint fk_BacSi
     foreign key (ID_BacSi)
     references ThongTinTaiKhoan(ID)
-    on delete no action,
+    on delete cascade,
     
     constraint fk_TrangThai
     foreign key (ID_TrangThai)
