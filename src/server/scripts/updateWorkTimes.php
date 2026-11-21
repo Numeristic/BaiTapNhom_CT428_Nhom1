@@ -4,15 +4,15 @@
     require_once("initSession.php");
     require_once("loggedInFunc.php");
 
-    if (!is_logged_in($SESSION_KEYS) || $_SESSION["Admin"]<=0) {
-        $_SESSION["alertMessage"] = "Bạn không có quyền thực hiện tác vụ này.";
+    if (!isset($_POST["id"])) {
+        $_SESSION["alertMessage"] = "Đầu vào không hợp lệ!";
         header("Location: ../../../index.php");
         exit;
     }
 
-    if (!isset($_POST["id"])) {
-        $_SESSION["alertMessage"] = "Đầu vào không hợp lệ!";
-        header("Location: ../../../index.php");
+    if (!is_logged_in($SESSION_KEYS) || $_SESSION["Admin"]<=0) {
+        $_SESSION["alertMessage"] = "Bạn không có quyền thực hiện tác vụ này.";
+        header("Location: ../../user/quanlylichlamviec.php?id=".$_POST["id"]);
         exit;
     }
 

@@ -38,8 +38,12 @@
         for ($y=0;$y<count($this_buoi);$y++) {
             $this_element = $this_buoi[$y];
             $selected = "";
+
             if (in_array($this_element["ID"],$khung_gio,false)) {
                 $selected = "checked";
+            }
+            if ($_SESSION["Admin"]<=0) {
+                $selected = $selected." disabled";
             }
 
             echo "<input type=\"checkbox\" name=\"kg_".$this_element["ID"]."\" $selected>\n";
