@@ -65,6 +65,7 @@
             include_once '../server/scripts/alert.php';
             include_once '../server/scripts/initSession.php';
         ?>
+        <script src="../client/scripts/changepassword.js" defer></script>
     </head>
     <body>
         <?php
@@ -86,11 +87,11 @@
                             <br>
 
 
-                            <label for="oldmk" id="label_mk">
+                            <label for="oldmk" id="label_oldmk">
                                 Mật khẩu cũ <p class="red_required">*</p>
                             </label>
                             <br>
-                            <input class="input_text" type="password" name="oldmk" id="input_mk" required>
+                            <input class="input_text" type="password" name="oldmk" id="input_oldmk" required>
                             <br>
 
                             <label for="mk" id="label_mk">
@@ -100,11 +101,11 @@
                             <input class="input_text" type="password" name="mk" id="input_mk" required>
                             <br>
 
-                            <label for="rptmk" id="label_mk">
+                            <label for="rptmk" id="label_rptmk">
                                 Lặp lại mật khẩu mới <p class="red_required">*</p>
                             </label>
                             <br>
-                            <input class="input_text" type="password" name="rptmk" id="input_mk" required>
+                            <input class="input_text" type="password" name="rptmk" id="input_rptmk" required>
                             <br>
 
 
