@@ -61,7 +61,7 @@
                         <input type="submit" value="Lọc">
 
                     </form>
-                    <table>
+                    <table id="main_table">
                         <tr>
                             <td class="list_title">STT</td>
                             <td class="list_title">Mã tài khoản</td>
@@ -85,10 +85,10 @@
                                 $card = "<tr class=\"lichkham_card\">
 
                                     <td class=\"card_stt\">$stt</td>
-                                    <td>$id</td>
-                                    <td>$ht_bs</td>
-                                    <td>$so_cccd</td>
-                                    <td>$so_dt</td>
+                                    <td class=\"card_nd\">$id</td>
+                                    <td class=\"card_nd\">$ht_bs</td>
+                                    <td class=\"card_nd\">$so_cccd</td>
+                                    <td class=\"card_nd\">$so_dt</td>
                                     <td class=\"card_link\"><a href=\"thongtincanhan.php?id=$id\">Xem</a></td>
                                     <td class=\"card_link\"><a href=\"xemyeucaukham.php?id=$id\">Xem</a></td>
                                 </tr>";

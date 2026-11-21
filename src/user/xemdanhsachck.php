@@ -54,7 +54,7 @@
                         <input type="submit" value="Thêm">
 
                     </form>
-                    <table>
+                    <table id="main_table">
                         <tr>
                             <td class="list_title">STT</td>
                             <td class="list_title">Mã chuyên khoa</td>
@@ -71,10 +71,10 @@
 
                                 $card = "<tr class=\"lichkham_card\">
 
-                                    <td>$stt</td>
-                                    <td>$id</td>
-                                    <td>$ten_ck</td>
-                                    <td><a href=\"thongtinck.php?id=$id\">Xem</a></td>
+                                    <td class=\"card_stt\">$stt</td>
+                                    <td class=\"card_nd\">$id</td>
+                                    <td class=\"card_nd\">$ten_ck</td>
+                                    <td class=\"card_link\"><a href=\"thongtinck.php?id=$id\">Xem</a></td>
 
                                 </tr>";
                                 echo $card;

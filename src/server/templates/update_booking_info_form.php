@@ -1,10 +1,17 @@
 <form action="../server/scripts/updateBooking.php" method="post" id="adjust_form" class="main_form">
     <label for="maphieu_fake" id="label_maphieu">
-            Mã phiếu <p class="red_required">*</p>
+            Mã phiếu
     </label>
     <br>
     <input class="input_text" type="text" name="maphieu_fake" id="input_maphieufake" value=<?php $id = $data_result["ID"]; echo "\"$id\""; ?> required disabled>
     <input type="hidden" name="maphieu" id="input_maphieu" value=<?php $id = $data_result["ID"]; echo "\"$id\""; ?>>
+    <br>
+
+    <label for="tenbn_fake" id="label_maphieu">
+            Tên bệnh nhân
+    </label>
+    <br>
+    <input class="input_text" type="text" name="tenbn_fake" id="input_tenbnfake" value=<?php $htbn = $data_result["BenhNhan"]; echo "\"$htbn\""; ?> required disabled>
     <br>
 
     <label for="ck" id="label_ck">

@@ -65,7 +65,7 @@
                         <input type="submit" value="Lọc">
 
                     </form>
-                    <table>
+                    <table id="main_table">
                         <tr>
                             <td class="list_title">STT</td>
                             <td class="list_title">Mã tài khoản</td>
@@ -92,16 +92,16 @@
 
                                 $card = "<tr class=\"lichkham_card\">
 
-                                    <td>$stt</td>
-                                    <td>$id</td>
-                                    <td>$ht_bs</td>
-                                    <td>$so_cccd</td>
-                                    <td>$so_dt</td>
-                                    <td>$ten_ck</td>
+                                    <td class=\"card_stt\">$stt</td>
+                                    <td class=\"card_nd\">$id</td>
+                                    <td class=\"card_nd\">$ht_bs</td>
+                                    <td class=\"card_nd\">$so_cccd</td>
+                                    <td class=\"card_nd\">$so_dt</td>
+                                    <td class=\"card_nd\">$ten_ck</td>
                                     <td style=\"display: none;\">$id_ck</td>
-                                    <td><a href=\"thongtincanhan.php?id=$id\">Xem</a></td>
-                                    <td><a href=\"xemyeucaukham.php?id=$id\">Xem</a></td>
-                                    <td><a href=\"quanlylichlamviec.php?id=$id\">Xem</a></td>
+                                    <td class=\"card_link\"><a href=\"thongtincanhan.php?id=$id\">Xem</a></td>
+                                    <td class=\"card_link\"><a href=\"xemyeucaukham.php?id=$id\">Xem</a></td>
+                                    <td class=\"card_link\"><a href=\"quanlylichlamviec.php?id=$id\">Xem</a></td>
                                 </tr>";
                                 echo $card;
                             }

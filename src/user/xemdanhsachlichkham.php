@@ -18,11 +18,12 @@
     $mysqli = new mysqli($hostname,$username,$password);
     $mysqli->select_db("htdlkbtt");
 
-    $data_result = $mysqli->query("SELECT DISTINCT LichKham.ID as ID, LichKham.ID_BacSi, LichKham.ID_BenhNhan, LichKham.ID_ChuyenKhoa, LichKham.LyDoKham, LichKham.ID_TrangThai, LichKham.NgayKham, ThongTinTaiKhoan.HoTen as HoTen_BacSi, ChuyenKhoa.TenChuyenKhoa as Ten_ChuyenKhoa, TrangThai.TenTrangThai as Ten_TrangThai 
+    $data_result = $mysqli->query("SELECT DISTINCT LichKham.ID as ID, LichKham.ID_BacSi, LichKham.ID_BenhNhan, LichKham.ID_ChuyenKhoa, LichKham.LyDoKham, LichKham.ID_TrangThai, LichKham.NgayKham, bs.HoTen as HoTen_BacSi, bn.HoTen as HoTen_BenhNhan, ChuyenKhoa.TenChuyenKhoa as Ten_ChuyenKhoa, TrangThai.TenTrangThai as Ten_TrangThai 
     FROM LichKham
     LEFT JOIN ChuyenKhoa ON LichKham.ID_ChuyenKhoa = ChuyenKhoa.ID
     LEFT JOIN BacSi ON LichKham.ID_BacSi = BacSi.ID
-    LEFT JOIN ThongTinTaiKhoan ON LichKham.ID_BacSi = ThongTinTaiKhoan.ID
+    LEFT JOIN ThongTinTaiKhoan bs ON LichKham.ID_BacSi = bs.ID
+    LEFT JOIN ThongTinTaiKhoan bn ON LichKham.ID_BenhNhan = bn.ID
     LEFT JOIN KhungGio ON LichKham.KhungGio = KhungGio.ID
     LEFT JOIN TrangThai ON LichKham.ID_TrangThai = TrangThai.ID");
 
@@ -85,11 +86,11 @@
                         <input type="submit" value="Lọc">
 
                     </form>
-                    <table>
+                    <table id="main_table">
                         <tr>
                             <td class="list_title">STT</td>
                             <td class="list_title">Mã phiếu</td>
-                            <td class="list_title">Lập bởi</td>
+                            <td class="list_title">Bệnh nhân</td>
                             <td class="list_title">Chuyên khoa</td>
                             <td class="list_title">Chuyên gia</td>
                             <td class="list_title">Ngày khám</td>
@@ -105,6 +106,7 @@
                                 $id = $this_element["ID"];
 
                                 $ht_bs = $this_element["HoTen_BacSi"];
+                                $ht_bn = $this_element["HoTen_BenhNhan"];
                                 $id_bs = $this_element["ID_BacSi"];
                                 $id_bn = $this_element["ID_BenhNhan"];
                                 $id_ck = $this_element["ID_ChuyenKhoa"];
@@ -113,20 +115,33 @@
                                 $lydokham = $this_element["LyDoKham"];
                                 $trangthai = $this_element["Ten_TrangThai"];
                                 $ngaykham = $this_element["NgayKham"];
+                                
+                                $tt_class = "";
+                                $id_tt = $this_element["ID_TrangThai"];
+                                if ($id_tt==1) {
+                                    $tt_class = "card_tt_wait";
+                                } elseif ($id_tt==2) {
+                                    $tt_class = "card_tt_good";
+                                } elseif ($id_tt==3 || $id_tt==4) {
+                                    $tt_class = "card_tt_bad";
+                                } else {
+                                    $tt_class = "card_tt_missed";
+                                }
+
 
                                 $card = "<tr class=\"lichkham_card\">
 
-                                    <td>$stt</td>
-                                    <td>$id</td>
-                                    <td>$id_bn</td>
-                                    <td>$ten_ck</td>
-                                    <td>$ht_bs</td>
-                                    <td>$ngaykham</td>
-                                    <td>$lydokham</td>
-                                    <td>$trangthai</td>
+                                    <td class=\"card_stt\">$stt</td>
+                                    <td class=\"card_nd\">$id</td>
+                                    <td class=\"card_nd\">$ht_bn</td>
+                                    <td class=\"card_nd\">$ten_ck</td>
+                                    <td class=\"card_nd\">$ht_bs</td>
+                                    <td class=\"card_nd\">$ngaykham</td>
+                                    <td class=\"card_nd\">$lydokham</td>
+                                    <td class=\"$tt_class\">$trangthai</td>
                                     <td style=\"display: none;\">$id_bs</td>
                                     <td style=\"display: none;\">$id_ck</td>
-                                    <td><a href=\"phieukhambenh.php?id=$id\">Xem</a></td>
+                                    <td class=\"card_link\"><a href=\"phieukhambenh.php?id=$id\">Xem</a></td>
 
                                 </tr>";
                                 echo $card;
