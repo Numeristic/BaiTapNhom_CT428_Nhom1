@@ -27,8 +27,10 @@
     }
 
     function verify_user_has_access($POST_KEYS,$mysqli){
-        $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID, LichKham.ID_BenhNhan, LichKham.ID_BacSi FROM LichKham,BacSi WHERE (LichKham.ID = ?) AND ((LichKham.ID_BenhNhan = ?) OR (LichKham.ID_BacSi = ? AND LichKham.ID_BacSi = BacSi.ID));");
-        $stm->bind_param("iii",$_POST["maphieu"],$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"]);
+        $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID, LichKham.ID_BenhNhan, LichKham.ID_BacSi FROM LichKham,BacSi 
+        WHERE (LichKham.ID = ?) 
+        AND ((LichKham.ID_BenhNhan = ?) OR ((LichKham.ID_BacSi = ? AND LichKham.ID_BacSi = BacSi.ID) OR (LichKham.ID_BacSi IS NULL AND LichKham.ID_ChuyenKhoa = ?)));");
+        $stm->bind_param("iiis",$_POST["maphieu"],$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"],$_SESSION["ChuyenKhoa"]);
         
         if ($stm->execute()) {
             $result = $stm->get_result();
@@ -91,7 +93,7 @@
         $check_stm = $mysqli->prepare("SELECT LichKham.ID, LichKham.ID_BacSi from LichKham WHERE ID_ChuyenKhoa = ? AND KhungGio = ? AND NgayKham = ?;");
         $check_stm->bind_param("sis",$_POST["ck"],$_POST["khung_gio"],$_POST["ngay_kham"]);
 
-        if ($_SESSION["Admin"]>0 && isset($_POST["tt"])) {
+        if (($_SESSION["Admin"]>0||($_SESSION["BacSi"]>0)) && isset($_POST["tt"])) {
             $stm = $mysqli->prepare("UPDATE LichKham
             SET KhungGio = ?, NgayKham = ?, LyDoKham = ?, ID_TrangThai = ?, ID_BacSi = ?, ID_ChuyenKhoa = ?
             WHERE ID = ?");

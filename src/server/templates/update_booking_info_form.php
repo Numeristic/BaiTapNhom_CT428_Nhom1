@@ -66,7 +66,7 @@
 
     <?php 
     
-        if ($_SESSION["Admin"]>0) {
+        if ($_SESSION["Admin"]>0||$_SESSION["BacSi"]>0) {
             require_once("../server/templates/update_booking_info_adminonly.php");
         }
 

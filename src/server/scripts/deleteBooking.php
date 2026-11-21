@@ -17,18 +17,21 @@
         $stm = $mysqli->prepare("DELETE FROM LichKham WHERE ID = ?");
         $stm->bind_param("i",$_POST["id"]);
 
-        if (!$stm->execute()) {
+        if ($stm->execute()) {
+            $result = $stm->get_result();
+
+            $_SESSION["alertMessage"] = "Xóa lịch khám thành công.";
+            if ($result->num_rows<=0) {
+                $_SESSION["alertMessage"] = "Không tìm thấy lịch khám cần xóa!";
+            }
+            $stm->close();
+        } else {
             $_SESSION["alertMessage"] = "Lỗi CSDL! $stm->error";
             header("Location: ");
+            $stm->close();
             exit;
         }
-        
-        $result = $stm->get_result();
 
-        $_SESSION["alertMessage"] = "Xóa lịch khám thành công.";
-        if ($result->num_rows<=0) {
-            $_SESSION["alertMessage"] = "Không tìm thấy lịch khám cần xóa!";
-        }
     }
     
     $logged_in = is_logged_in($SESSION_KEYS);

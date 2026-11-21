@@ -28,7 +28,7 @@
             $mysqli = new mysqli($hostname,$username,$password);
             $mysqli->select_db("htdlkbtt");
 
-            $stm = $mysqli->prepare("SELECT * FROM LichLamViec WHERE ID_BacSi = ?");
+            $stm = $mysqli->prepare("SELECT LichLamViec.ID_BacSi, LichLamViec.ID_KhungGio FROM LichLamViec, BacSi WHERE ID_BacSi = ? AND ID_BacSi = BacSi.ID");
             $stm->bind_param("i",$load_id);
 
             if (!$stm->execute()) {

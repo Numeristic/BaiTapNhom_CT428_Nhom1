@@ -89,8 +89,18 @@
                     $bsupdate_stm = $mysqli->prepare($query);
                     $bsupdate_stm->bind_param('i',$_POST['idtk']);
                 }
-                if (!$bsupdate_stm->execute()) {
+                /*if ($bsupdate_stm->execute()) {
                     $_SESSION["alertMessage"] = "";
+                } else {
+                    $_SESSION["alertMessage"] = "Lỗi CSDL!";
+                    exit;
+                }*/
+                try {
+                    $bsupdate_stm->execute();
+                } catch(mysqli_sql_exception $e) {
+                    $_SESSION["alertMessage"] = "Lỗi CSDL! ".$e->getMessage();
+                    header("Location: $home_url?id=".$_POST["idtk"]);
+                    exit;
                 }
             } elseif ($check_row['LaBacSi']>0) {
                 if (!isset($_POST['ck']) || $_POST['ck']=="") {
@@ -101,8 +111,10 @@
                 $query = "UPDATE BacSi SET ID_ChuyenKhoa = ? WHERE BacSi.ID = ?";
                 $bsupdate_stm = $mysqli->prepare($query);
                 $bsupdate_stm->bind_param('si',$_POST['ck'],$_POST['idtk']);
-                if (!$bsupdate_stm->execute()) {
-                    $_SESSION["alertMessage"] = "";
+                if ($bsupdate_stm->execute()) {
+                 } else {
+                    $_SESSION["alertMessage"] = "Lỗi CSDL!";
+                    /*exit;*/
                  }
             }
         }

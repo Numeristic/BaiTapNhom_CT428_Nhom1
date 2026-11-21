@@ -41,6 +41,7 @@
         } else {
             echo "Thêm thành công!";
         }
+        $update_stm->close();
     }
 
     if (verify_doesnt_exist($mysqli)) {

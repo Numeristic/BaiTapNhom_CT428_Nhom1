@@ -7,7 +7,7 @@ create table ThongTinTaiKhoan (
     ID int AUTO_INCREMENT unique not null,
     
     HoTen varchar(50) not null,
-    SoCCCD char(12) not null,
+    SoCCCD varchar(20) not null,
     NgaySinh date not null,
     SoDT varchar(20) not null,
       
@@ -88,12 +88,12 @@ create table LichKham (
     
     constraint fk_BenhNhan
     foreign key (ID_BenhNhan)
-    references BenhNhan(ID)
+    references ThongTinTaiKhoan(ID)
     on delete no action,
     
     constraint fk_BacSi
     foreign key (ID_BacSi)
-    references BacSi(ID)
+    references ThongTinTaiKhoan(ID)
     on delete no action,
     
     constraint fk_TrangThai
@@ -118,7 +118,7 @@ create table LichLamViec (
     
   constraint fk_LichCuaBacSi
   foreign key (ID_BacSi)
-  references BacSi(ID)
+  references ThongTinTaiKhoan(ID)
   on delete cascade,
   
   constraint fk_BuoiLamViec
@@ -139,7 +139,7 @@ create table LichNghiPhep (
     
     constraint fk_BacSiNghiPhep
     foreign key (ID_BacSi)
-    references BacSi(ID)
+    references ThongTinTaiKhoan(ID)
     on delete cascade,
 
     constraint fk_TrangThaiDXNP
@@ -154,7 +154,7 @@ create table LichNghi (
     
     constraint fk_BacSiNghi
     foreign key (ID_BacSi)
-    references BacSi(ID)
+    references ThongTinTaiKhoan(ID)
     on delete cascade,
     
     constraint fk_NgayNghi

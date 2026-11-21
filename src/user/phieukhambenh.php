@@ -23,8 +23,8 @@
         LEFT JOIN ThongTinTaiKhoan bn ON LichKham.ID_BenhNhan = bn.ID
         LEFT JOIN KhungGio ON LichKham.KhungGio = KhungGio.ID
         LEFT JOIN TrangThai ON LichKham.ID_TrangThai = TrangThai.ID
-        WHERE LichKham.ID = ? AND (LichKham.ID_BacSi=? OR LichKham.ID_BenhNhan=?);");
-        $stm->bind_param("iii",$_GET["id"],$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"]);
+        WHERE LichKham.ID = ? AND (LichKham.ID_BenhNhan=? OR (LichKham.ID_BacSi=? OR (LichKham.ID_BacSi IS NULL AND LichKham.ID_ChuyenKhoa = ?)));");
+        $stm->bind_param("iiis",$_GET["id"],$_SESSION["ID_TaiKhoan"],$_SESSION["ID_TaiKhoan"],$_SESSION["ChuyenKhoa"]);
     } else {
         $stm = $mysqli->prepare("SELECT DISTINCT LichKham.ID as ID, LichKham.ID_BenhNhan, TrangThai.ID AS ID_TrangThai, TrangThai.TenTrangThai, NgayKham, bs.HoTen as BacSi, bs.ID as ID_BacSi, bn.HoTen as BenhNhan, bn.ID as ID_BenhNhan, KhungGio.ID as ID_KhungGio, KhungGio.Gio_BD, KhungGio.Gio_KT, ChuyenKhoa.TenChuyenKhoa as ChuyenKhoa, ChuyenKhoa.ID as ID_ChuyenKhoa, LichKham.LyDoKham FROM
         LichKham

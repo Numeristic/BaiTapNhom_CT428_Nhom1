@@ -20,7 +20,9 @@
         $check_stm = $mysqli->prepare("SELECT * FROM ChuyenKhoa WHERE ID = ?");
         $check_stm->bind_param("s",$_POST["idck"]);
 
-        if (!$check_stm->execute()) {
+        if ($check_stm->execute()) {
+            
+        } else {
             echo "Lỗi CSDL! $check_stm->error";
             //header("");
             exit;
@@ -38,12 +40,19 @@
         $update_stm->bind_param("s",$_POST["idck"]);
         
         
-        if (!$update_stm->execute()) {
-            echo "Lỗi CSDL! $update_stm->error";
-        } else {
+        /*if ($update_stm->execute()) {
             echo "Xóa thành công.";
+        } else {
+            echo "Lỗi CSDL! $update_stm->error";
+        }*/
+        try {
+            $update_stm->execute();
+            echo "Xóa thành công";
+        } catch(mysql_sql_exception $e) {
+            echo "Lỗi CSDL! ".$e->getMessage();
         }
 
+        $update_stm->close();
         //header("Location: ../../user/thongtinck.php?id=".$_POST["idck"]);
     }
 

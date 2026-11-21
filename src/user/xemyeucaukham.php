@@ -10,10 +10,27 @@
     }
     
     $load_id = 0;
+    $load_ck = "";
     if (isset($_GET["id"])) {
         $load_id = $_GET["id"];
+
+        $check_stm = $mysqli->prepare("SELECT ChuyenKhoa.ID FROM BacSi, ChuyenKhoa WHERE BacSi.ID = ? AND BacSi.ID_ChuyenKhoa = ChuyenKhoa.ID");
+        $check_stm->bind_param("i",$load_id);
+        if ($check_stm->execute()) {
+            $check_result = $check_stm->get_result();
+            if ($check_result->num_rows>0) {
+                $check_result = $check_result->fetch_assoc();
+                $load_ck = $check_result["ID"];
+            } else {
+                $load_ck = "null";
+            }
+        } else {
+            $_SESSION["alertMessage"] = "Lỗi CSDL!";
+        }
+        $check_stm->close();
     } else {
         $load_id = $_SESSION["ID_TaiKhoan"];
+        $load_ck = $_SESSION["ChuyenKhoa"];
     }
 
     if ($load_id!=$_SESSION["ID_TaiKhoan"] && !($_SESSION["Admin"]>0 || $_SESSION["BacSi"]>0)) {
@@ -33,9 +50,9 @@
     LEFT JOIN ThongTinTaiKhoan bn ON LichKham.ID_BenhNhan = bn.ID
     LEFT JOIN KhungGio ON LichKham.KhungGio = KhungGio.ID
     LEFT JOIN TrangThai ON LichKham.ID_TrangThai = TrangThai.ID
-    WHERE (LichKham.ID_BacSi=? OR LichKham.ID_BenhNhan=?);");
+    WHERE (LichKham.ID_BenhNhan=? OR (LichKham.ID_BacSi=? OR (LichKham.ID_BacSi IS NULL AND LichKham.ID_ChuyenKhoa = ?)));");
 
-    $stm->bind_param("ii",$load_id,$load_id);
+    $stm->bind_param("iis",$load_id,$load_id,$load_ck);
 
     $data_result = "";
 

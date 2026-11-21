@@ -50,7 +50,7 @@
         $_SESSION['SoCCCD'] = $result["SoCCCD"];
         $_SESSION['NgaySinh'] = $result['NgaySinh'];
 
-        if ($_SESSION['Admin']>0) {
+        if ($_SESSION['BacSi']>0) {
             $_SESSION['ChuyenKhoa'] = $result["ID_ChuyenKhoa"];
         } else {
             $_SESSION['ChuyenKhoa'] = "";

@@ -22,7 +22,9 @@
         $check_stm = $mysqli->prepare("SELECT PHash FROM ThongTinTaiKhoan WHERE ID = ?");
         $check_stm->bind_param("i",$_POST["idtk"]);
 
-        if (!$check_stm->execute()) {
+        if ($check_stm->execute()) {
+            
+        } else {
             $_SESSION["alertMessage"] = "Lỗi CSDL: $stm->error";
             header("Location: ../../user/doimatkhau.php?id=".$_POST["idtk"]);
             exit;
@@ -47,10 +49,15 @@
 
         $update_stm->bind_param("si",$hashed_new_password,$_POST["idtk"]);
 
-        $_SESSION["alertMessage"] = "Cập nhật mật khẩu thành công.";
-        if (!$update_stm->execute()) {
+        
+        if ($update_stm->execute()) {
+            $_SESSION["alertMessage"] = "Cập nhật mật khẩu thành công.";
+        } else {
             $_SESSION["alertMessage"] = "Lỗi CSDL. Cập nhật mật khẩu thất bại!\n$update_stm->error";
         }
+
+        $update_stm->close();
+        
         header("Location: ../../user/thongtincanhan.php?id=".$_POST["idtk"]);
     }
 
