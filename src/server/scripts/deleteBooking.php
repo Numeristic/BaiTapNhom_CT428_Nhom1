@@ -28,7 +28,7 @@
             $creator_id = $check_result["ID_BenhNhan"];
         }
         
-        if ($_SESSION["Admin"]>0 || ($_SESSION["ID_TaiKhoan"]==$creator_id && $check_result["ID_TrangThai"]<=1)) {
+        if ($_SESSION["Admin"]>0 || ($_SESSION["ID_TaiKhoan"]==$creator_id && $check_result["ID_TrangThai"]<=2)) {
             return true;
         }
         $check_stm->close();

@@ -34,7 +34,7 @@
         
         if ($stm->execute()) {
             $result = $stm->get_result();
-            $has_access = $result->num_rows>0;
+            $has_access = ($result->num_rows>0 || $_SESSION["Admin"]>0);
             $result = $result->fetch_assoc();
 
             if ($_SESSION["Admin"]<=0 && $_SESSION["BacSi"]<=0 && $result["ID_TrangThai"]>1) {

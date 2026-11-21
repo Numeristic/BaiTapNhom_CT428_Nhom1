@@ -151,8 +151,10 @@
                                 if ($id_tt==1) {
                                     $tt_class = "card_tt_wait";
                                 } elseif ($id_tt==2) {
+                                    $tt_class = "card_tt_confirmed";
+                                } elseif ($id_tt==3) {
                                     $tt_class = "card_tt_good";
-                                } elseif ($id_tt==3 || $id_tt==4) {
+                                } elseif ($id_tt==4 || $id_tt==5) {
                                     $tt_class = "card_tt_bad";
                                 } else {
                                     $tt_class = "card_tt_missed";

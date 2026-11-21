@@ -13,10 +13,12 @@ insert into Buoi(ID,TenBuoi) values(2,"Chiều");
 insert into Buoi(ID,TenBuoi) values(3,"Tối");
 
 insert into TrangThai(ID,TenTrangThai) values(1,"Đang chờ");
-insert into TrangThai(ID,TenTrangThai) values(2,"Đã khám");
-insert into TrangThai(ID,TenTrangThai) values(3,"Đã hủy");
-insert into TrangThai(ID,TenTrangThai) values(4,"Từ chối");
-insert into TrangThai(ID,TenTrangThai) values(5,"Lỡ lịch");
+insert into TrangThai(ID,TenTrangThai) values(2,"Đã xác nhận");
+insert into TrangThai(ID,TenTrangThai) values(3,"Đã khám");
+insert into TrangThai(ID,TenTrangThai) values(4,"Đã hủy");
+insert into TrangThai(ID,TenTrangThai) values(5,"Từ chối");
+insert into TrangThai(ID,TenTrangThai) values(6,"Lỡ lịch");
+
 
 insert into KhungGio(Gio_BD,Gio_KT,ID_Buoi) values('07:00:00','08:00:00',1);
 insert into KhungGio(Gio_BD,Gio_KT,ID_Buoi) values('08:00:00','09:00:00',1);
